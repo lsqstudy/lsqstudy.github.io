@@ -1,0 +1,3873 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>16SpringCloud Alibaba Seata处理分布式事务 | 卖剩鸭</title>
+  <meta name="keywords" content=" SpringCloud ">
+  <meta name="description" content="16SpringCloud Alibaba Seata处理分布式事务 | 卖剩鸭">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Sorry！没有你想要的内容错误代码：404">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404">
+<meta property="og:url" content="http://lsqstudy.top/404.html">
+<meta property="og:site_name" content="卖剩鸭">
+<meta property="og:description" content="Sorry！没有你想要的内容错误代码：404">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-06T12:00:05.052Z">
+<meta property="article:modified_time" content="2020-07-06T12:00:05.052Z">
+<meta property="article:author" content="卖剩鸭">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418165302.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="卖剩鸭" type="application/atom+xml">
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+</div>
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418164903.jpg" />
+</a>
+<div class="author">
+    <span>卖剩鸭</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/lsqstudy" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="weibo" href="https://weibo.com/p/1005057423713257" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/34fa573ae2b2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/lsqstudy" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://me.csdn.net/PorkBird" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1823472446@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1823472446&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=333252440" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="全部文章">全部文章<small>(191)</small></div></li>
+    
+        
+            
+            <li><div data-rel="课程"><i class="fold iconfont icon-right"></i>课程<small>(137)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="课程<--->ActiveMQ">ActiveMQ<small>(11)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Docker">Docker<small>(16)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Dubbo">Dubbo<small>(17)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->FastDFS">FastDFS<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Git">Git<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Github">Github<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Linux">Linux<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->MyCat">MyCat<small>(11)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Nginx">Nginx<small>(5)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Solr">Solr<small>(16)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Zookeeper">Zookeeper<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->数据库"><i class="fold iconfont icon-right"></i>数据库<small>(26)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="课程<--->数据库MySQL">MySQL<small>(7)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="课程<--->数据库Redis">Redis<small>(19)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->数据结构与算法">数据结构与算法<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->计算机网络">计算机网络<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->阿里云">阿里云<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="框架"><i class="fold iconfont icon-right"></i>框架<small>(22)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="框架<--->MyBatisPlus">MyBatisPlus<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->shiro">shiro<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SpringBoot">SpringBoot<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SpringCloud">SpringCloud<small>(17)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SSM">SSM<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="前端"><i class="fold iconfont icon-right"></i>前端<small>(11)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="前端<--->vue">vue<small>(11)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="系统与软件"><i class="fold iconfont icon-right"></i>系统与软件<small>(7)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="系统与软件<--->快捷键">快捷键<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="系统与软件<--->环境">环境<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="系统与软件<--->软件配置">软件配置<small>(3)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="普通话"><i class="fold iconfont icon-right"></i>普通话<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="普通话<--->拼音">拼音<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="English"><i class="fold iconfont icon-right"></i>English<small>(13)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="English<--->Pharse">Pharse<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Translation">Translation<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Vocabulary">Vocabulary<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Writing">Writing<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="191">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://lsqstudy.top/">卖剩鸭</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ActiveMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Dubbo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>English</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>FastDFS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Github</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyBatisPlus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyCat</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MySQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Pharse</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>shiro</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>socket</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Solr</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringBoot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringCloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SSM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Translation</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vocabulary</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vue</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Writing</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Zookeeper</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>快捷键</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>拼音</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据结构与算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>普通话</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>环境</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>计算机网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>软件配置</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>阿里云</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="全部文章 English Pharse "
+           href="/post/5b2620ec.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="日常词组（1）">日常词组（1）</span>
+            <span class="post-date" title="2020-02-27 22:10:43">2020/02/27</span>
+        </a>
+        
+        <a id="top" class="全部文章 English Pharse "
+           href="/post/49938f02.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="日常词组（2）">日常词组（2）</span>
+            <span class="post-date" title="2020-02-29 22:10:43">2020/02/29</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/41b321f1.html"
+           data-tag="软件配置"
+           data-author="" >
+            <span class="post-title" title="VSCode基本配置">VSCode基本配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/d3eb75f3.html"
+           data-tag="软件配置"
+           data-author="" >
+            <span class="post-title" title="IDEA基本配置">IDEA基本配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/cb52f9d8.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="Word 快捷键">Word 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/cc9c1aa9.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="VS Code 快捷键">VS Code 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 环境 "
+           href="/post/c623287b.html"
+           data-tag="环境,软件配置"
+           data-author="" >
+            <span class="post-title" title="node.js安装配置">node.js安装配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/610bdf07.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="IDEA快捷键">IDEA快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/f03799ec.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="Typory 快捷键">Typory 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SSM "
+           href="/post/6990e316.html"
+           data-tag="环境,SSM"
+           data-author="" >
+            <span class="post-title" title="SSM环境搭建">SSM环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringBoot "
+           href="/post/f09f8d55.html"
+           data-tag="SpringBoot"
+           data-author="" >
+            <span class="post-title" title="springboot基础">springboot基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/f4ccf8e0.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="17【面试】ID生成——雪花算法">17【面试】ID生成——雪花算法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/dbb658df.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="16SpringCloud Alibaba Seata处理分布式事务">16SpringCloud Alibaba Seata处理分布式事务</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/bdecf7ed.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="15SpringCloud Alibaba Sentinel实现熔断与限流.md">15SpringCloud Alibaba Sentinel实现熔断与限流.md</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/e13c8c8d.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="14SpringCloud Alibaba Nacos服务注册和配置中心">14SpringCloud Alibaba Nacos服务注册和配置中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/85ee5c30.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="11SpringCloud Bus消息总线">11SpringCloud Bus消息总线</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/92ae0bbf.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="13Spring Cloud Sleuth分布式链路跟踪">13Spring Cloud Sleuth分布式链路跟踪</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/e44e7c6b.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="12SpringCloud Stream消息驱动">12SpringCloud Stream消息驱动</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/2a134859.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="08Hystrix熔断器">08Hystrix熔断器</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/f8a33702.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="09Gateway新一代网关">09Gateway新一代网关</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/b5685c58.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="10SpringCloud config分布式配置中心">10SpringCloud config分布式配置中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/44028d5a.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="05三个注册中心异同点">05三个注册中心异同点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/788b5538.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="07OpenFeign服务接口调用">07OpenFeign服务接口调用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/c0092dea.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="06Ribbon负载均衡调用">06Ribbon负载均衡调用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/349c9423.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="04Consul服务注册与发现">04Consul服务注册与发现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/1a3cd1eb.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="03Zookeeper服务注册与发现">03Zookeeper服务注册与发现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/c38b7567.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="01微服务架构编码 构建">01微服务架构编码 构建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/b1d49aec.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="02Eureka服务注册与发现【已经停更】">02Eureka服务注册与发现【已经停更】</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 shiro "
+           href="/post/f92777b3.html"
+           data-tag="环境,SSM,shiro"
+           data-author="" >
+            <span class="post-title" title="SSM-shiro环境搭建">SSM-shiro环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 shiro "
+           href="/post/3c250027.html"
+           data-tag="shiro"
+           data-author="" >
+            <span class="post-title" title="shiro基础">shiro基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 MyBatisPlus "
+           href="/post/8955ba6d.html"
+           data-tag="MyBatisPlus"
+           data-author="" >
+            <span class="post-title" title="MyBatis-Plus基础">MyBatis-Plus基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/42c68f02.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="module模块">module模块</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/ff56e6aa.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="solt插槽">solt插槽</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/dae84f4a.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vuex共享变量">Vuex共享变量</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/e0886ac8.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue基础语法">Vue基础语法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/34778b46.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="组件">组件</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/e37a829a.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue项目创建与配置">Vue项目创建与配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/5925592c.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="UI库的选择">UI库的选择</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/342f857c.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Promise对像">Promise对像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/a314c4e9.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue-router路由">Vue-router路由</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/f65b3c86.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Axios网络请求">Axios网络请求</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/700f8fbd.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="MVVM模型">MVVM模型</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/51287ee3.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Zookerper集群的特征（面试）">10【掌握】Zookerper集群的特征（面试）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/3e0f77a3.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="06【了解】Zookeeper客户端连接">06【了解】Zookeeper客户端连接</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/3392f3a6.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Zookeper应用场景">07【掌握】Zookeper应用场景</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/c220babc.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="08【掌握】java操作zookeeper">08【掌握】java操作zookeeper</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/237c5a16.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="09【了解】ZooKeeper和CAP理论及一致性原则">09【了解】ZooKeeper和CAP理论及一致性原则</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/1fba7961.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Zookeeper单机版本使用">04【掌握】Zookeeper单机版本使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/f5952d38.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Zookeeper集群搭建及使用">05【掌握】Zookeeper集群搭建及使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/a7d5b2cd.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Zookeeper文件系统及监听机制">03【掌握】Zookeeper文件系统及监听机制</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/5272d092.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="16【掌握】Solr集群的使用">16【掌握】Solr集群的使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/76aa98b0.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Zookeeper的安装及单机版配置">02【掌握】Zookeeper的安装及单机版配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/8d771482.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="01【了解】Zookeeper简介">01【了解】Zookeeper简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/bd4851f8.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Solr控制台全量和增量导入配置">12【掌握】Solr控制台全量和增量导入配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/ce05e1ea.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="13【掌握】SolrCloud概述">13【掌握】SolrCloud概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/80a0385a.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="15【掌握】zookeeper管理配置文件">15【掌握】zookeeper管理配置文件</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/905d5fbe.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="14【掌握】SolrCloud搭建">14【掌握】SolrCloud搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/b807aa4e.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Solr的分词及IK库的使用">09【掌握】Solr的分词及IK库的使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a850c581.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Solr的javaAPI讲解solrj">10【掌握】Solr的javaAPI讲解solrj</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/8955ba63d.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="11【案例】使用Solr完成对jd案例的实现">11【案例】使用Solr完成对jd案例的实现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/2f388a55.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Solr的单机版装">05【掌握】Solr的单机版装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/cac3217.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Solr的名词解释及配置文件说明">06【掌握】Solr的名词解释及配置文件说明</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/47b66419.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Solr索引库说明及创建">07【掌握】Solr索引库说明及创建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/dc447f4a.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="08【了解】Solr控制台说明">08【了解】Solr控制台说明</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a4d23341.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="01【掌握】入门问题">01【掌握】入门问题</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/af9e4515.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="02【了解】倒排索引算法">02【了解】倒排索引算法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/4775554e.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="03【熟悉】手写倒排索引">03【熟悉】手写倒排索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a3530fc1.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="04【了解】Solr简介">04【了解】Solr简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/c1e71fa1.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="05【掌握】动静分离">05【掌握】动静分离</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/d11f721c.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="02【掌握】CentOS7下安装Nginx">02【掌握】CentOS7下安装Nginx</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/6e632f41.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="03【掌握】nginx.conf配置详解">03【掌握】nginx.conf配置详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/c1e71fa1.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="04【掌握】反向代理+负载均衡">04【掌握】反向代理+负载均衡</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/775845e2.html"
+           data-tag="Linux,Nginx"
+           data-author="" >
+            <span class="post-title" title="01【了解】简介">01【了解】简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/e255a10a.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="计算机网络">计算机网络</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/b3287aa2.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="计算机网络知识总结">计算机网络知识总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/cea506c.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="HTTPS中的TLS">HTTPS中的TLS</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/8efe3606.html"
+           data-tag="计算机网络,socket"
+           data-author="" >
+            <span class="post-title" title="网络编程（socket套接字)">网络编程（socket套接字)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/d968d449.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="09【掌握】全局ID的概述">09【掌握】全局ID的概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/3c239ac7.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="11【重点】mycat使用总结">11【重点】mycat使用总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/ba8e5577.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="10【掌握】mycat全局主键的生成方式">10【掌握】mycat全局主键的生成方式</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/a0d7b5e6.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="05【掌握】mycat名词解释">05【掌握】mycat名词解释</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/b18584ce.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="06【掌握】mycat的server.xml配置">06【掌握】mycat的server.xml配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/6af66496.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="07【掌握】mycat分片详解">07【掌握】mycat分片详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/5307fdc1.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="08【掌握】全局表和ER表">08【掌握】全局表和ER表</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/2b250a65.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="03【掌握】mysql的集群搭建">03【掌握】mysql的集群搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/4772ad75.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="04【掌握】mycat的安装">04【掌握】mycat的安装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/3a4057a1.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="01【了解】mycat简介">01【了解】mycat简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/946c1207.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="02【了解】mysql主从搭建">02【了解】mysql主从搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/5a5470c9.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux06：磁盘管理">Linux06：磁盘管理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/63ce1fb.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux07：三种软件安装方式及服务器基本环境搭建">Linux07：三种软件安装方式及服务器基本环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/281556f0.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux03：linux基本命令">Linux03：linux基本命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/fa67d3b0.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux04：vim使用方法">Linux04：vim使用方法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/d7893cbc.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux05：账号【用户】管理">Linux05：账号【用户】管理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/dd0f448e.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux01：概述及环境搭建">Linux01：概述及环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/cb47c65a.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux02：linux基本使用">Linux02：linux基本使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Github "
+           href="/post/5c70dd55.html"
+           data-tag="Github"
+           data-author="" >
+            <span class="post-title" title="高效使用Github寻找开源项目">高效使用Github寻找开源项目</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/bbd8500a.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="Apache配置虚拟主机">Apache配置虚拟主机</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/661cff0f.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="CentOS7安装RabbitMQ">CentOS7安装RabbitMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/37b68c09.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="CentOS7防火墙和开放端口相关命令">CentOS7防火墙和开放端口相关命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Git "
+           href="/post/a4abef79.html"
+           data-tag="Git"
+           data-author="" >
+            <span class="post-title" title="Git">Git</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 FastDFS "
+           href="/post/f5bd765101.html"
+           data-tag="FastDFS"
+           data-author="" >
+            <span class="post-title" title="FastDFS基础">FastDFS基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 FastDFS "
+           href="/post/52f98e0d.html"
+           data-tag="FastDFS"
+           data-author="" >
+            <span class="post-title" title="FastDFS总结">FastDFS总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/f361b11e.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="15【了解】RPC原理和通信原理">15【了解】RPC原理和通信原理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/51879ad5.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="16【难点】[源代码]Dubbo的设计原理">16【难点】[源代码]Dubbo的设计原理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/laddb7d2.html"
+           data-tag="Dubbo,面试"
+           data-author="" >
+            <span class="post-title" title="17【掌握】Dubbo面试相关">17【掌握】Dubbo面试相关</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/cacca95c.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Dubbo常规配置">10【掌握】Dubbo常规配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/2cb5f04d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Zookeeper宕机与Dubbo直连">12【掌握】Zookeeper宕机与Dubbo直连</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/e4cc786.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="11【掌握】Dubbo与SpringBoot整合的常规配置">11【掌握】Dubbo与SpringBoot整合的常规配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/b263e128.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="13【掌握】集群下dubbo负载均衡配置">13【掌握】集群下dubbo负载均衡配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/1f89747d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="14【掌握】整合hystrix，服务容断与降级处理">14【掌握】整合hystrix，服务容断与降级处理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/bbb51140.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="06【了解】监控中心">06【了解】监控中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/73fcab3d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Dubbo整合Springboot方式1">07【掌握】Dubbo整合Springboot方式1</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/32789f2f.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="08【掌握】Dubbo整合Springboot方式2">08【掌握】Dubbo整合Springboot方式2</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/63175f7f.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Dubbo配置文件加载顺序">09【掌握】Dubbo配置文件加载顺序</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/90263f4b.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Dubbo环境搭建（linux）">04【掌握】Dubbo环境搭建（linux）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/28d225bd.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="05【掌握】dubbo-HelloWork">05【掌握】dubbo-HelloWork</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/ac36621.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="01【掌握】分布式基础理论">01【掌握】分布式基础理论</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/d0740bf3.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Dubbo核心概念">02【掌握】Dubbo核心概念</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/bd889a72.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Dubbo环境搭建(windows)">03【掌握】Dubbo环境搭建(windows)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/43aeb173.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="14【掌握】制作tomcat镜像">14【掌握】制作tomcat镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="15【掌握】Docker安装与配置mysql5.7">15【掌握】Docker安装与配置mysql5.7</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker,Redis"
+           data-author="" >
+            <span class="post-title" title="16【掌握】docker部署Redis集群">16【掌握】docker部署Redis集群</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="11【掌握】Docker制作war包镜像">11【掌握】Docker制作war包镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/5970d170.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Docker制作jar包镜像">12【掌握】Docker制作jar包镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="13【掌握】docker安装nginx">13【掌握】docker安装nginx</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/3849e8ae.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="08【掌握】Docker网络">08【掌握】Docker网络</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Docker的四种网络模式">09【掌握】Docker的四种网络模式</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/e94391b2.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="09【了解】Docker可视化界面">09【了解】Docker可视化界面</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/72509934.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Docker容器数据卷">05【掌握】Docker容器数据卷</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/14805318.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Dockerfile详解">06【掌握】Dockerfile详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/9dd03917.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="07【掌握】发布镜像">07【掌握】发布镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d72e194.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="02【掌握】docker安装和配置">02【掌握】docker安装和配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="03【掌握】docker常用命令">03【掌握】docker常用命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/913d1c8d.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Docker镜像">04【掌握】Docker镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/7c7aa8be.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="01【了解】docker的简介">01【了解】docker的简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/4d968ae.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="redis基础">redis基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/187692e0.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="Redis(1)——5种基本数据结构">Redis(1)——5种基本数据结构</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/92415e6.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="15【掌握】Redis键和值的设计原则">15【掌握】Redis键和值的设计原则</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/faddb7d2.html"
+           data-tag="Redis,面试"
+           data-author="" >
+            <span class="post-title" title="16【掌握】redis面试中重点">16【掌握】redis面试中重点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/6484fd69.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="Redis持久化">Redis持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/87947476.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="12【掌握】spring里面使用redis缓存">12【掌握】spring里面使用redis缓存</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/cf6d0bb4.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="13【掌握】spring+redis实现秒杀">13【掌握】spring+redis实现秒杀</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/462467c9.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="14【掌握】springboot使用redis做缓存">14【掌握】springboot使用redis做缓存</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/baa33aa9.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="09【掌握】高可用高并发集群配置">09【掌握】高可用高并发集群配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/e6bd8ae0.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Redis客户端使用">10【掌握】Redis客户端使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/2be75867.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="11【掌握】java连接redis">11【掌握】java连接redis</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/d696ae96.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Redis的持久化">06【掌握】Redis的持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/ed566576.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="07【了解】Redis的事务">07【了解】Redis的事务</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/323c5dd4.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="08【了解】Redis的复制(Master/Slave)">08【了解】Redis的复制(Master/Slave)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/da2464d6.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="05【掌握】配置文件redis.conf">05【掌握】配置文件redis.conf</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/f4dfe0bc.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Redis的安装及启动停止">02【掌握】Redis的安装及启动停止</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/b2f6f635.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="03【掌握】启动后相关知识串讲">03【掌握】启动后相关知识串讲</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/debd07e2.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="04【掌握】数据类型和相关命令">04【掌握】数据类型和相关命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/87947476.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="01【了解】简介">01【了解】简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/1442515a.html"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="数据库索引">数据库索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/fb393be.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="一条sql语句在mysql中如何执行的">一条sql语句在mysql中如何执行的</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/1c44b4c0.html"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="事务隔离级别(图文详解)">事务隔离级别(图文详解)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/6dd3ee4e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL高性能优化规范建议">MySQL高性能优化规范建议</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/e35d838e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="一千行MySQL命令">一千行MySQL命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/c24675b4.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL">MySQL</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/4c160c6e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL数据库索引">MySQL数据库索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/62b5cc4f.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="队列的应用(1)——热土豆（python版）">队列的应用(1)——热土豆（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/83ba725c.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="队列的应用(2)——打印任务（python版）">队列的应用(2)——打印任务（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/da9e44a6.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(3)——表达式（python版）">栈的应用(3)——表达式（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/8912cd63.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(4)——后缀表达式求值（python版）">栈的应用(4)——后缀表达式求值（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/c82a1b6e.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(2)——进制转换（python版）">栈的应用(2)——进制转换（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/a2c4feef.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(1)——符号匹配（python版）">栈的应用(1)——符号匹配（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 阿里云 "
+           href="/post/b8a2cdb2.html"
+           data-tag="阿里云"
+           data-author="" >
+            <span class="post-title" title="阿里云服务器使用经验">阿里云服务器使用经验</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/c294b70c.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="09【掌握】ActiveMQ的消息存储和持久化">09【掌握】ActiveMQ的消息存储和持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/2b82d214.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="10【掌握】ActiveMQ的多节点集群">10【掌握】ActiveMQ的多节点集群</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/39dff01d.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="11【掌握】面试重点">11【掌握】面试重点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/7b069547.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="06【重点】Spring整合ActiveMQ">06【重点】Spring整合ActiveMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/1265381b.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="07【重点】SpringBoot整合ActiveMQ">07【重点】SpringBoot整合ActiveMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/118a2e03.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="08【了解】ActiveMQ的传输协议">08【了解】ActiveMQ的传输协议</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/a396c1d6.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="04【掌握】JMS规范和落地产品">04【掌握】JMS规范和落地产品</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/2eb68993.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="05【了解】ActiveMQ的Broker">05【了解】ActiveMQ的Broker</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/7988865d.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Java编码实现ActiveMQ通讯">03【掌握】Java编码实现ActiveMQ通讯</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/9302ee05.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="01【了解】入门概述">01【了解】入门概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/6512d5c7.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="02【掌握】ActiveMQ安装">02【掌握】ActiveMQ安装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 普通话 拼音 "
+           href="/post/8f89e6b9.html"
+           data-tag="普通话,拼音"
+           data-author="" >
+            <span class="post-title" title="学习拼音">学习拼音</span>
+            <span class="post-date" title="2020-03-05 22:10:43">2020/03/05</span>
+        </a>
+        
+        <a  class="全部文章 English Writing "
+           href="/post/9e9cc8ba.html"
+           data-tag="English,Writing"
+           data-author="" >
+            <span class="post-title" title="写作句式">写作句式</span>
+            <span class="post-date" title="2020-03-03 22:10:43">2020/03/03</span>
+        </a>
+        
+        <a  class="全部文章 English Translation "
+           href="/post/94818824.html"
+           data-tag="English,Pharse,Translation"
+           data-author="" >
+            <span class="post-title" title="翻译词组与词汇">翻译词组与词汇</span>
+            <span class="post-date" title="2020-03-02 22:10:43">2020/03/02</span>
+        </a>
+        
+        <a  class="全部文章 English Translation "
+           href="/post/dad6e1bc.html"
+           data-tag="English,Translation"
+           data-author="" >
+            <span class="post-title" title="中英翻译">中英翻译</span>
+            <span class="post-date" title="2020-03-01 22:10:43">2020/03/01</span>
+        </a>
+        
+        <a  class="全部文章 English Pharse "
+           href="/post/44d82819.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="词组固定搭配">词组固定搭配</span>
+            <span class="post-date" title="2020-02-28 22:10:43">2020/02/28</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/524daf26.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（3）">积累词汇（3）</span>
+            <span class="post-date" title="2020-02-26 22:10:43">2020/02/26</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/eaf1c843.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（2）">积累词汇（2）</span>
+            <span class="post-date" title="2020-02-25 22:10:43">2020/02/25</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/f84467ad.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（1）">积累词汇（1）</span>
+            <span class="post-date" title="2020-02-24 22:10:43">2020/02/24</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/ba5a0ef8.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（1）">有道考神词汇（1）</span>
+            <span class="post-date" title="2020-02-23 15:29:32">2020/02/23</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/8d84feca.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（4）">有道考神词汇（4）</span>
+            <span class="post-date" title="2020-02-23 00:00:00">2020/02/23</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/1053c673.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（3）">有道考神词汇（3）</span>
+            <span class="post-date" title="2020-02-22 00:00:00">2020/02/22</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/a8efa116.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（2）">有道考神词汇（2）</span>
+            <span class="post-date" title="2020-02-21 00:00:00">2020/02/21</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-docs/framework/spring-cloud/16SpringCloud Alibaba Seata处理分布式事务" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">16SpringCloud Alibaba Seata处理分布式事务</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="框架">框架</a> > 
+            
+            <a  data-rel="框架&lt;---&gt;SpringCloud">SpringCloud</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">SpringCloud</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2020-07-06 20:00:05'>2020-07-06 20:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01、分布式事务问题"><span class="toc-text">01、分布式事务问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1、问题"><span class="toc-text">1.1、问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2、案例"><span class="toc-text">1.2、案例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02、Seata简介"><span class="toc-text">02、Seata简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1、是什么"><span class="toc-text">2.1、是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2、分布式事务处理过程"><span class="toc-text">2.2、分布式事务处理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1、ID-三组件模型"><span class="toc-text">2.2.1、ID+三组件模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2、处理过程"><span class="toc-text">2.2.2、处理过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4、怎么使用"><span class="toc-text">2.4、怎么使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03、Seata-Server安装"><span class="toc-text">03、Seata-Server安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1、官网"><span class="toc-text">3.1、官网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2、下载"><span class="toc-text">3.2、下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3、解压"><span class="toc-text">3.3、解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4、创建表"><span class="toc-text">3.4、创建表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5、修改file-conf文件"><span class="toc-text">3.5、修改file.conf文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6、修改registry-conf文件"><span class="toc-text">3.6、修改registry.conf文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7、启动"><span class="toc-text">3.7、启动</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04、订单-库存-账户业务数据库准备"><span class="toc-text">04、订单&#x2F;库存&#x2F;账户业务数据库准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1、前提条件"><span class="toc-text">4.1、前提条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2、分布式事务业务说明"><span class="toc-text">4.2、分布式事务业务说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3、创建业务数据库"><span class="toc-text">4.3、创建业务数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4、3库中分别建立对应的回滚日志表"><span class="toc-text">4.4、3库中分别建立对应的回滚日志表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02、订单-库存-账户业务微服务准备"><span class="toc-text">02、订单&#x2F;库存&#x2F;账户业务微服务准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1、业务需求"><span class="toc-text">2.1、业务需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2、新建订单Order-Module"><span class="toc-text">2.2、新建订单Order-Module</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1、创建模块：seata-order-service2001"><span class="toc-text">2.2.1、创建模块：seata-order-service2001</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2、修改pom-xml"><span class="toc-text">2.2.2、修改pom.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3、创建application-yml"><span class="toc-text">2.2.3、创建application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-4、创建启动类"><span class="toc-text">2.2.4、创建启动类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-5、创建bean的config"><span class="toc-text">2.2.5、创建bean的config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-6、创建domain"><span class="toc-text">2.2.6、创建domain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-7、创建mapper-xml"><span class="toc-text">2.2.7、创建mapper.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-8、创建Dao"><span class="toc-text">2.2.8、创建Dao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-9、创建service"><span class="toc-text">2.2.9、创建service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-10、创建controller"><span class="toc-text">2.2.10、创建controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-11、拷贝seatas配置文件到"><span class="toc-text">2.2.11、拷贝seatas配置文件到</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3、新建库存Storage-Module"><span class="toc-text">2.3、新建库存Storage-Module</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1、创建模块：seata-storage-service2002"><span class="toc-text">2.3.1、创建模块：seata-storage-service2002</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2、修改pom-xml"><span class="toc-text">2.3.2、修改pom.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3、创建application-yml"><span class="toc-text">2.3.3、创建application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-4、创建启动类-1"><span class="toc-text">2.2.4、创建启动类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-5、创建bean的config-1"><span class="toc-text">2.2.5、创建bean的config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-6、创建domain-1"><span class="toc-text">2.2.6、创建domain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-7、创建mapper-xml-1"><span class="toc-text">2.2.7、创建mapper.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-8、创建Dao-1"><span class="toc-text">2.2.8、创建Dao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-9、创建service-1"><span class="toc-text">2.2.9、创建service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-10、创建controller-1"><span class="toc-text">2.2.10、创建controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-11、拷贝seatas配置文件"><span class="toc-text">2.2.11、拷贝seatas配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4、新建账户Account-Module"><span class="toc-text">2.4、新建账户Account-Module</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1、创建模块：seata-account-service2003"><span class="toc-text">2.4.1、创建模块：seata-account-service2003</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2、修改pom-xml"><span class="toc-text">2.4.2、修改pom.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3、创建application-yml"><span class="toc-text">2.4.3、创建application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-4、创建启动类-2"><span class="toc-text">2.2.4、创建启动类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-5、创建bean的config-2"><span class="toc-text">2.2.5、创建bean的config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-6、创建domain-2"><span class="toc-text">2.2.6、创建domain</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-7、创建mapper-xml-2"><span class="toc-text">2.2.7、创建mapper.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-8、创建Dao-2"><span class="toc-text">2.2.8、创建Dao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-9、创建service-2"><span class="toc-text">2.2.9、创建service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-10、创建controller-2"><span class="toc-text">2.2.10、创建controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-11、拷贝seatas配置文件-1"><span class="toc-text">2.2.11、拷贝seatas配置文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03、测试"><span class="toc-text">03、测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1、前提条件"><span class="toc-text">3.1、前提条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2、数据库初始情况"><span class="toc-text">3.2、数据库初始情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3、下订单-gt-减库存-gt-扣余额-gt-改-订单-状态"><span class="toc-text">3.3、下订单-&gt;减库存-&gt;扣余额-&gt;改(订单)状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4、正常下单"><span class="toc-text">3.4、正常下单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5、超时异常-没加-GlobalTransactional"><span class="toc-text">3.5、超时异常,没加@GlobalTransactional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6、超时异常-添加-GlobalTransactional"><span class="toc-text">3.6、超时异常,添加@GlobalTransactional</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04、补充"><span class="toc-text">04、补充</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1、再看TC-TM-RM三个组件"><span class="toc-text">4.1、再看TC&#x2F;TM&#x2F;RM三个组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2、AT模式如何做到对业务的无侵入"><span class="toc-text">4.2、AT模式如何做到对业务的无侵入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1、AT模式是什么"><span class="toc-text">4.2.1、AT模式是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2、一阶段加载"><span class="toc-text">4.2.2、一阶段加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3、二阶段提交"><span class="toc-text">4.2.3、二阶段提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-4、二阶段回滚"><span class="toc-text">4.2.4、二阶段回滚</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3、debug调试"><span class="toc-text">4.3、debug调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4、补充"><span class="toc-text">4.4、补充</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="01、分布式事务问题"><a href="#01、分布式事务问题" class="headerlink" title="01、分布式事务问题"></a>01、分布式事务问题</h1><h2 id="1-1、问题"><a href="#1-1、问题" class="headerlink" title="1.1、问题"></a>1.1、问题</h2><blockquote>
+<p>总结：一次业务操作需要垮多个数据源或需要垮多个系统进行远程调用,就会产生分布式事务问题</p>
+</blockquote>
+<p>单体应用被拆分成微服务应用，原来的三个模块被拆分成<strong>三个独立的应用</strong>，分别使用<strong>三个独立的数据源</strong>，业务操作需要调用三个服务来完成。此时<strong>每个服务内部的数据一致性由本地事务来保证，但是全局的数据一致性问题没法保证。</strong></p>
+<h2 id="1-2、案例"><a href="#1-2、案例" class="headerlink" title="1.2、案例"></a>1.2、案例</h2><p>用户购买商品的业务逻辑。整个业务逻辑由3个微服务提供支持：</p>
+<ul>
+<li>仓储服务：对给定的商品扣除仓储数量。</li>
+<li>订单服务：根据采购需求创建订单。</li>
+<li>帐户服务：从用户帐户中扣除余额。</li>
+</ul>
+<blockquote>
+<p>架构图</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175016.png" alt=""></p>
+<h1 id="02、Seata简介"><a href="#02、Seata简介" class="headerlink" title="02、Seata简介"></a>02、Seata简介</h1><h2 id="2-1、是什么"><a href="#2-1、是什么" class="headerlink" title="2.1、是什么"></a>2.1、是什么</h2><p>Seata是一款开源的分布式事务解决方案,致力于在微服务架构下提供高性能和简单易用的分布式事务服务</p>
+<p>官网地址：<a href="http://seata.io/zh-cn/" target="_blank" rel="noopener">http://seata.io/zh-cn/</a></p>
+<h2 id="2-2、分布式事务处理过程"><a href="#2-2、分布式事务处理过程" class="headerlink" title="2.2、分布式事务处理过程"></a>2.2、分布式事务处理过程</h2><h3 id="2-2-1、ID-三组件模型"><a href="#2-2-1、ID-三组件模型" class="headerlink" title="2.2.1、ID+三组件模型"></a>2.2.1、ID+三组件模型</h3><blockquote>
+<p>ID</p>
+</blockquote>
+<p>ID(XID)：全局唯一的事务id</p>
+<blockquote>
+<p>三组件概念</p>
+</blockquote>
+<ul>
+<li>Transaction Coordinator(TC)：事务协调器,维护全局事务的运行状态,负责协调并驱动全局事务的提交或回滚</li>
+<li>Transaction Manager(TM)：控制全局事务的边界,负责开启一个全局事务,并最终发起全局提交或全局回滚的决议</li>
+<li>Resource Manager(RM)：控制分支事务,负责分支注册、状态汇报,并接受事务协调的指令,驱动分支(本地)事务的提交和回滚</li>
+</ul>
+<h3 id="2-2-2、处理过程"><a href="#2-2-2、处理过程" class="headerlink" title="2.2.2、处理过程"></a>2.2.2、处理过程</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175024.png" alt=""></p>
+<ol>
+<li>TM向TC申请开启一个全局XID，全局事务建成功并生成一个全局唯一的XID；</li>
+<li>XID在微服务调用链路的上下文中传播；</li>
+<li>RM向TC注册事务，将其纳入XID对应全局事务的管辖；</li>
+<li>TM向TC发起针对XID的全局提交或回滚决议；</li>
+<li>TC调度XID下管辖的全部分支事务完成提交或回滚请求。</li>
+</ol>
+<h2 id="2-4、怎么使用"><a href="#2-4、怎么使用" class="headerlink" title="2.4、怎么使用"></a>2.4、怎么使用</h2><p>以前：本地@Transational</p>
+<p>现在：全局@GlobalTranstional</p>
+<blockquote>
+<p>SEATA 的分布式交易解决方案</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175032.png" alt=""></p>
+<p>我们只需要使用一个 <code>@GlobalTransactional</code> 注解在业务方法上:</p>
+<pre><code class="java">@GlobalTransactional
+public void purchase(String userId, String commodityCode, int orderCount) {
+    ......
+}</code></pre>
+<h1 id="03、Seata-Server安装"><a href="#03、Seata-Server安装" class="headerlink" title="03、Seata-Server安装"></a>03、Seata-Server安装</h1><blockquote>
+<p>linux和windows配置一样</p>
+</blockquote>
+<h2 id="3-1、官网"><a href="#3-1、官网" class="headerlink" title="3.1、官网"></a>3.1、官网</h2><ul>
+<li>官网文档：<a href="https://seata.io/zh-cn/" target="_blank" rel="noopener">https://seata.io/zh-cn/</a></li>
+<li>安装手册：<a href="http://seata.io/zh-cn/docs/ops/deploy-guide-beginner.html" target="_blank" rel="noopener">http://seata.io/zh-cn/docs/ops/deploy-guide-beginner.html</a></li>
+</ul>
+<h2 id="3-2、下载"><a href="#3-2、下载" class="headerlink" title="3.2、下载"></a>3.2、下载</h2><p>下载地址： <a href="https://github.com/seata/seata/releases" target="_blank" rel="noopener">https://github.com/seata/seata/releases</a></p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175040.png" alt=""></p>
+<h2 id="3-3、解压"><a href="#3-3、解压" class="headerlink" title="3.3、解压"></a>3.3、解压</h2><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175045.png" alt=""></p>
+<h2 id="3-4、创建表"><a href="#3-4、创建表" class="headerlink" title="3.4、创建表"></a>3.4、创建表</h2><p>全局事务会话信息由3块内容构成，全局事务–&gt;分支事务–&gt;全局锁，对应表global_table、branch_table、lock_table</p>
+<p>全部sql脚本：<a href="https://github.com/seata/seata/tree/1.0.0/script" target="_blank" rel="noopener">https://github.com/seata/seata/tree/1.0.0/script</a></p>
+<blockquote>
+<p>server端</p>
+</blockquote>
+<p>sql脚本：<a href="https://github.com/seata/seata/blob/1.0.0/script/server/db/mysql.sql" target="_blank" rel="noopener">https://github.com/seata/seata/blob/1.0.0/script/server/db/mysql.sql</a></p>
+<pre><code class="mysql">-- -------------------------------- The script used when storeMode is &#39;db&#39; --------------------------------
+-- the table to store GlobalSession data
+CREATE TABLE IF NOT EXISTS `global_table`
+(
+    `xid`                       VARCHAR(128) NOT NULL,
+    `transaction_id`            BIGINT,
+    `status`                    TINYINT      NOT NULL,
+    `application_id`            VARCHAR(32),
+    `transaction_service_group` VARCHAR(32),
+    `transaction_name`          VARCHAR(128),
+    `timeout`                   INT,
+    `begin_time`                BIGINT,
+    `application_data`          VARCHAR(2000),
+    `gmt_create`                DATETIME,
+    `gmt_modified`              DATETIME,
+    PRIMARY KEY (`xid`),
+    KEY `idx_gmt_modified_status` (`gmt_modified`, `status`),
+    KEY `idx_transaction_id` (`transaction_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+-- the table to store BranchSession data
+CREATE TABLE IF NOT EXISTS `branch_table`
+(
+    `branch_id`         BIGINT       NOT NULL,
+    `xid`               VARCHAR(128) NOT NULL,
+    `transaction_id`    BIGINT,
+    `resource_group_id` VARCHAR(32),
+    `resource_id`       VARCHAR(256),
+    `branch_type`       VARCHAR(8),
+    `status`            TINYINT,
+    `client_id`         VARCHAR(64),
+    `application_data`  VARCHAR(2000),
+    `gmt_create`        DATETIME,
+    `gmt_modified`      DATETIME,
+    PRIMARY KEY (`branch_id`),
+    KEY `idx_xid` (`xid`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+-- the table to store lock data
+CREATE TABLE IF NOT EXISTS `lock_table`
+(
+    `row_key`        VARCHAR(128) NOT NULL,
+    `xid`            VARCHAR(96),
+    `transaction_id` BIGINT,
+    `branch_id`      BIGINT       NOT NULL,
+    `resource_id`    VARCHAR(256),
+    `table_name`     VARCHAR(32),
+    `pk`             VARCHAR(36),
+    `gmt_create`     DATETIME,
+    `gmt_modified`   DATETIME,
+    PRIMARY KEY (`row_key`),
+    KEY `idx_branch_id` (`branch_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;</code></pre>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175052.png" alt=""></p>
+<blockquote>
+<p>client端，注意：在具体项目的数据库中建表</p>
+</blockquote>
+<p>sql脚本：<a href="https://github.com/seata/seata/blob/1.0.0/script/client/at/db/mysql.sql" target="_blank" rel="noopener">https://github.com/seata/seata/blob/1.0.0/script/client/at/db/mysql.sql</a></p>
+<pre><code class="mysql">-- for AT mode you must to init this sql for you business database. the seata server not need it.
+CREATE TABLE IF NOT EXISTS `undo_log`
+(
+    `id`            BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT &#39;increment id&#39;,
+    `branch_id`     BIGINT(20)   NOT NULL COMMENT &#39;branch transaction id&#39;,
+    `xid`           VARCHAR(100) NOT NULL COMMENT &#39;global transaction id&#39;,
+    `context`       VARCHAR(128) NOT NULL COMMENT &#39;undo_log context,such as serialization&#39;,
+    `rollback_info` LONGBLOB     NOT NULL COMMENT &#39;rollback info&#39;,
+    `log_status`    INT(11)      NOT NULL COMMENT &#39;0:normal status,1:defense status&#39;,
+    `log_created`   DATETIME     NOT NULL COMMENT &#39;create datetime&#39;,
+    `log_modified`  DATETIME     NOT NULL COMMENT &#39;modify datetime&#39;,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8 COMMENT =&#39;AT transaction mode undo table&#39;;</code></pre>
+<h2 id="3-5、修改file-conf文件"><a href="#3-5、修改file-conf文件" class="headerlink" title="3.5、修改file.conf文件"></a>3.5、修改file.conf文件</h2><blockquote>
+<p>注意：修改文件时备份</p>
+</blockquote>
+<p>文件位置： seata–&gt;conf–&gt;file.conf</p>
+<blockquote>
+<p>service模块</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175057.png" alt=""></p>
+<blockquote>
+<p>store模块</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175059.png" alt=""></p>
+<h2 id="3-6、修改registry-conf文件"><a href="#3-6、修改registry-conf文件" class="headerlink" title="3.6、修改registry.conf文件"></a>3.6、修改registry.conf文件</h2><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175102.png" alt=""></p>
+<h2 id="3-7、启动"><a href="#3-7、启动" class="headerlink" title="3.7、启动"></a>3.7、启动</h2><blockquote>
+<p>注意：先启动Nacos端口号8848</p>
+</blockquote>
+<p>启动：nacos\bin\startup.cmd</p>
+<p>访问：<a href="http://localhost:8848/nacos" target="_blank" rel="noopener">http://localhost:8848/nacos</a></p>
+<blockquote>
+<p>启动seate-server</p>
+</blockquote>
+<p>启动：seata\bin\seata-server.bat</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175106.png" alt=""></p>
+<h1 id="04、订单-库存-账户业务数据库准备"><a href="#04、订单-库存-账户业务数据库准备" class="headerlink" title="04、订单/库存/账户业务数据库准备"></a>04、订单/库存/账户业务数据库准备</h1><h2 id="4-1、前提条件"><a href="#4-1、前提条件" class="headerlink" title="4.1、前提条件"></a>4.1、前提条件</h2><p>先启动Nacos后启动Seata,保证两个都OK </p>
+<p>Seata没启动报错no available server to connect</p>
+<h2 id="4-2、分布式事务业务说明"><a href="#4-2、分布式事务业务说明" class="headerlink" title="4.2、分布式事务业务说明"></a>4.2、分布式事务业务说明</h2><blockquote>
+<p>三个服务，一个订单服务，一个库存服务，一个帐户服务。</p>
+</blockquote>
+<p>1、当用户下单时，会在订单服务中创建一个订单，然后通过远程调用库存服务下扣减下单商品的库存。</p>
+<p>2、再通过远程调用帐户服务来后后扣减用户帐户里面的余额。</p>
+<p>3、最后在订单服务中修改订单状态为完成。</p>
+<p>该操作跨越三个数据库，有两次远程调用，很明显会有分布式事务问题。</p>
+<h2 id="4-3、创建业务数据库"><a href="#4-3、创建业务数据库" class="headerlink" title="4.3、创建业务数据库"></a>4.3、创建业务数据库</h2><ul>
+<li>seata_order:存储订单的数据库</li>
+<li>seata_storage:存储库存的数据库</li>
+<li>seata_account:存储账户信息的数据库</li>
+</ul>
+<blockquote>
+<p>建库sql：</p>
+</blockquote>
+<pre><code class="mysql">create database seata_order;
+create database seata_storage;
+create database seata_account;</code></pre>
+<blockquote>
+<p>seata_order库下新建t_order表</p>
+</blockquote>
+<pre><code class="mysql">DROP TABLE IF EXISTS `t_order`;
+CREATE TABLE `t_order`  (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL COMMENT &#39;用户id&#39;,
+  `product_id` bigint(11) DEFAULT NULL COMMENT &#39;产品id&#39;,
+  `count` int(11) DEFAULT NULL COMMENT &#39;数量&#39;,
+  `money` decimal(11, 0) DEFAULT NULL COMMENT &#39;金额&#39;,
+  `status` int(1) DEFAULT NULL COMMENT &#39;订单状态:  0:创建中 1:已完结&#39;,
+  PRIMARY KEY (`int`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = &#39;订单表&#39; ROW_FORMAT = Dynamic;
+</code></pre>
+<blockquote>
+<p>seata_storage库下新建t_storage表</p>
+</blockquote>
+<pre><code class="mysql">DROP TABLE IF EXISTS `t_storage`;
+CREATE TABLE `t_storage`  (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(11) DEFAULT NULL COMMENT &#39;id&#39;,
+  `total` int(11) DEFAULT NULL COMMENT &#39;&#39;,
+  `used` int(11) DEFAULT NULL COMMENT &#39;&#39;,
+  `residue` int(11) DEFAULT NULL COMMENT &#39;&#39;,
+  PRIMARY KEY (`int`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = &#39;&#39; ROW_FORMAT = Dynamic;
+INSERT INTO `t_storage` VALUES (1, 1, 100, 0, 100);</code></pre>
+<blockquote>
+<p>seata_account库下新建t_account表</p>
+</blockquote>
+<pre><code class="mysql">CREATE TABLE `t_account`  (
+  `id` bigint(11) NOT NULL COMMENT &#39;id&#39;,
+  `user_id` bigint(11) DEFAULT NULL COMMENT &#39;用户id&#39;,
+  `total` decimal(10, 0) DEFAULT NULL COMMENT &#39;总额度&#39;,
+  `used` decimal(10, 0) DEFAULT NULL COMMENT &#39;已用余额&#39;,
+  `residue` decimal(10, 0) DEFAULT NULL COMMENT &#39;剩余可用额度&#39;,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = &#39;账户表&#39; ROW_FORMAT = Dynamic;
+
+INSERT INTO `t_account` VALUES (1, 1, 1000, 0, 1000);</code></pre>
+<h2 id="4-4、3库中分别建立对应的回滚日志表"><a href="#4-4、3库中分别建立对应的回滚日志表" class="headerlink" title="4.4、3库中分别建立对应的回滚日志表"></a>4.4、3库中分别建立对应的回滚日志表</h2><blockquote>
+<p>client端，在具体项目中的数据库中建表</p>
+</blockquote>
+<p>sql脚本：<a href="https://github.com/seata/seata/blob/1.0.0/script/client/at/db/mysql.sql" target="_blank" rel="noopener">https://github.com/seata/seata/blob/1.0.0/script/client/at/db/mysql.sql</a></p>
+<pre><code class="mysql">-- for AT mode you must to init this sql for you business database. the seata server not need it.
+CREATE TABLE IF NOT EXISTS `undo_log`
+(
+    `id`            BIGINT(20)   NOT NULL AUTO_INCREMENT COMMENT &#39;increment id&#39;,
+    `branch_id`     BIGINT(20)   NOT NULL COMMENT &#39;branch transaction id&#39;,
+    `xid`           VARCHAR(100) NOT NULL COMMENT &#39;global transaction id&#39;,
+    `context`       VARCHAR(128) NOT NULL COMMENT &#39;undo_log context,such as serialization&#39;,
+    `rollback_info` LONGBLOB     NOT NULL COMMENT &#39;rollback info&#39;,
+    `log_status`    INT(11)      NOT NULL COMMENT &#39;0:normal status,1:defense status&#39;,
+    `log_created`   DATETIME     NOT NULL COMMENT &#39;create datetime&#39;,
+    `log_modified`  DATETIME     NOT NULL COMMENT &#39;modify datetime&#39;,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8 COMMENT =&#39;AT transaction mode undo table&#39;;</code></pre>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175112.png" alt=""></p>
+<h1 id="02、订单-库存-账户业务微服务准备"><a href="#02、订单-库存-账户业务微服务准备" class="headerlink" title="02、订单/库存/账户业务微服务准备"></a>02、订单/库存/账户业务微服务准备</h1><h2 id="2-1、业务需求"><a href="#2-1、业务需求" class="headerlink" title="2.1、业务需求"></a>2.1、业务需求</h2><p>下订单-&gt;减库存-&gt;扣余额-&gt;改(订单)状态</p>
+<h2 id="2-2、新建订单Order-Module"><a href="#2-2、新建订单Order-Module" class="headerlink" title="2.2、新建订单Order-Module"></a>2.2、新建订单Order-Module</h2><blockquote>
+<p>目录结构</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175117.png" alt=""></p>
+<h3 id="2-2-1、创建模块：seata-order-service2001"><a href="#2-2-1、创建模块：seata-order-service2001" class="headerlink" title="2.2.1、创建模块：seata-order-service2001"></a>2.2.1、创建模块：seata-order-service2001</h3><p>略</p>
+<h3 id="2-2-2、修改pom-xml"><a href="#2-2-2、修改pom-xml" class="headerlink" title="2.2.2、修改pom.xml"></a>2.2.2、修改pom.xml</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;parent&gt;
+        &lt;artifactId&gt;cloud2020&lt;/artifactId&gt;
+        &lt;groupId&gt;com.lsq.springcloud&lt;/groupId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;artifactId&gt;seata-order-service2001&lt;/artifactId&gt;
+
+
+    &lt;dependencies&gt;
+        &lt;!--nacos--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;!--seata--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-seata&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+                    &lt;groupId&gt;io.seata&lt;/groupId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+            &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+            &lt;version&gt;0.9.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--feign--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;!--web-actuator--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;!--mysql-druid--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.37&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.1.10&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+&lt;/project&gt;</code></pre>
+<h3 id="2-2-3、创建application-yml"><a href="#2-2-3、创建application-yml" class="headerlink" title="2.2.3、创建application.yml"></a>2.2.3、创建application.yml</h3><pre><code class="yml">server:
+  port: 2001
+
+spring:
+  application:
+    name: seata-order-service
+  cloud:
+    alibaba:
+      seata:
+        #自定义事务组名称需要与seata-server中的对应
+        tx-service-group: lsqstudy_tx_group
+
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://server.lsqstudy.top:3306/seata_order
+    username: seata_order
+    password: seata_order
+
+feign:
+  hystrix:
+    enabled: false
+
+#设置feign客户端超时时间(OpenFeign默认支持ribbon)
+#OpenFeign默认等待1秒钟,超过后报错
+ribbon:
+  #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ConnectTimeout: 5000
+
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml</code></pre>
+<h3 id="2-2-4、创建启动类"><a href="#2-2-4、创建启动类" class="headerlink" title="2.2.4、创建启动类"></a>2.2.4、创建启动类</h3><pre><code class="java">@EnableDiscoveryClient
+@EnableFeignClients
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)//取消数据源的自动创建
+public class SeataOrderMainApp2001
+{
+
+    public static void main(String[] args)
+    {
+        SpringApplication.run(SeataOrderMainApp2001.class, args);
+    }
+}</code></pre>
+<h3 id="2-2-5、创建bean的config"><a href="#2-2-5、创建bean的config" class="headerlink" title="2.2.5、创建bean的config"></a>2.2.5、创建bean的config</h3><blockquote>
+<p>1、DataSourceProxyConfig.java</p>
+</blockquote>
+<pre><code class="java">package com.lsq.springcloud.config;
+
+import com.alibaba.druid.pool.DruidDataSource;
+import io.seata.rm.datasource.DataSourceProxy;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class DataSourceProxyConfig {
+
+    @Value(&quot;${mybatis.mapperLocations}&quot;)
+    private String mapperLocations;
+
+    @Bean
+    @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+    public DataSource druidDataSource(){
+        return new DruidDataSource();
+    }
+
+    @Bean
+    public DataSourceProxy dataSourceProxy(DataSource dataSource) {
+        return new DataSourceProxy(dataSource);
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSourceProxy);
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(mapperLocations));
+        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
+        return sqlSessionFactoryBean.getObject();
+    }
+
+}</code></pre>
+<blockquote>
+<p>2、MyBatisConfig.java</p>
+</blockquote>
+<pre><code class="java">package com.lsq.springcloud.config;
+
+
+@Configuration
+@MapperScan({&quot;com.lsq.springcloud.dao&quot;})
+public class MyBatisConfig {
+}
+</code></pre>
+<h3 id="2-2-6、创建domain"><a href="#2-2-6、创建domain" class="headerlink" title="2.2.6、创建domain"></a>2.2.6、创建domain</h3><blockquote>
+<p>1、CommonResult.java</p>
+</blockquote>
+<pre><code class="java">@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CommonResult&lt;T&gt;
+{
+    private Integer code;
+    private String  message;
+    private T       data;
+
+    public CommonResult(Integer code, String message)
+    {
+        this(code,message,null);
+    }
+}</code></pre>
+<blockquote>
+<p>2、Order.java</p>
+</blockquote>
+<pre><code class="java">@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Order
+{
+    private Long id;
+
+    private Long userId;
+
+    private Long productId;
+
+    private Integer count;
+
+    private BigDecimal money;
+
+    private Integer status; //订单状态：0：创建中；1：已完结
+}</code></pre>
+<h3 id="2-2-7、创建mapper-xml"><a href="#2-2-7、创建mapper-xml" class="headerlink" title="2.2.7、创建mapper.xml"></a>2.2.7、创建mapper.xml</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot; &gt;
+
+&lt;mapper namespace=&quot;com.lsq.springcloud.dao.OrderDao&quot;&gt;
+
+    &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.lsq.springcloud.domain.Order&quot;&gt;
+        &lt;id column=&quot;id&quot; property=&quot;id&quot; jdbcType=&quot;BIGINT&quot;/&gt;
+        &lt;result column=&quot;user_id&quot; property=&quot;userId&quot; jdbcType=&quot;BIGINT&quot;/&gt;
+        &lt;result column=&quot;product_id&quot; property=&quot;productId&quot; jdbcType=&quot;BIGINT&quot;/&gt;
+        &lt;result column=&quot;count&quot; property=&quot;count&quot; jdbcType=&quot;INTEGER&quot;/&gt;
+        &lt;result column=&quot;money&quot; property=&quot;money&quot; jdbcType=&quot;DECIMAL&quot;/&gt;
+        &lt;result column=&quot;status&quot; property=&quot;status&quot; jdbcType=&quot;INTEGER&quot;/&gt;
+    &lt;/resultMap&gt;
+
+    &lt;insert id=&quot;create&quot;&gt;
+        insert into t_order (id,user_id,product_id,count,money,status)
+        values (null,#{userId},#{productId},#{count},#{money},0);
+    &lt;/insert&gt;
+
+
+    &lt;update id=&quot;update&quot;&gt;
+        update t_order set status = 1
+        where user_id=#{userId} and status = #{status};
+    &lt;/update&gt;
+
+&lt;/mapper&gt;</code></pre>
+<h3 id="2-2-8、创建Dao"><a href="#2-2-8、创建Dao" class="headerlink" title="2.2.8、创建Dao"></a>2.2.8、创建Dao</h3><pre><code class="java">package com.lsq.springcloud.dao;
+
+import com.lsq.springcloud.domain.Order;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+@Mapper
+public interface OrderDao
+{
+    //1 新建订单
+    void create(Order order);
+
+    //2 修改订单状态，从零改为1
+    void update(@Param(&quot;userId&quot;) Long userId, @Param(&quot;status&quot;) Integer status);
+}</code></pre>
+<h3 id="2-2-9、创建service"><a href="#2-2-9、创建service" class="headerlink" title="2.2.9、创建service"></a>2.2.9、创建service</h3><blockquote>
+<p>接口</p>
+</blockquote>
+<p>OrderService.java</p>
+<pre><code class="java">public interface OrderService
+{
+    void create(Order order);
+}</code></pre>
+<p>AccountService.java</p>
+<pre><code class="java">@FeignClient(value = &quot;seata-account-service&quot;)
+public interface AccountService
+{
+    @PostMapping(value = &quot;/account/decrease&quot;)
+    CommonResult decrease(@RequestParam(&quot;userId&quot;) Long userId, @RequestParam(&quot;money&quot;) BigDecimal money);
+}</code></pre>
+<p>StorageService.java</p>
+<pre><code class="java">@FeignClient(value = &quot;seata-storage-service&quot;)
+public interface StorageService
+{
+    @PostMapping(value = &quot;/storage/decrease&quot;)
+    CommonResult decrease(@RequestParam(&quot;productId&quot;) Long productId, @RequestParam(&quot;count&quot;) Integer count);
+}</code></pre>
+<blockquote>
+<p>实现类</p>
+</blockquote>
+<p>OrderServiceImpl.java</p>
+<pre><code class="java">@Service
+@Slf4j
+public class OrderServiceImpl implements OrderService
+{
+    @Resource
+    private OrderDao orderDao;
+    @Resource
+    private StorageService storageService;
+    @Resource
+    private AccountService accountService;
+
+    /**
+     * 创建订单-&gt;调用库存服务扣减库存-&gt;调用账户服务扣减账户余额-&gt;修改订单状态
+     * 简单说：下订单-&gt;扣库存-&gt;减余额-&gt;改状态
+     */
+    @Override
+    @GlobalTransactional(name = &quot;fsp-create-order&quot;,rollbackFor = Exception.class)
+    public void create(Order order)
+    {
+        log.info(&quot;-----&gt;开始新建订单&quot;);
+        //1 新建订单
+        orderDao.create(order);
+
+        //2 扣减库存
+        log.info(&quot;-----&gt;订单微服务开始调用库存，做扣减Count&quot;);
+        storageService.decrease(order.getProductId(),order.getCount());
+        log.info(&quot;-----&gt;订单微服务开始调用库存，做扣减end&quot;);
+
+        //3 扣减账户
+        log.info(&quot;-----&gt;订单微服务开始调用账户，做扣减Money&quot;);
+        accountService.decrease(order.getUserId(),order.getMoney());
+        log.info(&quot;-----&gt;订单微服务开始调用账户，做扣减end&quot;);
+
+        //4 修改订单状态，从零到1,1代表已经完成
+        log.info(&quot;-----&gt;修改订单状态开始&quot;);
+        orderDao.update(order.getUserId(),0);
+        log.info(&quot;-----&gt;修改订单状态结束&quot;);
+
+        log.info(&quot;-----&gt;下订单结束了，O(∩_∩)O哈哈~&quot;);
+
+    }
+}</code></pre>
+<h3 id="2-2-10、创建controller"><a href="#2-2-10、创建controller" class="headerlink" title="2.2.10、创建controller"></a>2.2.10、创建controller</h3><pre><code class="java">@RestController
+public class OrderController
+{
+    @Resource
+    private OrderService orderService;
+
+
+    @GetMapping(&quot;/order/create&quot;)
+    public CommonResult create(Order order)
+    {
+        orderService.create(order);
+        return new CommonResult(200,&quot;订单创建成功&quot;);
+    }
+}</code></pre>
+<h3 id="2-2-11、拷贝seatas配置文件到"><a href="#2-2-11、拷贝seatas配置文件到" class="headerlink" title="2.2.11、拷贝seatas配置文件到"></a>2.2.11、拷贝seatas配置文件到</h3><blockquote>
+<p>1、拷贝seata-server/conf目录下的file.conf，需要修改：</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175126.png" alt=""></p>
+<blockquote>
+<p>2、拷贝seata-server/conf目录下的registry.conf，不用修改</p>
+</blockquote>
+<h2 id="2-3、新建库存Storage-Module"><a href="#2-3、新建库存Storage-Module" class="headerlink" title="2.3、新建库存Storage-Module"></a>2.3、新建库存Storage-Module</h2><blockquote>
+<p>目录结构</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175135.png" alt=""></p>
+<h3 id="2-3-1、创建模块：seata-storage-service2002"><a href="#2-3-1、创建模块：seata-storage-service2002" class="headerlink" title="2.3.1、创建模块：seata-storage-service2002"></a>2.3.1、创建模块：seata-storage-service2002</h3><p>略</p>
+<h3 id="2-3-2、修改pom-xml"><a href="#2-3-2、修改pom-xml" class="headerlink" title="2.3.2、修改pom.xml"></a>2.3.2、修改pom.xml</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;parent&gt;
+        &lt;artifactId&gt;cloud2020&lt;/artifactId&gt;
+        &lt;groupId&gt;com.lsq.springcloud&lt;/groupId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;artifactId&gt;seata-storage-service2002&lt;/artifactId&gt;
+
+    &lt;dependencies&gt;
+        &lt;!--nacos--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;!--seata--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-seata&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+                    &lt;groupId&gt;io.seata&lt;/groupId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+            &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+            &lt;version&gt;0.9.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--feign--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.37&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.1.10&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+&lt;/project&gt;</code></pre>
+<h3 id="2-3-3、创建application-yml"><a href="#2-3-3、创建application-yml" class="headerlink" title="2.3.3、创建application.yml"></a>2.3.3、创建application.yml</h3><pre><code class="yml">server:
+  port: 2001
+
+spring:
+  application:
+    name: seata-order-service
+  cloud:
+    alibaba:
+      seata:
+        #自定义事务组名称需要与seata-server中的对应
+        tx-service-group: lsqstudy_tx_group
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://server.lsqstudy.top:3306/seata_order
+    username: seata_order
+    password: seata_order
+
+feign:
+  hystrix:
+    enabled: false
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml</code></pre>
+<h3 id="2-2-4、创建启动类-1"><a href="#2-2-4、创建启动类-1" class="headerlink" title="2.2.4、创建启动类"></a>2.2.4、创建启动类</h3><pre><code class="java">@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@EnableDiscoveryClient
+@EnableFeignClients
+public class SeataStorageServiceApplication2002
+{
+    public static void main(String[] args)
+    {
+        SpringApplication.run(SeataStorageServiceApplication2002.class, args);
+    }
+}</code></pre>
+<h3 id="2-2-5、创建bean的config-1"><a href="#2-2-5、创建bean的config-1" class="headerlink" title="2.2.5、创建bean的config"></a>2.2.5、创建bean的config</h3><blockquote>
+<p>DataSourceProxyConfig.java</p>
+</blockquote>
+<pre><code class="java">package com.lsq.springcloud.config;
+
+import com.alibaba.druid.pool.DruidDataSource;
+import io.seata.rm.datasource.DataSourceProxy;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class DataSourceProxyConfig {
+
+    @Value(&quot;${mybatis.mapperLocations}&quot;)
+    private String mapperLocations;
+
+    @Bean
+    @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+    public DataSource druidDataSource(){
+        return new DruidDataSource();
+    }
+
+    @Bean
+    public DataSourceProxy dataSourceProxy(DataSource dataSource) {
+        return new DataSourceProxy(dataSource);
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSourceProxy);
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(mapperLocations));
+        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
+        return sqlSessionFactoryBean.getObject();
+    }
+
+}</code></pre>
+<blockquote>
+<p>MyBatisConfig.java</p>
+</blockquote>
+<pre><code class="java">@Configuration
+@MapperScan({&quot;com.lsq.springcloud.dao&quot;})
+public class MyBatisConfig {
+}</code></pre>
+<h3 id="2-2-6、创建domain-1"><a href="#2-2-6、创建domain-1" class="headerlink" title="2.2.6、创建domain"></a>2.2.6、创建domain</h3><blockquote>
+<p>CommonResult.java</p>
+</blockquote>
+<pre><code class="java">@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CommonResult&lt;T&gt;
+{
+    private Integer code;
+    private String  message;
+    private T       data;
+
+    public CommonResult(Integer code, String message)
+    {
+        this(code,message,null);
+    }
+}</code></pre>
+<blockquote>
+<p>Storage.java</p>
+</blockquote>
+<pre><code class="java">@Data
+public class Storage {
+
+    private Long id;
+
+    /**
+     * 产品id
+     */
+    private Long productId;
+
+    /**
+     * 总库存
+     */
+    private Integer total;
+
+    /**
+     * 已用库存
+     */
+    private Integer used;
+
+    /**
+     * 剩余库存
+     */
+    private Integer residue;
+}
+</code></pre>
+<h3 id="2-2-7、创建mapper-xml-1"><a href="#2-2-7、创建mapper-xml-1" class="headerlink" title="2.2.7、创建mapper.xml"></a>2.2.7、创建mapper.xml</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot; &gt;
+
+&lt;mapper namespace=&quot;com.lsq.springcloud.dao.StorageDao&quot;&gt;
+
+    &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.lsq.springcloud.domain.Storage&quot;&gt;
+        &lt;id column=&quot;id&quot; property=&quot;id&quot; jdbcType=&quot;BIGINT&quot;/&gt;
+        &lt;result column=&quot;product_id&quot; property=&quot;productId&quot; jdbcType=&quot;BIGINT&quot;/&gt;
+        &lt;result column=&quot;total&quot; property=&quot;total&quot; jdbcType=&quot;INTEGER&quot;/&gt;
+        &lt;result column=&quot;used&quot; property=&quot;used&quot; jdbcType=&quot;INTEGER&quot;/&gt;
+        &lt;result column=&quot;residue&quot; property=&quot;residue&quot; jdbcType=&quot;INTEGER&quot;/&gt;
+    &lt;/resultMap&gt;
+
+    &lt;update id=&quot;decrease&quot;&gt;
+        UPDATE
+            t_storage
+        SET
+            used = used + #{count},residue = residue - #{count}
+        WHERE
+            product_id = #{productId}
+    &lt;/update&gt;
+
+&lt;/mapper&gt;</code></pre>
+<h3 id="2-2-8、创建Dao-1"><a href="#2-2-8、创建Dao-1" class="headerlink" title="2.2.8、创建Dao"></a>2.2.8、创建Dao</h3><pre><code class="java">@Mapper
+public interface StorageDao {
+
+    //扣减库存
+    void decrease(@Param(&quot;productId&quot;) Long productId, @Param(&quot;count&quot;) Integer count);
+}</code></pre>
+<h3 id="2-2-9、创建service-1"><a href="#2-2-9、创建service-1" class="headerlink" title="2.2.9、创建service"></a>2.2.9、创建service</h3><blockquote>
+<p>接口</p>
+</blockquote>
+<pre><code class="java">public interface StorageService {
+    /**
+     * 扣减库存
+     */
+    void decrease(Long productId, Integer count);
+}</code></pre>
+<blockquote>
+<p>实现类</p>
+</blockquote>
+<pre><code class="java">@Service
+public class StorageServiceImpl implements StorageService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StorageServiceImpl.class);
+
+    @Resource
+    private StorageDao storageDao;
+
+    /**
+     * 扣减库存
+     */
+    @Override
+    public void decrease(Long productId, Integer count) {
+        LOGGER.info(&quot;-------&gt;storage-service中扣减库存开始&quot;);
+        storageDao.decrease(productId,count);
+        LOGGER.info(&quot;-------&gt;storage-service中扣减库存结束&quot;);
+    }
+}</code></pre>
+<h3 id="2-2-10、创建controller-1"><a href="#2-2-10、创建controller-1" class="headerlink" title="2.2.10、创建controller"></a>2.2.10、创建controller</h3><pre><code class="java">@RestController
+public class StorageController {
+
+    @Autowired
+    private StorageService storageService;
+
+    /**
+     * 扣减库存
+     */
+    @RequestMapping(&quot;/storage/decrease&quot;)
+    public CommonResult decrease(Long productId, Integer count) {
+        storageService.decrease(productId, count);
+        return new CommonResult(200,&quot;扣减库存成功！&quot;);
+    }
+}</code></pre>
+<h3 id="2-2-11、拷贝seatas配置文件"><a href="#2-2-11、拷贝seatas配置文件" class="headerlink" title="2.2.11、拷贝seatas配置文件"></a>2.2.11、拷贝seatas配置文件</h3><blockquote>
+<p>1、拷贝seata-server/conf目录下的file.conf，需要修改：</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175143.png" alt=""></p>
+<blockquote>
+<p>2、拷贝seata-server/conf目录下的registry.conf，不用修改</p>
+</blockquote>
+<h2 id="2-4、新建账户Account-Module"><a href="#2-4、新建账户Account-Module" class="headerlink" title="2.4、新建账户Account-Module"></a>2.4、新建账户Account-Module</h2><blockquote>
+<p>目录结构</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175147.png" alt=""></p>
+<h3 id="2-4-1、创建模块：seata-account-service2003"><a href="#2-4-1、创建模块：seata-account-service2003" class="headerlink" title="2.4.1、创建模块：seata-account-service2003"></a>2.4.1、创建模块：seata-account-service2003</h3><p>略</p>
+<h3 id="2-4-2、修改pom-xml"><a href="#2-4-2、修改pom-xml" class="headerlink" title="2.4.2、修改pom.xml"></a>2.4.2、修改pom.xml</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;parent&gt;
+        &lt;artifactId&gt;cloud2020&lt;/artifactId&gt;
+        &lt;groupId&gt;com.lsq.springcloud&lt;/groupId&gt;
+        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;artifactId&gt;seata-account-service2003&lt;/artifactId&gt;
+
+    &lt;dependencies&gt;
+        &lt;!--nacos--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;!--seata--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-alibaba-seata&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+                    &lt;groupId&gt;io.seata&lt;/groupId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+            &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+            &lt;version&gt;0.9.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--feign--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.37&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.1.10&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+&lt;/project&gt;</code></pre>
+<h3 id="2-4-3、创建application-yml"><a href="#2-4-3、创建application-yml" class="headerlink" title="2.4.3、创建application.yml"></a>2.4.3、创建application.yml</h3><pre><code class="yml">server:
+  port: 2003
+
+spring:
+  application:
+    name: seata-account-service
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: lsqstudy_tx_group
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://server.lsqstudy.top:3306/seata_account
+    username: seata_account
+    password: seata_account
+
+feign:
+  hystrix:
+    enabled: false
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml</code></pre>
+<h3 id="2-2-4、创建启动类-2"><a href="#2-2-4、创建启动类-2" class="headerlink" title="2.2.4、创建启动类"></a>2.2.4、创建启动类</h3><pre><code class="java">@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@EnableDiscoveryClient
+@EnableFeignClients
+public class SeataAccountMainApp2003
+{
+    public static void main(String[] args)
+    {
+        SpringApplication.run(SeataAccountMainApp2003.class, args);
+    }
+}</code></pre>
+<h3 id="2-2-5、创建bean的config-2"><a href="#2-2-5、创建bean的config-2" class="headerlink" title="2.2.5、创建bean的config"></a>2.2.5、创建bean的config</h3><blockquote>
+<p>DataSourceProxyConfig.java</p>
+</blockquote>
+<pre><code class="java">@Configuration
+public class DataSourceProxyConfig {
+
+    @Value(&quot;${mybatis.mapperLocations}&quot;)
+    private String mapperLocations;
+
+    @Bean
+    @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+    public DataSource druidDataSource(){
+        return new DruidDataSource();
+    }
+
+    @Bean
+    public DataSourceProxy dataSourceProxy(DataSource dataSource) {
+        return new DataSourceProxy(dataSource);
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSourceProxy);
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(mapperLocations));
+        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
+        return sqlSessionFactoryBean.getObject();
+    }
+
+}</code></pre>
+<blockquote>
+<p>MyBatisConfig.java</p>
+</blockquote>
+<pre><code class="java">@Configuration
+@MapperScan({&quot;com.lsq.springcloud.dao&quot;})
+public class MyBatisConfig {
+}
+</code></pre>
+<h3 id="2-2-6、创建domain-2"><a href="#2-2-6、创建domain-2" class="headerlink" title="2.2.6、创建domain"></a>2.2.6、创建domain</h3><blockquote>
+<p>CommonResult.java</p>
+</blockquote>
+<pre><code>@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CommonResult&lt;T&gt;
+{
+    private Integer code;
+    private String  message;
+    private T       data;
+
+    public CommonResult(Integer code, String message)
+    {
+        this(code,message,null);
+    }
+}</code></pre><blockquote>
+<p>Account.java</p>
+</blockquote>
+<pre><code>@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Account {
+
+    private Long id;
+
+    /**
+     * 用户id
+     */
+    private Long userId;
+
+    /**
+     * 总额度
+     */
+    private BigDecimal total;
+
+    /**
+     * 已用额度
+     */
+    private BigDecimal used;
+
+    /**
+     * 剩余额度
+     */
+    private BigDecimal residue;
+}
+</code></pre><h3 id="2-2-7、创建mapper-xml-2"><a href="#2-2-7、创建mapper-xml-2" class="headerlink" title="2.2.7、创建mapper.xml"></a>2.2.7、创建mapper.xml</h3><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot; &gt;
+
+&lt;mapper namespace=&quot;com.lsq.springcloud.dao.AccountDao&quot;&gt;
+
+    &lt;resultMap id=&quot;BaseResultMap&quot; type=&quot;com.lsq.springcloud.domain.Account&quot;&gt;
+        &lt;id column=&quot;id&quot; property=&quot;id&quot; jdbcType=&quot;BIGINT&quot;/&gt;
+        &lt;result column=&quot;user_id&quot; property=&quot;userId&quot; jdbcType=&quot;BIGINT&quot;/&gt;
+        &lt;result column=&quot;total&quot; property=&quot;total&quot; jdbcType=&quot;DECIMAL&quot;/&gt;
+        &lt;result column=&quot;used&quot; property=&quot;used&quot; jdbcType=&quot;DECIMAL&quot;/&gt;
+        &lt;result column=&quot;residue&quot; property=&quot;residue&quot; jdbcType=&quot;DECIMAL&quot;/&gt;
+    &lt;/resultMap&gt;
+
+    &lt;update id=&quot;decrease&quot;&gt;
+        UPDATE t_account
+        SET
+          residue = residue - #{money},used = used + #{money}
+        WHERE
+          user_id = #{userId};
+    &lt;/update&gt;
+
+&lt;/mapper&gt;</code></pre>
+<h3 id="2-2-8、创建Dao-2"><a href="#2-2-8、创建Dao-2" class="headerlink" title="2.2.8、创建Dao"></a>2.2.8、创建Dao</h3><pre><code class="java">@Mapper
+public interface AccountDao {
+
+    /**
+     * 扣减账户余额
+     */
+    void decrease(@Param(&quot;userId&quot;) Long userId, @Param(&quot;money&quot;) BigDecimal money);
+}
+</code></pre>
+<h3 id="2-2-9、创建service-2"><a href="#2-2-9、创建service-2" class="headerlink" title="2.2.9、创建service"></a>2.2.9、创建service</h3><blockquote>
+<p>接口</p>
+</blockquote>
+<pre><code class="java">public interface AccountService {
+
+    /**
+     * 扣减账户余额
+     * @param userId 用户id
+     * @param money 金额
+     */
+    void decrease(@RequestParam(&quot;userId&quot;) Long userId, @RequestParam(&quot;money&quot;) BigDecimal money);
+}</code></pre>
+<blockquote>
+<p>实现类</p>
+</blockquote>
+<pre><code class="java">@Service
+public class AccountServiceImpl implements AccountService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountServiceImpl.class);
+
+
+    @Resource
+    AccountDao accountDao;
+
+    /**
+     * 扣减账户余额
+     */
+    @Override
+    public void decrease(Long userId, BigDecimal money) {
+        LOGGER.info(&quot;-------&gt;account-service中扣减账户余额开始&quot;);
+        //模拟超时异常，全局事务回滚
+        //暂停几秒钟线程
+//        try { TimeUnit.SECONDS.sleep(20); } catch (InterruptedException e) { e.printStackTrace(); }
+        accountDao.decrease(userId,money);
+        LOGGER.info(&quot;-------&gt;account-service中扣减账户余额结束&quot;);
+    }
+}</code></pre>
+<h3 id="2-2-10、创建controller-2"><a href="#2-2-10、创建controller-2" class="headerlink" title="2.2.10、创建controller"></a>2.2.10、创建controller</h3><pre><code class="java">@RestController
+public class AccountController {
+
+    @Resource
+    AccountService accountService;
+
+    /**
+     * 扣减账户余额
+     */
+    @RequestMapping(&quot;/account/decrease&quot;)
+    public CommonResult decrease(@RequestParam(&quot;userId&quot;) Long userId, @RequestParam(&quot;money&quot;) BigDecimal money){
+        accountService.decrease(userId,money);
+        return new CommonResult(200,&quot;扣减账户余额成功！&quot;);
+    }
+}</code></pre>
+<h3 id="2-2-11、拷贝seatas配置文件-1"><a href="#2-2-11、拷贝seatas配置文件-1" class="headerlink" title="2.2.11、拷贝seatas配置文件"></a>2.2.11、拷贝seatas配置文件</h3><blockquote>
+<p>1、拷贝seata-server/conf目录下的file.conf，需要修改：</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175155.png" alt=""></p>
+<blockquote>
+<p>2、拷贝seata-server/conf目录下的registry.conf，不用修改</p>
+</blockquote>
+<h1 id="03、测试"><a href="#03、测试" class="headerlink" title="03、测试"></a>03、测试</h1><h2 id="3-1、前提条件"><a href="#3-1、前提条件" class="headerlink" title="3.1、前提条件"></a>3.1、前提条件</h2><ul>
+<li>启动nacos</li>
+<li>启动seate-server</li>
+<li>启动2002</li>
+<li>启动2003</li>
+<li>启动2001</li>
+</ul>
+<h2 id="3-2、数据库初始情况"><a href="#3-2、数据库初始情况" class="headerlink" title="3.2、数据库初始情况"></a>3.2、数据库初始情况</h2><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175158.png" alt=""></p>
+<h2 id="3-3、下订单-gt-减库存-gt-扣余额-gt-改-订单-状态"><a href="#3-3、下订单-gt-减库存-gt-扣余额-gt-改-订单-状态" class="headerlink" title="3.3、下订单-&gt;减库存-&gt;扣余额-&gt;改(订单)状态"></a>3.3、下订单-&gt;减库存-&gt;扣余额-&gt;改(订单)状态</h2><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175203.png" alt=""></p>
+<h2 id="3-4、正常下单"><a href="#3-4、正常下单" class="headerlink" title="3.4、正常下单"></a>3.4、正常下单</h2><p>访问：<a href="http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100" target="_blank" rel="noopener">http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100</a></p>
+<p>数据库情况：</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175207.png" alt=""></p>
+<h2 id="3-5、超时异常-没加-GlobalTransactional"><a href="#3-5、超时异常-没加-GlobalTransactional" class="headerlink" title="3.5、超时异常,没加@GlobalTransactional"></a>3.5、超时异常,没加@GlobalTransactional</h2><blockquote>
+<p>AccountServiceImpl添加超时</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175211.png" alt=""></p>
+<blockquote>
+<p>访问</p>
+</blockquote>
+<p><a href="http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100" target="_blank" rel="noopener">http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100</a></p>
+<blockquote>
+<p>数据库情况</p>
+</blockquote>
+<p>数据改变了</p>
+<blockquote>
+<p>故障情况</p>
+</blockquote>
+<p>当库存和账户金额扣减后,订单状态并没有设置为已经完成,没有从零改为1</p>
+<p>而且由于feign的重试机制,账户余额还有可能被多次扣减</p>
+<h2 id="3-6、超时异常-添加-GlobalTransactional"><a href="#3-6、超时异常-添加-GlobalTransactional" class="headerlink" title="3.6、超时异常,添加@GlobalTransactional"></a>3.6、超时异常,添加@GlobalTransactional</h2><blockquote>
+<p>AccountServiceImpl添加超时</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175215.png" alt=""></p>
+<blockquote>
+<p>OrderServiceImpl@GlobalTransactional</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175218.png" alt=""></p>
+<blockquote>
+<p>访问</p>
+</blockquote>
+<p><a href="http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100" target="_blank" rel="noopener">http://localhost:2001/order/create?userId=1&amp;productId=1&amp;count=10&amp;money=100</a></p>
+<blockquote>
+<p>数据库情况</p>
+</blockquote>
+<p>数据没有改变，回滚了。</p>
+<h1 id="04、补充"><a href="#04、补充" class="headerlink" title="04、补充"></a>04、补充</h1><h2 id="4-1、再看TC-TM-RM三个组件"><a href="#4-1、再看TC-TM-RM三个组件" class="headerlink" title="4.1、再看TC/TM/RM三个组件"></a>4.1、再看TC/TM/RM三个组件</h2><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175222.png" alt=""></p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175227.png" alt=""></p>
+<blockquote>
+<p>分布式事务的执行流程</p>
+</blockquote>
+<ul>
+<li>TM开启分布式事务(TM向TC注册全局事务记录)    </li>
+<li>按业务场景,编排数据库、服务等事务内资源(RM向TC汇报资源准备状态)</li>
+<li>TM结束分布式事务,事务一阶段结束(TM通知TC提交/回滚分布式事务)</li>
+<li>TC汇报事务信息,决定分布式事务是提交还是回滚</li>
+<li>TC通知所有RM提交/回滚资源,事务二阶段结束</li>
+</ul>
+<h2 id="4-2、AT模式如何做到对业务的无侵入"><a href="#4-2、AT模式如何做到对业务的无侵入" class="headerlink" title="4.2、AT模式如何做到对业务的无侵入"></a>4.2、AT模式如何做到对业务的无侵入</h2><h3 id="4-2-1、AT模式是什么"><a href="#4-2-1、AT模式是什么" class="headerlink" title="4.2.1、AT模式是什么"></a>4.2.1、AT模式是什么</h3><blockquote>
+<p>前提</p>
+</blockquote>
+<ul>
+<li>基于支持本地ACID事务的关系型数据库</li>
+<li>Java应用，通过JDBC访问数据库</li>
+</ul>
+<blockquote>
+<p>整体机制</p>
+</blockquote>
+<p>两阶段提交协议的演变：</p>
+<ul>
+<li>一阶段：业务数据和回滚日志记录在同一个本地事务中提交，释放本地锁和连接资源。</li>
+<li>二阶段：<ul>
+<li>提交异步化，非常快速地完成。</li>
+<li>回滚通过一阶段的回滚日志进行反身补偿。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-2、一阶段加载"><a href="#4-2-2、一阶段加载" class="headerlink" title="4.2.2、一阶段加载"></a>4.2.2、一阶段加载</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175235.png" alt=""></p>
+<blockquote>
+<p>在一阶段，Seata会拦截“业务SQL”，</p>
+</blockquote>
+<ol>
+<li>解析SQL语义，找到“业务 SQL”要更新的业务数据，在业务数据被更新前，将其保存成“before image”。</li>
+<li>执行”业务SQL” 更新业务数据，在业务数据更新之后。</li>
+<li>其保存成”after image”，最后生成行锁。</li>
+</ol>
+<p>以上的操作全部在一个数据库事务内完成，这样保证了一阶段操作的原子性。</p>
+<h3 id="4-2-3、二阶段提交"><a href="#4-2-3、二阶段提交" class="headerlink" title="4.2.3、二阶段提交"></a>4.2.3、二阶段提交</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175241.png" alt=""></p>
+<blockquote>
+<p>二阶段如果是顺利提交的话</p>
+</blockquote>
+<p>因为”业务SQL“在一阶段已经提交到数据库，所以Seata框架只需将 <strong>一阶段保存的快照数据和行锁删掉，完成数据清理即可。</strong></p>
+<h3 id="4-2-4、二阶段回滚"><a href="#4-2-4、二阶段回滚" class="headerlink" title="4.2.4、二阶段回滚"></a>4.2.4、二阶段回滚</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175245.png" alt=""></p>
+<blockquote>
+<p>如果二阶段没有提交，而是回滚</p>
+</blockquote>
+<p>Seata就需要回滚一阶段已经执行的“业务SQL”，还原业务数据。</p>
+<p>回滚方式便是用“before image”还原业务数据；但在还原前要首先校验脏写，对比”数据库当前业务数据“和”after image”,</p>
+<p>如果两份数据完全一致，就说明没有脏写，可以还原业务数据，如果不一致就说明有脏写，出现脏写就需要转人工处理。</p>
+<h2 id="4-3、debug调试"><a href="#4-3、debug调试" class="headerlink" title="4.3、debug调试"></a>4.3、debug调试</h2><blockquote>
+<p>1、在AccountServiceImpl中设置超时，打个断点</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175252.png" alt=""></p>
+<blockquote>
+<p>2、查看seata数据库</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175300.png" alt=""></p>
+<p>记录哪个微服务参加了这个事务</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175647.png" alt=""></p>
+<p>记录每个微服务对应的数据库，AT模式</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175651.png" alt="image-20200705171939796"></p>
+<blockquote>
+<p>查看业务数据库中的一个，undo.log表</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175655.png" alt=""></p>
+<blockquote>
+<p>before image、after image</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175701.png" alt=""></p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175705.png" alt=""></p>
+<h2 id="4-4、补充"><a href="#4-4、补充" class="headerlink" title="4.4、补充"></a>4.4、补充</h2><blockquote>
+<p>整个执行流程</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/29/20200705175715.png" alt=""></p>
+
+      
+       
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>16SpringCloud Alibaba Seata处理分布式事务</p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="卖剩鸭">卖剩鸭</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-07-06, 20:00:05</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-06, 20:00:05</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/post/dbb658df.html" title="16SpringCloud Alibaba Seata处理分布式事务">http://lsqstudy.top/post/dbb658df.html</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备20031985号</a>
+        </span>
+    
+    ©2019-2020
+</p>
+<p class="footer-entry">卖剩鸭也要奋斗</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 579px;
+    }
+    .nav.fullscreen {
+        margin-left: -579px;
+    }
+    .nav-left {
+        width: 157px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 512px;
+        }
+        .nav.fullscreen {
+            margin-left: -512px;
+        }
+        .nav-left {
+            width: 120px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 512px;
+            margin-left: -512px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #c1bfc1;
+    }
+    
+    
+    .nav-right nav a.hover > span{
+        color: #ffffff !important;
+    }
+    
+
+    /*列表样式*/
+    
+    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>

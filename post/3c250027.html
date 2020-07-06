@@ -1,0 +1,3821 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>shiro基础 | 卖剩鸭</title>
+  <meta name="keywords" content=" shiro ">
+  <meta name="description" content="shiro基础 | 卖剩鸭">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Sorry！没有你想要的内容错误代码：404">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404">
+<meta property="og:url" content="http://lsqstudy.top/404.html">
+<meta property="og:site_name" content="卖剩鸭">
+<meta property="og:description" content="Sorry！没有你想要的内容错误代码：404">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-06T12:00:05.052Z">
+<meta property="article:modified_time" content="2020-07-06T12:00:05.052Z">
+<meta property="article:author" content="卖剩鸭">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418165302.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="卖剩鸭" type="application/atom+xml">
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+</div>
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418164903.jpg" />
+</a>
+<div class="author">
+    <span>卖剩鸭</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/lsqstudy" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="weibo" href="https://weibo.com/p/1005057423713257" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/34fa573ae2b2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/lsqstudy" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://me.csdn.net/PorkBird" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1823472446@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1823472446&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=333252440" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="全部文章">全部文章<small>(191)</small></div></li>
+    
+        
+            
+            <li><div data-rel="课程"><i class="fold iconfont icon-right"></i>课程<small>(137)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="课程<--->ActiveMQ">ActiveMQ<small>(11)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Docker">Docker<small>(16)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Dubbo">Dubbo<small>(17)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->FastDFS">FastDFS<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Git">Git<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Github">Github<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Linux">Linux<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->MyCat">MyCat<small>(11)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Nginx">Nginx<small>(5)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Solr">Solr<small>(16)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Zookeeper">Zookeeper<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->数据库"><i class="fold iconfont icon-right"></i>数据库<small>(26)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="课程<--->数据库MySQL">MySQL<small>(7)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="课程<--->数据库Redis">Redis<small>(19)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->数据结构与算法">数据结构与算法<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->计算机网络">计算机网络<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->阿里云">阿里云<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="框架"><i class="fold iconfont icon-right"></i>框架<small>(22)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="框架<--->MyBatisPlus">MyBatisPlus<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->shiro">shiro<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SpringBoot">SpringBoot<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SpringCloud">SpringCloud<small>(17)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SSM">SSM<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="前端"><i class="fold iconfont icon-right"></i>前端<small>(11)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="前端<--->vue">vue<small>(11)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="系统与软件"><i class="fold iconfont icon-right"></i>系统与软件<small>(7)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="系统与软件<--->快捷键">快捷键<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="系统与软件<--->环境">环境<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="系统与软件<--->软件配置">软件配置<small>(3)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="普通话"><i class="fold iconfont icon-right"></i>普通话<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="普通话<--->拼音">拼音<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="English"><i class="fold iconfont icon-right"></i>English<small>(13)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="English<--->Pharse">Pharse<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Translation">Translation<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Vocabulary">Vocabulary<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Writing">Writing<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="191">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://lsqstudy.top/">卖剩鸭</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ActiveMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Dubbo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>English</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>FastDFS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Github</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyBatisPlus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyCat</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MySQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Pharse</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>shiro</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>socket</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Solr</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringBoot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringCloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SSM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Translation</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vocabulary</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vue</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Writing</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Zookeeper</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>快捷键</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>拼音</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据结构与算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>普通话</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>环境</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>计算机网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>软件配置</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>阿里云</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="全部文章 English Pharse "
+           href="/post/5b2620ec.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="日常词组（1）">日常词组（1）</span>
+            <span class="post-date" title="2020-02-27 22:10:43">2020/02/27</span>
+        </a>
+        
+        <a id="top" class="全部文章 English Pharse "
+           href="/post/49938f02.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="日常词组（2）">日常词组（2）</span>
+            <span class="post-date" title="2020-02-29 22:10:43">2020/02/29</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/41b321f1.html"
+           data-tag="软件配置"
+           data-author="" >
+            <span class="post-title" title="VSCode基本配置">VSCode基本配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/d3eb75f3.html"
+           data-tag="软件配置"
+           data-author="" >
+            <span class="post-title" title="IDEA基本配置">IDEA基本配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/cb52f9d8.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="Word 快捷键">Word 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/cc9c1aa9.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="VS Code 快捷键">VS Code 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 环境 "
+           href="/post/c623287b.html"
+           data-tag="环境,软件配置"
+           data-author="" >
+            <span class="post-title" title="node.js安装配置">node.js安装配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/610bdf07.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="IDEA快捷键">IDEA快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/f03799ec.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="Typory 快捷键">Typory 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SSM "
+           href="/post/6990e316.html"
+           data-tag="环境,SSM"
+           data-author="" >
+            <span class="post-title" title="SSM环境搭建">SSM环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringBoot "
+           href="/post/f09f8d55.html"
+           data-tag="SpringBoot"
+           data-author="" >
+            <span class="post-title" title="springboot基础">springboot基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/f4ccf8e0.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="17【面试】ID生成——雪花算法">17【面试】ID生成——雪花算法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/dbb658df.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="16SpringCloud Alibaba Seata处理分布式事务">16SpringCloud Alibaba Seata处理分布式事务</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/bdecf7ed.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="15SpringCloud Alibaba Sentinel实现熔断与限流.md">15SpringCloud Alibaba Sentinel实现熔断与限流.md</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/e13c8c8d.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="14SpringCloud Alibaba Nacos服务注册和配置中心">14SpringCloud Alibaba Nacos服务注册和配置中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/85ee5c30.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="11SpringCloud Bus消息总线">11SpringCloud Bus消息总线</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/92ae0bbf.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="13Spring Cloud Sleuth分布式链路跟踪">13Spring Cloud Sleuth分布式链路跟踪</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/e44e7c6b.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="12SpringCloud Stream消息驱动">12SpringCloud Stream消息驱动</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/2a134859.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="08Hystrix熔断器">08Hystrix熔断器</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/f8a33702.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="09Gateway新一代网关">09Gateway新一代网关</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/b5685c58.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="10SpringCloud config分布式配置中心">10SpringCloud config分布式配置中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/44028d5a.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="05三个注册中心异同点">05三个注册中心异同点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/788b5538.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="07OpenFeign服务接口调用">07OpenFeign服务接口调用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/c0092dea.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="06Ribbon负载均衡调用">06Ribbon负载均衡调用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/349c9423.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="04Consul服务注册与发现">04Consul服务注册与发现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/1a3cd1eb.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="03Zookeeper服务注册与发现">03Zookeeper服务注册与发现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/c38b7567.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="01微服务架构编码 构建">01微服务架构编码 构建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/b1d49aec.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="02Eureka服务注册与发现【已经停更】">02Eureka服务注册与发现【已经停更】</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 shiro "
+           href="/post/f92777b3.html"
+           data-tag="环境,SSM,shiro"
+           data-author="" >
+            <span class="post-title" title="SSM-shiro环境搭建">SSM-shiro环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 shiro "
+           href="/post/3c250027.html"
+           data-tag="shiro"
+           data-author="" >
+            <span class="post-title" title="shiro基础">shiro基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 MyBatisPlus "
+           href="/post/8955ba6d.html"
+           data-tag="MyBatisPlus"
+           data-author="" >
+            <span class="post-title" title="MyBatis-Plus基础">MyBatis-Plus基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/42c68f02.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="module模块">module模块</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/ff56e6aa.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="solt插槽">solt插槽</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/dae84f4a.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vuex共享变量">Vuex共享变量</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/e0886ac8.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue基础语法">Vue基础语法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/34778b46.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="组件">组件</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/e37a829a.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue项目创建与配置">Vue项目创建与配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/5925592c.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="UI库的选择">UI库的选择</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/342f857c.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Promise对像">Promise对像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/a314c4e9.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue-router路由">Vue-router路由</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/f65b3c86.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Axios网络请求">Axios网络请求</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/700f8fbd.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="MVVM模型">MVVM模型</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/51287ee3.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Zookerper集群的特征（面试）">10【掌握】Zookerper集群的特征（面试）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/3e0f77a3.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="06【了解】Zookeeper客户端连接">06【了解】Zookeeper客户端连接</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/3392f3a6.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Zookeper应用场景">07【掌握】Zookeper应用场景</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/c220babc.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="08【掌握】java操作zookeeper">08【掌握】java操作zookeeper</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/237c5a16.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="09【了解】ZooKeeper和CAP理论及一致性原则">09【了解】ZooKeeper和CAP理论及一致性原则</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/1fba7961.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Zookeeper单机版本使用">04【掌握】Zookeeper单机版本使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/f5952d38.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Zookeeper集群搭建及使用">05【掌握】Zookeeper集群搭建及使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/a7d5b2cd.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Zookeeper文件系统及监听机制">03【掌握】Zookeeper文件系统及监听机制</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/5272d092.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="16【掌握】Solr集群的使用">16【掌握】Solr集群的使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/76aa98b0.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Zookeeper的安装及单机版配置">02【掌握】Zookeeper的安装及单机版配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/8d771482.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="01【了解】Zookeeper简介">01【了解】Zookeeper简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/bd4851f8.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Solr控制台全量和增量导入配置">12【掌握】Solr控制台全量和增量导入配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/ce05e1ea.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="13【掌握】SolrCloud概述">13【掌握】SolrCloud概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/80a0385a.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="15【掌握】zookeeper管理配置文件">15【掌握】zookeeper管理配置文件</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/905d5fbe.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="14【掌握】SolrCloud搭建">14【掌握】SolrCloud搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/b807aa4e.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Solr的分词及IK库的使用">09【掌握】Solr的分词及IK库的使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a850c581.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Solr的javaAPI讲解solrj">10【掌握】Solr的javaAPI讲解solrj</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/8955ba63d.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="11【案例】使用Solr完成对jd案例的实现">11【案例】使用Solr完成对jd案例的实现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/2f388a55.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Solr的单机版装">05【掌握】Solr的单机版装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/cac3217.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Solr的名词解释及配置文件说明">06【掌握】Solr的名词解释及配置文件说明</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/47b66419.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Solr索引库说明及创建">07【掌握】Solr索引库说明及创建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/dc447f4a.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="08【了解】Solr控制台说明">08【了解】Solr控制台说明</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a4d23341.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="01【掌握】入门问题">01【掌握】入门问题</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/af9e4515.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="02【了解】倒排索引算法">02【了解】倒排索引算法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/4775554e.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="03【熟悉】手写倒排索引">03【熟悉】手写倒排索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a3530fc1.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="04【了解】Solr简介">04【了解】Solr简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/c1e71fa1.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="05【掌握】动静分离">05【掌握】动静分离</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/d11f721c.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="02【掌握】CentOS7下安装Nginx">02【掌握】CentOS7下安装Nginx</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/6e632f41.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="03【掌握】nginx.conf配置详解">03【掌握】nginx.conf配置详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/c1e71fa1.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="04【掌握】反向代理+负载均衡">04【掌握】反向代理+负载均衡</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/775845e2.html"
+           data-tag="Linux,Nginx"
+           data-author="" >
+            <span class="post-title" title="01【了解】简介">01【了解】简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/e255a10a.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="计算机网络">计算机网络</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/b3287aa2.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="计算机网络知识总结">计算机网络知识总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/cea506c.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="HTTPS中的TLS">HTTPS中的TLS</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/8efe3606.html"
+           data-tag="计算机网络,socket"
+           data-author="" >
+            <span class="post-title" title="网络编程（socket套接字)">网络编程（socket套接字)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/d968d449.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="09【掌握】全局ID的概述">09【掌握】全局ID的概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/3c239ac7.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="11【重点】mycat使用总结">11【重点】mycat使用总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/ba8e5577.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="10【掌握】mycat全局主键的生成方式">10【掌握】mycat全局主键的生成方式</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/a0d7b5e6.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="05【掌握】mycat名词解释">05【掌握】mycat名词解释</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/b18584ce.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="06【掌握】mycat的server.xml配置">06【掌握】mycat的server.xml配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/6af66496.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="07【掌握】mycat分片详解">07【掌握】mycat分片详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/5307fdc1.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="08【掌握】全局表和ER表">08【掌握】全局表和ER表</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/2b250a65.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="03【掌握】mysql的集群搭建">03【掌握】mysql的集群搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/4772ad75.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="04【掌握】mycat的安装">04【掌握】mycat的安装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/3a4057a1.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="01【了解】mycat简介">01【了解】mycat简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/946c1207.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="02【了解】mysql主从搭建">02【了解】mysql主从搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/5a5470c9.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux06：磁盘管理">Linux06：磁盘管理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/63ce1fb.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux07：三种软件安装方式及服务器基本环境搭建">Linux07：三种软件安装方式及服务器基本环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/281556f0.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux03：linux基本命令">Linux03：linux基本命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/fa67d3b0.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux04：vim使用方法">Linux04：vim使用方法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/d7893cbc.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux05：账号【用户】管理">Linux05：账号【用户】管理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/dd0f448e.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux01：概述及环境搭建">Linux01：概述及环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/cb47c65a.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux02：linux基本使用">Linux02：linux基本使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Github "
+           href="/post/5c70dd55.html"
+           data-tag="Github"
+           data-author="" >
+            <span class="post-title" title="高效使用Github寻找开源项目">高效使用Github寻找开源项目</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/bbd8500a.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="Apache配置虚拟主机">Apache配置虚拟主机</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/661cff0f.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="CentOS7安装RabbitMQ">CentOS7安装RabbitMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/37b68c09.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="CentOS7防火墙和开放端口相关命令">CentOS7防火墙和开放端口相关命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Git "
+           href="/post/a4abef79.html"
+           data-tag="Git"
+           data-author="" >
+            <span class="post-title" title="Git">Git</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 FastDFS "
+           href="/post/f5bd765101.html"
+           data-tag="FastDFS"
+           data-author="" >
+            <span class="post-title" title="FastDFS基础">FastDFS基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 FastDFS "
+           href="/post/52f98e0d.html"
+           data-tag="FastDFS"
+           data-author="" >
+            <span class="post-title" title="FastDFS总结">FastDFS总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/f361b11e.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="15【了解】RPC原理和通信原理">15【了解】RPC原理和通信原理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/51879ad5.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="16【难点】[源代码]Dubbo的设计原理">16【难点】[源代码]Dubbo的设计原理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/laddb7d2.html"
+           data-tag="Dubbo,面试"
+           data-author="" >
+            <span class="post-title" title="17【掌握】Dubbo面试相关">17【掌握】Dubbo面试相关</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/cacca95c.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Dubbo常规配置">10【掌握】Dubbo常规配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/2cb5f04d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Zookeeper宕机与Dubbo直连">12【掌握】Zookeeper宕机与Dubbo直连</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/e4cc786.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="11【掌握】Dubbo与SpringBoot整合的常规配置">11【掌握】Dubbo与SpringBoot整合的常规配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/b263e128.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="13【掌握】集群下dubbo负载均衡配置">13【掌握】集群下dubbo负载均衡配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/1f89747d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="14【掌握】整合hystrix，服务容断与降级处理">14【掌握】整合hystrix，服务容断与降级处理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/bbb51140.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="06【了解】监控中心">06【了解】监控中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/73fcab3d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Dubbo整合Springboot方式1">07【掌握】Dubbo整合Springboot方式1</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/32789f2f.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="08【掌握】Dubbo整合Springboot方式2">08【掌握】Dubbo整合Springboot方式2</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/63175f7f.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Dubbo配置文件加载顺序">09【掌握】Dubbo配置文件加载顺序</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/90263f4b.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Dubbo环境搭建（linux）">04【掌握】Dubbo环境搭建（linux）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/28d225bd.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="05【掌握】dubbo-HelloWork">05【掌握】dubbo-HelloWork</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/ac36621.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="01【掌握】分布式基础理论">01【掌握】分布式基础理论</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/d0740bf3.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Dubbo核心概念">02【掌握】Dubbo核心概念</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/bd889a72.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Dubbo环境搭建(windows)">03【掌握】Dubbo环境搭建(windows)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/43aeb173.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="14【掌握】制作tomcat镜像">14【掌握】制作tomcat镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="15【掌握】Docker安装与配置mysql5.7">15【掌握】Docker安装与配置mysql5.7</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker,Redis"
+           data-author="" >
+            <span class="post-title" title="16【掌握】docker部署Redis集群">16【掌握】docker部署Redis集群</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="11【掌握】Docker制作war包镜像">11【掌握】Docker制作war包镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/5970d170.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Docker制作jar包镜像">12【掌握】Docker制作jar包镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="13【掌握】docker安装nginx">13【掌握】docker安装nginx</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/3849e8ae.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="08【掌握】Docker网络">08【掌握】Docker网络</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Docker的四种网络模式">09【掌握】Docker的四种网络模式</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/e94391b2.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="09【了解】Docker可视化界面">09【了解】Docker可视化界面</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/72509934.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Docker容器数据卷">05【掌握】Docker容器数据卷</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/14805318.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Dockerfile详解">06【掌握】Dockerfile详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/9dd03917.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="07【掌握】发布镜像">07【掌握】发布镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d72e194.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="02【掌握】docker安装和配置">02【掌握】docker安装和配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="03【掌握】docker常用命令">03【掌握】docker常用命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/913d1c8d.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Docker镜像">04【掌握】Docker镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/7c7aa8be.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="01【了解】docker的简介">01【了解】docker的简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/4d968ae.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="redis基础">redis基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/187692e0.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="Redis(1)——5种基本数据结构">Redis(1)——5种基本数据结构</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/92415e6.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="15【掌握】Redis键和值的设计原则">15【掌握】Redis键和值的设计原则</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/faddb7d2.html"
+           data-tag="Redis,面试"
+           data-author="" >
+            <span class="post-title" title="16【掌握】redis面试中重点">16【掌握】redis面试中重点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/6484fd69.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="Redis持久化">Redis持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/87947476.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="12【掌握】spring里面使用redis缓存">12【掌握】spring里面使用redis缓存</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/cf6d0bb4.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="13【掌握】spring+redis实现秒杀">13【掌握】spring+redis实现秒杀</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/462467c9.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="14【掌握】springboot使用redis做缓存">14【掌握】springboot使用redis做缓存</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/baa33aa9.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="09【掌握】高可用高并发集群配置">09【掌握】高可用高并发集群配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/e6bd8ae0.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Redis客户端使用">10【掌握】Redis客户端使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/2be75867.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="11【掌握】java连接redis">11【掌握】java连接redis</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/d696ae96.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Redis的持久化">06【掌握】Redis的持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/ed566576.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="07【了解】Redis的事务">07【了解】Redis的事务</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/323c5dd4.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="08【了解】Redis的复制(Master/Slave)">08【了解】Redis的复制(Master/Slave)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/da2464d6.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="05【掌握】配置文件redis.conf">05【掌握】配置文件redis.conf</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/f4dfe0bc.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Redis的安装及启动停止">02【掌握】Redis的安装及启动停止</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/b2f6f635.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="03【掌握】启动后相关知识串讲">03【掌握】启动后相关知识串讲</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/debd07e2.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="04【掌握】数据类型和相关命令">04【掌握】数据类型和相关命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/87947476.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="01【了解】简介">01【了解】简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/1442515a.html"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="数据库索引">数据库索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/fb393be.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="一条sql语句在mysql中如何执行的">一条sql语句在mysql中如何执行的</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/1c44b4c0.html"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="事务隔离级别(图文详解)">事务隔离级别(图文详解)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/6dd3ee4e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL高性能优化规范建议">MySQL高性能优化规范建议</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/e35d838e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="一千行MySQL命令">一千行MySQL命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/c24675b4.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL">MySQL</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/4c160c6e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL数据库索引">MySQL数据库索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/62b5cc4f.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="队列的应用(1)——热土豆（python版）">队列的应用(1)——热土豆（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/83ba725c.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="队列的应用(2)——打印任务（python版）">队列的应用(2)——打印任务（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/da9e44a6.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(3)——表达式（python版）">栈的应用(3)——表达式（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/8912cd63.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(4)——后缀表达式求值（python版）">栈的应用(4)——后缀表达式求值（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/c82a1b6e.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(2)——进制转换（python版）">栈的应用(2)——进制转换（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/a2c4feef.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(1)——符号匹配（python版）">栈的应用(1)——符号匹配（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 阿里云 "
+           href="/post/b8a2cdb2.html"
+           data-tag="阿里云"
+           data-author="" >
+            <span class="post-title" title="阿里云服务器使用经验">阿里云服务器使用经验</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/c294b70c.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="09【掌握】ActiveMQ的消息存储和持久化">09【掌握】ActiveMQ的消息存储和持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/2b82d214.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="10【掌握】ActiveMQ的多节点集群">10【掌握】ActiveMQ的多节点集群</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/39dff01d.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="11【掌握】面试重点">11【掌握】面试重点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/7b069547.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="06【重点】Spring整合ActiveMQ">06【重点】Spring整合ActiveMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/1265381b.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="07【重点】SpringBoot整合ActiveMQ">07【重点】SpringBoot整合ActiveMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/118a2e03.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="08【了解】ActiveMQ的传输协议">08【了解】ActiveMQ的传输协议</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/a396c1d6.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="04【掌握】JMS规范和落地产品">04【掌握】JMS规范和落地产品</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/2eb68993.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="05【了解】ActiveMQ的Broker">05【了解】ActiveMQ的Broker</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/7988865d.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Java编码实现ActiveMQ通讯">03【掌握】Java编码实现ActiveMQ通讯</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/9302ee05.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="01【了解】入门概述">01【了解】入门概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/6512d5c7.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="02【掌握】ActiveMQ安装">02【掌握】ActiveMQ安装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 普通话 拼音 "
+           href="/post/8f89e6b9.html"
+           data-tag="普通话,拼音"
+           data-author="" >
+            <span class="post-title" title="学习拼音">学习拼音</span>
+            <span class="post-date" title="2020-03-05 22:10:43">2020/03/05</span>
+        </a>
+        
+        <a  class="全部文章 English Writing "
+           href="/post/9e9cc8ba.html"
+           data-tag="English,Writing"
+           data-author="" >
+            <span class="post-title" title="写作句式">写作句式</span>
+            <span class="post-date" title="2020-03-03 22:10:43">2020/03/03</span>
+        </a>
+        
+        <a  class="全部文章 English Translation "
+           href="/post/94818824.html"
+           data-tag="English,Pharse,Translation"
+           data-author="" >
+            <span class="post-title" title="翻译词组与词汇">翻译词组与词汇</span>
+            <span class="post-date" title="2020-03-02 22:10:43">2020/03/02</span>
+        </a>
+        
+        <a  class="全部文章 English Translation "
+           href="/post/dad6e1bc.html"
+           data-tag="English,Translation"
+           data-author="" >
+            <span class="post-title" title="中英翻译">中英翻译</span>
+            <span class="post-date" title="2020-03-01 22:10:43">2020/03/01</span>
+        </a>
+        
+        <a  class="全部文章 English Pharse "
+           href="/post/44d82819.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="词组固定搭配">词组固定搭配</span>
+            <span class="post-date" title="2020-02-28 22:10:43">2020/02/28</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/524daf26.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（3）">积累词汇（3）</span>
+            <span class="post-date" title="2020-02-26 22:10:43">2020/02/26</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/eaf1c843.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（2）">积累词汇（2）</span>
+            <span class="post-date" title="2020-02-25 22:10:43">2020/02/25</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/f84467ad.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（1）">积累词汇（1）</span>
+            <span class="post-date" title="2020-02-24 22:10:43">2020/02/24</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/ba5a0ef8.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（1）">有道考神词汇（1）</span>
+            <span class="post-date" title="2020-02-23 15:29:32">2020/02/23</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/8d84feca.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（4）">有道考神词汇（4）</span>
+            <span class="post-date" title="2020-02-23 00:00:00">2020/02/23</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/1053c673.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（3）">有道考神词汇（3）</span>
+            <span class="post-date" title="2020-02-22 00:00:00">2020/02/22</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/a8efa116.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（2）">有道考神词汇（2）</span>
+            <span class="post-date" title="2020-02-21 00:00:00">2020/02/21</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-docs/framework/shiro/shiro基础" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">shiro基础</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="框架">框架</a> > 
+            
+            <a  data-rel="框架&lt;---&gt;shiro">shiro</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">shiro</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2020-07-06 20:00:05'>2020-07-06 20:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01【熟悉】Shiro概述"><span class="toc-text">01【熟悉】Shiro概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，-什么是shiro"><span class="toc-text">1， 什么是shiro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，为什么要学shiro"><span class="toc-text">2，为什么要学shiro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，基本功能"><span class="toc-text">3，基本功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4，架构说明"><span class="toc-text">4，架构说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5，下载Shiro和maven的依赖"><span class="toc-text">5，下载Shiro和maven的依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02【掌握】Shiro-ini文件-先熟悉"><span class="toc-text">02【掌握】Shiro.ini文件-先熟悉</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，Shiro-ini文件的说明"><span class="toc-text">1，Shiro.ini文件的说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，Shrio-ini文件的组成部分"><span class="toc-text">2，Shrio.ini文件的组成部分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1，-main-定义全局变量"><span class="toc-text">1，[main] :定义全局变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，-users-定义用户名和密码"><span class="toc-text">2，[users] :定义用户名和密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，-roles-定义角色"><span class="toc-text">3，[roles]: 定义角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4，-urls-定义哪些内置urls生效-在web应用时使用"><span class="toc-text">4，[urls] : 定义哪些内置urls生效.在web应用时使用.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03【掌握】Shiro实现认证-ini"><span class="toc-text">03【掌握】Shiro实现认证_ini</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，基本概念"><span class="toc-text">1，基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，认证流程"><span class="toc-text">2，认证流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，使用shiro的ini文件完成认证功能"><span class="toc-text">3，使用shiro的ini文件完成认证功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04【掌握】shiro-ini实现授权"><span class="toc-text">04【掌握】shiro.ini实现授权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，授权概述"><span class="toc-text">1，授权概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，授权流程"><span class="toc-text">2，授权流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，相关方法说明"><span class="toc-text">3，相关方法说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4，修改shiro-ini"><span class="toc-text">4，修改shiro.ini</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5，测试"><span class="toc-text">5，测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05【掌握】自定义Realm实现认证"><span class="toc-text">05【掌握】自定义Realm实现认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，Realm接口"><span class="toc-text">1，Realm接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，实现步骤"><span class="toc-text">2，实现步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06【掌握】自定义Realm实现授权"><span class="toc-text">06【掌握】自定义Realm实现授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07【掌握】散列算法-凭证配置"><span class="toc-text">07【掌握】散列算法+凭证配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#散列算法"><span class="toc-text">散列算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#凭证配置"><span class="toc-text">凭证配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方式1"><span class="toc-text">方式1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方式2"><span class="toc-text">方式2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方式3"><span class="toc-text">方式3</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#凭证的认证修改"><span class="toc-text">凭证的认证修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08【掌握】ssm-shiro-Realm实现集成"><span class="toc-text">08【掌握】ssm+shiro+Realm实现集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备数据库"><span class="toc-text">准备数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搭建ssm的环境"><span class="toc-text">搭建ssm的环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建项目"><span class="toc-text">创建项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改pom-xml"><span class="toc-text">修改pom.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建包"><span class="toc-text">创建包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建db-properties"><span class="toc-text">创建db.properties</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建log4j-properties"><span class="toc-text">创建log4j.properties</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建application-dao-xml"><span class="toc-text">创建application-dao.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建application-service-xml"><span class="toc-text">创建application-service.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建applicationContext-xml"><span class="toc-text">创建applicationContext.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建springmvc-xml"><span class="toc-text">创建springmvc.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置web-xml"><span class="toc-text">配置web.xml</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集成shiro"><span class="toc-text">集成shiro</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#生成User-Role-Permission"><span class="toc-text">生成User Role Permission</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成UserMapper-RoleMapper-PermissionMapper"><span class="toc-text">生成UserMapper RoleMapper PermissionMapper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成UserMapper-xml-RoleMapper-xml-PermissionMapper-xml"><span class="toc-text">生成UserMapper.xml RoleMapper.xml PermissionMapper.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建ActivierUser"><span class="toc-text">创建ActivierUser</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建UserRealm"><span class="toc-text">创建UserRealm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建application-shrio-xml"><span class="toc-text">创建application-shrio.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改applicationContext-xml"><span class="toc-text">修改applicationContext.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改web-xml"><span class="toc-text">修改web.xml</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用shiro完成用户权限的开发"><span class="toc-text">使用shiro完成用户权限的开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#修改UserRealm"><span class="toc-text">修改UserRealm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建UserService"><span class="toc-text">创建UserService</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建UserServiceImpl"><span class="toc-text">创建UserServiceImpl</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改UserMapper"><span class="toc-text">修改UserMapper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改UserMapper-xml"><span class="toc-text">修改UserMapper.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建RoleService"><span class="toc-text">创建RoleService</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建RoleServiceImpl"><span class="toc-text">创建RoleServiceImpl</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改RoleMapper"><span class="toc-text">修改RoleMapper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改RoleMapper-xml"><span class="toc-text">修改RoleMapper.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建PermissionService"><span class="toc-text">创建PermissionService</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建PermissionServiceImpl"><span class="toc-text">创建PermissionServiceImpl</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改PermissionMapper"><span class="toc-text">修改PermissionMapper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改PermissionMapper-xml"><span class="toc-text">修改PermissionMapper.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建index-jsp"><span class="toc-text">创建index.jsp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建WEB-INF-view-login-jsp"><span class="toc-text">创建WEB-INF&#x2F;view&#x2F;login.jsp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建LoginController"><span class="toc-text">创建LoginController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建UserController"><span class="toc-text">创建UserController</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#09【掌握】ssm-shrio前后端分离的使用方法"><span class="toc-text">09【掌握】ssm+shrio前后端分离的使用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是前后端分离"><span class="toc-text">什么是前后端分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接文档的说明【以登陆为例】"><span class="toc-text">接文档的说明【以登陆为例】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制项目"><span class="toc-text">复制项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建ResultObj"><span class="toc-text">创建ResultObj</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改loginController"><span class="toc-text">修改loginController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建ShiroLoginFilter-解决未登陆时返回json"><span class="toc-text">创建ShiroLoginFilter[解决未登陆时返回json]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改UserController"><span class="toc-text">修改UserController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改application-shrio-xml"><span class="toc-text">修改application-shrio.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建GlobalExceptionHanderAdvise"><span class="toc-text">创建GlobalExceptionHanderAdvise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改springmvc-xml"><span class="toc-text">修改springmvc.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="01【熟悉】Shiro概述"><a href="#01【熟悉】Shiro概述" class="headerlink" title="01【熟悉】Shiro概述"></a>01【熟悉】Shiro概述</h2><h3 id="1，-什么是shiro"><a href="#1，-什么是shiro" class="headerlink" title="1， 什么是shiro"></a>1， 什么是shiro</h3><p>Apache Shiro 是Java 的一个安全框架。Shiro 可以帮助我们完成：认证、授权、加密、会话管理、与Web 集成、缓存等。</p>
+<h3 id="2，为什么要学shiro"><a href="#2，为什么要学shiro" class="headerlink" title="2，为什么要学shiro"></a>2，为什么要学shiro</h3><ol>
+<li><p>既然shiro将安全认证相关的功能抽取出来组成一个框架，使用shiro就可以非常快速的完成认证、授权等功能的开发，降低系统成本。</p>
+</li>
+<li><p>shiro使用广泛，shiro可以运行在web应用，非web应用，集群分布式应用中越来越多的用户开始使用shiro。</p>
+</li>
+</ol>
+<h3 id="3，基本功能"><a href="#3，基本功能" class="headerlink" title="3，基本功能"></a>3，基本功能</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193940.jpg" alt=""></p>
+<p><strong>1</strong>，<strong>Authentication</strong> 【<strong>ɔː,θentɪ’keɪʃən/</strong>】</p>
+<p>身份认证/登录，验证用户是不是拥有相应的身份；</p>
+<p><strong>2</strong>，<strong>Authorization</strong>【<strong>/ɔːθəraɪ’zeɪʃ(ə)n/</strong>】</p>
+<p>授权，即权限验证，验证某个已认证的用户是否拥有某个权限；即判断用户是否能做事情，常见的如：验证某个用户是否拥有某个角色。或者细粒度的验证某个用户对某个资源是否具有某个权限；</p>
+<p><strong>3</strong>，<strong>Session Manager</strong></p>
+<p>会话管理，即用户登录后就是一次会话，在没有退出之前，它的所有信息都在会话中；会话可以是普通JavaSE环境的，也可以是如Web环境的；</p>
+<p><strong>4</strong>，<strong>Cryptography</strong>【<strong>/krɪp’tɒgrəfɪ/</strong>】</p>
+<p>加密，保护数据的安全性，如密码加密存储到数据库，而不是明文存储；</p>
+<p><strong>5</strong>，<strong>Web Support</strong></p>
+<p>Web 支持，可以非常容易的集成到Web 环境；</p>
+<p><strong>6</strong>，<strong>Caching</strong></p>
+<p>缓存，比如用户登录后，其用户信息、拥有的角色/权限不必每次去查，这样可以提高效率；</p>
+<p><strong>7</strong>，<strong>Concurrency</strong>【<strong>/kən’kɚrənsi</strong>】</p>
+<p>shiro 支持多线程应用的并发验证，即如在一个线程中开启另一个线程，能把权限自动传播过去； </p>
+<p><strong>8</strong>，<strong>Testing</strong></p>
+<p>提供测试支持；</p>
+<p><strong>9</strong>，<strong>Run As</strong></p>
+<p>允许一个用户假装为另一个用户（如果他们允许）的身份进行访问；</p>
+<p><strong>10</strong>，<strong>Remember Me</strong></p>
+<p>记住我，这个是非常常见的功能，即一次登录后，下次再来的话不用登录了。</p>
+<p><strong>注意：Shiro不会去维护用户、维护权限；这些需要我们自己去设计、提供；然后通过相应的接口注入给Shiro即可。关于设计，后面的ssm集成shiro里面去说</strong></p>
+<h3 id="4，架构说明"><a href="#4，架构说明" class="headerlink" title="4，架构说明"></a>4，架构说明</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193941.png" alt=""></p>
+<p><strong>1</strong>，<strong>Subject</strong></p>
+<p> Subject即主体，外部应用与subject进行交互，subject记录了当前操作用户，将用户的概念理解为当前操作的主体，可能是一个通过浏览器请求的用户，也可能是一个运行的程序。 Subject在shiro中是一个接口，接口中定义了很多认证授相关的方法，外部程序通过subject进行认证授，而subject是通过SecurityManager安全管理器进行认证授权</p>
+<p><strong>2</strong>，<strong>SecurityManager</strong>【<strong>sɪ’kjʊərətɪ/</strong>】</p>
+<p> SecurityManager即安全管理器，对全部的subject进行安全管理，它是shiro的核心，负责对所有的subject进行安全管理。通过SecurityManager可以完成subject的认证、授权等，实质上SecurityManager是通过Authenticator进行认证，通过Authorizer进行授权，通过SessionManager进行会话管理等。</p>
+<p> SecurityManager是一个接口，继承了Authenticator, Authorizer, SessionManager这三个接口。</p>
+<p><strong>3</strong>，<strong>Authenticator</strong>【<strong>/ɔ’θɛntɪ,ketɚ/</strong>】</p>
+<p> Authenticator即认证器，对用户身份进行认证，Authenticator是一个接口，shiro提供ModularRealmAuthenticator实现类，通过ModularRealmAuthenticator基本上可以满足大多数需求，也可以自定义认证器。</p>
+<p><strong>4</strong>，<strong>Authorizer</strong></p>
+<p> Authorizer即授权器，用户通过认证器认证通过，在访问功能时需要通过授权器判断用户是否有此功能的操作权限。</p>
+<p><strong>5</strong>，<strong>realm</strong></p>
+<p> Realm即领域，相当于datasource数据源，securityManager进行安全认证需要通过Realm获取用户权限数据，比如：如果用户身份数据在数据库那么realm就需要从数据库获取用户身份信息。</p>
+<p> <strong>注意：不要把realm理解成只是从数据源取数据，在realm中还有认证授权校验的相关的代码</strong>。</p>
+<p><strong>6</strong>，<strong>sessionManager</strong></p>
+<p>sessionManager即会话管理，shiro框架定义了一套会话管理，它不依赖web容器的session，所以shiro可以使用在非web应用上，也可以将分布式应用的会话集中在一点管理，此特性可使它实现单点登录。</p>
+<p><strong>7</strong>，<strong>SessionDAO</strong></p>
+<p>SessionDAO即会话dao，是对session会话操作的一套接口，比如要将session存储到数据库，可以通过jdbc将会话存储到数据库。</p>
+<p><strong>8</strong>，<strong>CacheManager</strong></p>
+<p>CacheManager即缓存管理，将用户权限数据存储在缓存，这样可以提高性能。</p>
+<p><strong>9</strong>，<strong>Cryptography</strong>【<strong>/krɪp’tɒgrəfɪ/</strong>】</p>
+<p> Cryptography即密码管理，shiro提供了一套加密/解密的组件，方便开发。比如提供常用的散列、加/解密等功能。</p>
+<h3 id="5，下载Shiro和maven的依赖"><a href="#5，下载Shiro和maven的依赖" class="headerlink" title="5，下载Shiro和maven的依赖"></a>5，下载Shiro和maven的依赖</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193942.png" alt=""></p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193943.jpg" alt=""></p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193944.jpg" alt=""></p>
+<p>控制台程序至少要使用</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193945.jpg" alt=""></p>
+<h2 id="02【掌握】Shiro-ini文件-先熟悉"><a href="#02【掌握】Shiro-ini文件-先熟悉" class="headerlink" title="02【掌握】Shiro.ini文件-先熟悉"></a>02【掌握】Shiro.ini文件-先熟悉</h2><h3 id="1，Shiro-ini文件的说明"><a href="#1，Shiro-ini文件的说明" class="headerlink" title="1，Shiro.ini文件的说明"></a>1，Shiro.ini文件的说明</h3><ol>
+<li>ini (InitializationFile) 初始文件.Window系统文件扩展名.</li>
+<li>Shiro 使用时可以连接数据库,也可以不连接数据库.<ul>
+<li>如果不连接数据库,可以在shiro.ini中配置静态数据</li>
+</ul>
+</li>
+</ol>
+<h3 id="2，Shrio-ini文件的组成部分"><a href="#2，Shrio-ini文件的组成部分" class="headerlink" title="2，Shrio.ini文件的组成部分"></a>2，Shrio.ini文件的组成部分</h3><h4 id="1，-main-定义全局变量"><a href="#1，-main-定义全局变量" class="headerlink" title="1，[main] :定义全局变量"></a>1，[main] :定义全局变量</h4><p>内置securityManager对象.</p>
+<p>操作内置对象时,在[main]里面写东西</p>
+<pre><code class="ini">[main]
+securityManager.属性=值     
+myobj=com.bjsxt.lei            相当于 ： &lt;bean id=myobj class=” com.bjsxt.lei”&gt;
+securityManager.对象属性=$myobj  相当于： &lt;bean id=” securityManager” class=””&gt;或&lt;property name=” 对象属性” ref=” myobj”&gt;
+</code></pre>
+<h3 id="2，-users-定义用户名和密码"><a href="#2，-users-定义用户名和密码" class="headerlink" title="2，[users] :定义用户名和密码"></a>2，[users] :定义用户名和密码</h3><pre><code class="ini">[users]
+# 定义用户名为zhangsan 密码为zs
+zhangsan=zs
+# 定义用户名lisi密码为lisi同时具有role1和role2两个角色
+lisi=lisi,role1,role2</code></pre>
+<h3 id="3，-roles-定义角色"><a href="#3，-roles-定义角色" class="headerlink" title="3，[roles]: 定义角色"></a>3，[roles]: 定义角色</h3><p>[roles]<br>role1=权限名1,权限名2<br>role2=权限3,权限4</p>
+<p>如:</p>
+<pre><code class="ini">[roles]
+role1=user:query,user:add,user:update,user:delete,user:export
+role2=user:query,user:add</code></pre>
+<h3 id="4，-urls-定义哪些内置urls生效-在web应用时使用"><a href="#4，-urls-定义哪些内置urls生效-在web应用时使用" class="headerlink" title="4，[urls] : 定义哪些内置urls生效.在web应用时使用."></a>4，[urls] : 定义哪些内置urls生效.在web应用时使用.</h3><p>authc  代表必须认证之后才能访问的路径</p>
+<p>anon  任意的url都不需要进行认证等功能</p>
+<p>user   所有的内容都必须保证用户已经登录.</p>
+<p>logout  注销</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193946.jpg" alt=""></p>
+<h2 id="03【掌握】Shiro实现认证-ini"><a href="#03【掌握】Shiro实现认证-ini" class="headerlink" title="03【掌握】Shiro实现认证_ini"></a>03【掌握】Shiro实现认证_ini</h2><h3 id="1，基本概念"><a href="#1，基本概念" class="headerlink" title="1，基本概念"></a>1，基本概念</h3><p><strong>1</strong>，<strong>身份验证</strong></p>
+<p> 即在应用中谁能证明他就是他本人。一般提供如他们的身份ID 一些标识信息来表明他就是他本人，如提供身份证，用户名/密码来证明。</p>
+<p> 在 shiro 中，用户需要提供principals （身份）和credentials（证明）给shiro，从而应用能验证用户身份</p>
+<p><strong>2</strong>，<strong>principals</strong> <strong>【</strong>/<strong>‘prɪnsəpl</strong>】</p>
+<p>​    身份，即主体的标识属性，可以是任何东西，如用户名、邮箱等，唯一即可。</p>
+<p>一个主体可以有多个principals，但只有一个Primary principals，一般是用户名/密码/手机号。</p>
+<p><strong>3</strong>，<strong>credentials</strong> 【<strong>/krə’dɛnʃlz/</strong>】</p>
+<p>​    证明/凭证，即只有主体知道的安全值，如密码/数字证书等。</p>
+<p>​    最常见的principals和credentials组合就是用户名/密码了。接下来先进行一个基本的身份认证。</p>
+<h3 id="2，认证流程"><a href="#2，认证流程" class="headerlink" title="2，认证流程"></a>2，认证流程</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193947.png" alt="认证流程"></p>
+<h3 id="3，使用shiro的ini文件完成认证功能"><a href="#3，使用shiro的ini文件完成认证功能" class="headerlink" title="3，使用shiro的ini文件完成认证功能"></a>3，使用shiro的ini文件完成认证功能</h3><p>创建项目并引入shiro-core的依赖</p>
+<pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.sxt.shiro&lt;/groupId&gt;
+    &lt;artifactId&gt;01_shiro_Authentication_ini&lt;/artifactId&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+            &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;
+            &lt;version&gt;1.4.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-simple&lt;/artifactId&gt;
+            &lt;version&gt;1.7.21&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;
+            &lt;version&gt;1.7.21&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
+<p>创建log4j.properties</p>
+<pre><code class="ini"># Global logging configuration
+log4j.rootLogger=DEBUG, stdout
+# MyBatis logging configuration...
+log4j.logger.org.mybatis.example.BlogMapper=TRACE
+# Console output...
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n</code></pre>
+<p>创建shiro.ini</p>
+<pre><code class="ini">#配置用户
+[users]
+zhangsan=123456
+lisi=123456</code></pre>
+<p>创建TestAuthenticationApp测试  </p>
+<pre><code class="java">public class TestAuthenticationApp {
+    // 日志输出工具
+    private static final transient Logger log = LoggerFactory.getLogger(TestAuthenticationApp.class);
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    public static void main(String[] args) {
+
+        String username = &quot;zhangsan1&quot;;
+        String password = &quot;123456&quot;;
+
+        log.info(&quot;My First Apache Shiro Application&quot;);
+        // 1，创建安全管理器的工厂对象 org.apache.shiro.mgt.SecurityManager;  不能使用java.lang.SecurityManager
+        Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);
+        // 2,使用工厂创建安全管理器
+        SecurityManager securityManager = factory.getInstance();
+        // 3,把当前的安全管理器绑定当到线的线程
+        SecurityUtils.setSecurityManager(securityManager);
+        // 4,使用SecurityUtils.getSubject得到主体对象
+        Subject subject = SecurityUtils.getSubject();
+        // 5，封装用户名和密码
+        AuthenticationToken token = new UsernamePasswordToken(username, password);
+        // 6,得到认证
+        try {
+            subject.login(token);
+            System.out.println(&quot;认证通过&quot;);
+        } catch (AuthenticationException e) {
+            System.out.println(&quot;用户名或密码不正确&quot;);
+        } 
+        /*} catch (IncorrectCredentialsException e) {
+            System.out.println(&quot;密码不正确&quot;);
+        } catch (UnknownAccountException e) {
+            System.out.println(&quot;用户名不存在&quot;);
+        }*/
+
+        Subject subject2 = SecurityUtils.getSubject();
+
+        System.out.println(subject);
+        System.out.println(subject2);
+
+        aaaa();
+
+    }
+
+    public static void aaaa() {
+        Subject subject2 = SecurityUtils.getSubject();
+        System.out.println(subject2);
+    }
+
+}</code></pre>
+<h2 id="04【掌握】shiro-ini实现授权"><a href="#04【掌握】shiro-ini实现授权" class="headerlink" title="04【掌握】shiro.ini实现授权"></a>04【掌握】shiro.ini实现授权</h2><p>前提：必须先认证通过之后有授权之说</p>
+<h3 id="1，授权概述"><a href="#1，授权概述" class="headerlink" title="1，授权概述"></a>1，授权概述</h3><p>授权，也叫访问控制，即在应用中控制谁能访问哪些资源（如访问页面/编辑数据/页面操作等）。</p>
+<p>在授权中需了解的几个关键对象：<strong>主体（Subject）、资源（Resource）、权限（Permission）、角色（Role）</strong>。</p>
+<h3 id="2，授权流程"><a href="#2，授权流程" class="headerlink" title="2，授权流程"></a>2，授权流程</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193948.png" alt="授权流程"></p>
+<h3 id="3，相关方法说明"><a href="#3，相关方法说明" class="headerlink" title="3，相关方法说明"></a>3，相关方法说明</h3><ul>
+<li>subject.hasRole(“”); 判断是否有角色</li>
+<li>subject.hashRoles(List);分别判断用户是否具有List中每个内容</li>
+<li>subject.hasAllRoles(Collection);返回boolean,要求参数中所有角色用户都需要具有.</li>
+<li>subject.isPermitted(“”);判断是否具有权限.</li>
+</ul>
+<h3 id="4，修改shiro-ini"><a href="#4，修改shiro-ini" class="headerlink" title="4，修改shiro.ini"></a>4，修改shiro.ini</h3><pre><code class="ini">#配置用户
+[users]
+zhangsan=123456,role1
+lisi=123456,role2
+wangwu=123456,role3
+zhaoliu=123456,role2,role3
+
+#声明角色
+[roles]
+role1=user:query,user:add,user:update,user:delete,user:export
+role2=user:query,user:add
+role3=user:query,user:export</code></pre>
+<h3 id="5，测试"><a href="#5，测试" class="headerlink" title="5，测试"></a>5，测试</h3><pre><code class="java">@SuppressWarnings(&quot;deprecation&quot;)
+public class TestAuthorizationApp {
+    // 日志输出工具
+    private static final transient Logger log = LoggerFactory.getLogger(TestAuthorizationApp.class);
+
+    public static void main(String[] args) {
+
+        String username = &quot;sunqi&quot;;
+        String password = &quot;123456&quot;;
+
+        log.info(&quot;My First Apache Shiro Application&quot;);
+        // 1，创建安全管理器的工厂对象 org.apache.shiro.mgt.SecurityManager;  不能使用java.lang.SecurityManager
+        Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);
+        // 2,使用工厂创建安全管理器
+        SecurityManager securityManager = factory.getInstance();
+        // 3,把当前的安全管理器绑定当到线的线程
+        SecurityUtils.setSecurityManager(securityManager);
+        // 4,使用SecurityUtils.getSubject得到主体对象
+        Subject subject = SecurityUtils.getSubject();
+        // 5，封装用户名和密码
+        AuthenticationToken token = new UsernamePasswordToken(username, password);
+        // 6,得到认证
+        try {
+            subject.login(token);
+            System.out.println(&quot;认证通过&quot;);
+        } catch (AuthenticationException e) {
+            System.out.println(&quot;用户名或密码不正确&quot;);
+        } 
+
+        //subject.logout();//退出的方法
+        //判断用户是否认证通过
+        boolean authenticated = subject.isAuthenticated();
+        System.out.println(&quot;是否认证通过:&quot;+authenticated);
+        //角色判断
+        boolean hasRole1 = subject.hasRole(&quot;role1&quot;);
+        System.out.println(&quot;是否有role1的角色:&quot;+hasRole1);
+        //分别判断集合里面的角色 返回数组
+        List&lt;String&gt; roleIdentifiers=Arrays.asList(&quot;role1&quot;,&quot;role2&quot;,&quot;role3&quot;);
+        boolean[] hasRoles = subject.hasRoles(roleIdentifiers);
+        for (boolean b : hasRoles) {
+            System.out.println(b);
+        }
+        //判断当前用户是否有roleIdentifiers集合里面的所有角色
+        boolean hasAllRoles = subject.hasAllRoles(roleIdentifiers);
+        System.out.println(hasAllRoles);
+
+        //权限判断
+        boolean permitted = subject.isPermitted(&quot;user:query&quot;);
+        System.out.println(&quot;判断当前用户是否有user:query的权限  &quot;+permitted);
+
+        boolean[] permitted2 = subject.isPermitted(&quot;user:query&quot;,&quot;user:add&quot;,&quot;user:export&quot;);
+        for (boolean b : permitted2) {
+            System.out.println(b);
+        }
+
+        boolean permittedAll = subject.isPermittedAll(&quot;user:query&quot;,&quot;user:add&quot;,&quot;user:export&quot;);
+        System.out.println(permittedAll);
+
+    }
+}</code></pre>
+<h2 id="05【掌握】自定义Realm实现认证"><a href="#05【掌握】自定义Realm实现认证" class="headerlink" title="05【掌握】自定义Realm实现认证"></a>05【掌握】自定义Realm实现认证</h2><p>Shiro默认使用自带的IniRealm<strong>，</strong>IniRealm从ni配置文件中读取用户的信息，大部分情况下需要从系统的数据库中读取用户信息，所以需要自定义realm。</p>
+<h3 id="1，Realm接口"><a href="#1，Realm接口" class="headerlink" title="1，Realm接口"></a>1，Realm接口</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193949.png" alt=""></p>
+<p>最基础的是Realm接口，CachingRealm负责缓存处理，AuthenticationRealm负责认证，AuthorizingRealm负责授权，通常自定义的realm继承AuthorizingRealm</p>
+<h3 id="2，实现步骤"><a href="#2，实现步骤" class="headerlink" title="2，实现步骤"></a>2，实现步骤</h3><p>创建项目</p>
+<p>创建User</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193950.jpg" alt=""></p>
+<p>创建UserService</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193951.jpg" alt=""></p>
+<p>创建UserServiceImpl</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193952.jpg" alt=""></p>
+<p>创建UserRealm</p>
+<pre><code class="java">public class UserRealm extends AuthenticatingRealm {
+
+    private UserService userService=new UserServiceImpl();
+
+    /**
+     * 做认证
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String username=token.getPrincipal().toString();
+        token.getCredentials();
+        System.out.println(username);
+        /**
+         * 以前登陆的逻辑是  把用户和密码全部发到数据库  去匹配
+         * 在shrio里面是先根据用户名把用户对象查询出来，再来做密码匹配
+         */
+        User user=userService.queryUserByUserName(username);
+        if(null!=user) {
+            /**
+             * 参数说明
+             * 参数1:可以传到任意对象
+             * 参数2:从数据库里面查询出来的密码
+             * 参数3:当前类名
+             */
+            SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(user, user.getPwd(), this.getName());
+            return info;
+        }else {
+            //用户不存在  shiro会抛 UnknowAccountException
+            return null;
+        }
+    }
+}</code></pre>
+<p>修改shiro.ini</p>
+<pre><code class="ini">[main]
+#创建userRealm对象
+userRealm=com.sxt.realm.UserRealm
+#把当前对象给安全管理器
+#securityManager=org.apache.shiro.mgt.DefaultSecurityManager
+securityManager.realm=$userRealm</code></pre>
+<p>测试</p>
+<pre><code class="java">@SuppressWarnings(&quot;deprecation&quot;)
+public class TestAuthenticationApp {
+    // 日志输出工具
+    private static final transient Logger log = LoggerFactory.getLogger(TestAuthenticationApp.class);
+
+    public static void main(String[] args) {
+
+        String username = &quot;zhangsan&quot;;
+        String password = &quot;123456&quot;;
+
+        log.info(&quot;My First Apache Shiro Application&quot;);
+        // 1，创建安全管理器的工厂对象 org.apache.shiro.mgt.SecurityManager;
+        // 不能使用java.lang.SecurityManager
+        Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);
+        // 2,使用工厂创建安全管理器
+        DefaultSecurityManager securityManager = (DefaultSecurityManager) factory.getInstance();
+        // 3,创建UserRealm
+//        UserRealm realm = new UserRealm();
+        // 4,给securityManager注入userRealm
+//        securityManager.setRealm(realm);
+        // 6,把当前的安全管理器绑定当到线的线程
+        SecurityUtils.setSecurityManager(securityManager);
+        // 7,使用SecurityUtils.getSubject得到主体对象
+        Subject subject = SecurityUtils.getSubject();
+        // 8，封装用户名和密码
+        AuthenticationToken token = new UsernamePasswordToken(username, password);
+        // 9,得到认证
+        try {
+            subject.login(token);
+            System.out.println(&quot;认证通过&quot;);
+            Object principal = subject.getPrincipal();
+            System.out.println(principal);
+        } catch (IncorrectCredentialsException e) {
+            System.out.println(&quot;密码不正确&quot;);
+        } catch (UnknownAccountException e) {
+            System.out.println(&quot;用户名不存在&quot;);
+        }
+
+    }
+}</code></pre>
+<h2 id="06【掌握】自定义Realm实现授权"><a href="#06【掌握】自定义Realm实现授权" class="headerlink" title="06【掌握】自定义Realm实现授权"></a>06【掌握】自定义Realm实现授权</h2><p>复制03_shiro_Authentication_realm项目</p>
+<p>创建ActiverUser</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193953.jpg" alt=""></p>
+<p>创建RoleService</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193954.jpg" alt=""></p>
+<p>创建RoleServiceImpl</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193955.jpg" alt=""></p>
+<p>创建PermissionService</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193956.jpg" alt=""></p>
+<p>创建PermissionServiceImpl</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193957.jpg" alt=""></p>
+<p>修改UserRealm</p>
+<pre><code class="java">
+public class UserRealm extends AuthorizingRealm {
+
+
+
+    private UserService userService=new UserServiceImpl();
+
+    private RoleService roleService =new RoleServiceImpl();
+
+    private PermissionService permissionService=new PermissionServiceImpl();
+
+
+    /**
+     * 做认证
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String username=token.getPrincipal().toString();
+        token.getCredentials();
+        System.out.println(username);
+        /**
+         * 以前登陆的逻辑是  把用户和密码全部发到数据库  去匹配
+         * 在shrio里面是先根据用户名把用户对象查询出来，再来做密码匹配
+         */
+        User user=userService.queryUserByUserName(username);
+        if(null!=user) {
+            List&lt;String&gt; roles=roleService.queryRoleByUserName(user.getUsername());
+
+            List&lt;String&gt; permissions=permissionService.queryPermissionByUserName(user.getUsername());
+            ActiverUser activerUser=new ActiverUser(user, roles, permissions);
+            /**
+             * 参数说明
+             * 参数1:可以传到任意对象
+             * 参数2:从数据库里面查询出来的密码
+             * 参数3:当前类名
+             */
+            SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(activerUser, user.getPwd(), this.getName());
+            return info;
+        }else {
+            //用户不存在  shiro会抛 UnknowAccountException
+            return null;
+        }
+    }
+
+
+    /**
+     * 作授权
+     * 
+     * 参数说明
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        ActiverUser activerUser = (ActiverUser) principals.getPrimaryPrincipal();
+        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+        //添加角色
+        Collection&lt;String&gt; roles=activerUser.getRoles();
+        if(null!=roles&amp;&amp;roles.size()&gt;0) {
+            info.addRoles(roles);
+        }
+        Collection&lt;String&gt; permissions=activerUser.getPermissions();
+        //添加权限
+        if(null!=permissions&amp;&amp;permissions.size()&gt;0) {
+            info.addStringPermissions(permissions);
+        }
+//        if(activerUser.getUser().getType()==0) {
+//            info.addStringPermission(&quot;*:*&quot;);
+//        }
+        return info;
+    }
+
+}            </code></pre>
+<p>测试</p>
+<h2 id="07【掌握】散列算法-凭证配置"><a href="#07【掌握】散列算法-凭证配置" class="headerlink" title="07【掌握】散列算法+凭证配置"></a>07【掌握】散列算法+凭证配置</h2><h3 id="散列算法"><a href="#散列算法" class="headerlink" title="散列算法"></a>散列算法</h3><pre><code class="java">
+public class MD5Utils {
+
+
+    public static void main(String[] args) {
+        String source=&quot;123456&quot;;
+        Md5Hash hash1=new Md5Hash(source);
+        System.out.println(&quot;使用MD5加密后的结果:&quot;+hash1.toString());
+
+        Md5Hash hash2=new Md5Hash(source, &quot;广东&quot;); 
+        System.out.println(&quot;使用MD5加密并加盐后的结果:&quot;+hash2.toString());
+        Md5Hash hash3=new Md5Hash(source, &quot;广东&quot;, 2);
+        System.out.println(&quot;使用MD5加密加盐并散列两次后的结果:&quot;+hash3.toString());
+    }
+
+    /**
+     * 对密码加密 md5
+     * @param source  要加密的明文
+     * @param salt  盐
+     * @param hashIterations  散列次数
+     * @return
+     */
+    public static String md5(String source, Object salt, Integer hashIterations) {
+        return new Md5Hash(source, salt, hashIterations).toString();
+    }
+
+
+    /**
+     * 对密码加密sha1
+     * @param source  要加密的明文
+     * @param salt  盐
+     * @param hashIterations  散列次数
+     * @return
+     */
+    public static String sha1(String source, Object salt, Integer hashIterations) {
+        return new Sha1Hash(source, salt, hashIterations).toString();
+    }
+
+}</code></pre>
+<h3 id="凭证配置"><a href="#凭证配置" class="headerlink" title="凭证配置"></a>凭证配置</h3><h4 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193958.jpg" alt=""></p>
+<h4 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513193959.jpg" alt=""></p>
+<h4 id="方式3"><a href="#方式3" class="headerlink" title="方式3"></a>方式3</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194000.jpg" alt=""></p>
+<h3 id="凭证的认证修改"><a href="#凭证的认证修改" class="headerlink" title="凭证的认证修改"></a>凭证的认证修改</h3><p>修改UserServiceImpl</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194001.jpg" alt=""></p>
+<p>修改UserRealm</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194002.jpg" alt=""></p>
+<p>测试</p>
+<h2 id="08【掌握】ssm-shiro-Realm实现集成"><a href="#08【掌握】ssm-shiro-Realm实现集成" class="headerlink" title="08【掌握】ssm+shiro+Realm实现集成"></a>08【掌握】ssm+shiro+Realm实现集成</h2><h3 id="准备数据库"><a href="#准备数据库" class="headerlink" title="准备数据库"></a>准备数据库</h3><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194003.jpg" alt=""></p>
+<p>数据结构</p>
+<p>张三：user:query user:add user:update user:delete<br>李四：user:query user:add user:update<br>王五：user:query user:export</p>
+<h3 id="搭建ssm的环境"><a href="#搭建ssm的环境" class="headerlink" title="搭建ssm的环境"></a>搭建ssm的环境</h3><h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194004.jpg" alt=""></p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194005.jpg" alt=""></p>
+<h4 id="修改pom-xml"><a href="#修改pom-xml" class="headerlink" title="修改pom.xml"></a>修改pom.xml</h4><pre><code class="xml">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.sxt&lt;/groupId&gt;
+    &lt;artifactId&gt;06_ssm_shiro&lt;/artifactId&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+    &lt;version&gt;1.0&lt;/version&gt;
+    &lt;name&gt;06_ssm_shiro Maven Webapp&lt;/name&gt;
+    &lt;url&gt;http://maven.apache.org&lt;/url&gt;
+    &lt;!-- 声明常量 --&gt;
+    &lt;properties&gt;
+        &lt;servlet.version&gt;3.1.0&lt;/servlet.version&gt;
+        &lt;jsp.version&gt;2.3.1&lt;/jsp.version&gt;
+        &lt;spring.version&gt;4.3.24.RELEASE&lt;/spring.version&gt;
+        &lt;mybatis.version&gt;3.5.1&lt;/mybatis.version&gt;
+        &lt;mybatis.spring.version&gt;2.0.1&lt;/mybatis.spring.version&gt;
+        &lt;mysql.version&gt;5.1.47&lt;/mysql.version&gt;
+        &lt;pagehelper.version&gt;5.1.10&lt;/pagehelper.version&gt;
+        &lt;druid.version&gt;1.1.19&lt;/druid.version&gt;
+        &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
+        &lt;slf4j.version&gt;1.7.26&lt;/slf4j.version&gt;
+        &lt;jackson.version&gt;2.9.9&lt;/jackson.version&gt;
+        &lt;shiro.version&gt;1.4.1&lt;/shiro.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!--servlet --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+            &lt;version&gt;${servlet.version}&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;!-- javax.servlet.jsp --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+            &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
+            &lt;version&gt;${jsp.version}&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+
+        &lt;!--spring-core --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-oxm&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- mybatis --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+            &lt;version&gt;${mybatis.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- mybatis-spring --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+            &lt;version&gt;${mybatis.spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- mysql-connector-java --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;${mysql.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- pagehelper --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+            &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
+            &lt;version&gt;${pagehelper.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- druid --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid&lt;/artifactId&gt;
+            &lt;version&gt;${druid.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;log4j&lt;/groupId&gt;
+            &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+            &lt;version&gt;${log4j.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- slf4j-api --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+            &lt;version&gt;${slf4j.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- jackson-core --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+            &lt;version&gt;${jackson.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!-- 引入shiro的包 --&gt;
+        &lt;!-- &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+            &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;
+            &lt;version&gt;${shiro.version}&lt;/version&gt;
+        &lt;/dependency&gt; --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+            &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;
+            &lt;version&gt;${shiro.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;finalName&gt;06_ssm_shiro&lt;/finalName&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.2&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;!-- 配置urlencoding --&gt;
+                    &lt;uriEncoding&gt;UTF-8&lt;/uriEncoding&gt;
+                    &lt;!-- 配置端口 --&gt;
+                    &lt;port&gt;8080&lt;/port&gt;
+                    &lt;!-- 配置访问路径 --&gt;
+                    &lt;path&gt;/bjsxt&lt;/path&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;</code></pre>
+<h4 id="创建包"><a href="#创建包" class="headerlink" title="创建包"></a>创建包</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194006.jpg" alt=""></p>
+<h4 id="创建db-properties"><a href="#创建db-properties" class="headerlink" title="创建db.properties"></a>创建db.properties</h4><pre><code class="ini">driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://127.0.0.1:3306/shiro?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true
+user=root
+password=123456
+
+#maxActive 
+maxActive=20
+#initialSize
+initialSize=1
+#maxWait 
+maxWait=60000
+#minIdle 
+minIdle=1
+
+filters=stat,log4j,wall</code></pre>
+<h4 id="创建log4j-properties"><a href="#创建log4j-properties" class="headerlink" title="创建log4j.properties"></a>创建log4j.properties</h4><h4 id="创建application-dao-xml"><a href="#创建application-dao-xml" class="headerlink" title="创建application-dao.xml"></a>创建application-dao.xml</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+
+    &lt;!-- 解析配置文件 --&gt;
+    &lt;context:property-placeholder location=&quot;classpath:db.properties&quot; system-properties-mode=&quot;FALLBACK&quot;/&gt;    
+    &lt;!-- 声明数据源 --&gt;
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+        &lt;property name=&quot;driverClassName&quot; value=&quot;${driver}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;url&quot; value=&quot;${url}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;username&quot; value=&quot;${user}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;password&quot; value=&quot;${password}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;maxActive&quot; value=&quot;${maxActive}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;initialSize&quot; value=&quot;${initialSize}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;maxWait&quot; value=&quot;${maxWait}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;minIdle&quot; value=&quot;${minIdle}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;filters&quot; value=&quot;${filters}&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 创建mybatis的 configuration对象--&gt;
+    &lt;bean id=&quot;configuration&quot; class=&quot;org.apache.ibatis.session.Configuration&quot;&gt;
+        &lt;property name=&quot;logImpl&quot; value=&quot;org.apache.ibatis.logging.stdout.StdOutImpl&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 创建sqlSessionFactory --&gt;
+    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;!-- 注入数据源 --&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+
+        &lt;!-- 注入配置类 --&gt;
+        &lt;property name=&quot;configuration&quot; ref=&quot;configuration&quot;&gt;&lt;/property&gt;
+
+        &lt;!-- 扫描mapper.xml --&gt;
+        &lt;property name=&quot;mapperLocations&quot;&gt;
+            &lt;array&gt;
+                &lt;value&gt;classpath:mapper/*Mapper.xml&lt;/value&gt;
+            &lt;/array&gt;
+        &lt;/property&gt;
+        &lt;!-- 配置分页插件 --&gt;
+        &lt;property name=&quot;plugins&quot;&gt;
+            &lt;array&gt;
+                &lt;bean class=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;&lt;/bean&gt;
+            &lt;/array&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置mapper接口的扫描 --&gt;
+    &lt;bean id=&quot;mapperScannerConfigurer&quot; class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;com.sxt.mapper&quot;&gt;&lt;/property&gt;
+        &lt;!-- &lt;property name=&quot;basePackage&quot;&gt;
+            &lt;value&gt;
+                com.sxt.mapper
+                com.bjsxt.mapper
+            &lt;/value&gt;
+        &lt;/property&gt; --&gt;
+
+        &lt;!-- 注入sqlSessionFactory --&gt;
+        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;&gt;&lt;/property&gt;
+
+    &lt;/bean&gt;
+
+&lt;/beans&gt;</code></pre>
+<h4 id="创建application-service-xml"><a href="#创建application-service-xml" class="headerlink" title="创建application-service.xml"></a>创建application-service.xml</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;
+    &lt;!-- 扫描 --&gt;
+    &lt;context:component-scan base-package=&quot;com.sxt.service.impl&quot;&gt;&lt;/context:component-scan&gt;
+
+    &lt;!-- 配置事务管理器 --&gt;
+    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;!-- 注入数据源 --&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置事务的传播特性 --&gt;
+    &lt;tx:advice id=&quot;advise&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+        &lt;tx:attributes&gt;
+            &lt;tx:method name=&quot;add*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+            &lt;tx:method name=&quot;save*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+            &lt;tx:method name=&quot;insert*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+            &lt;tx:method name=&quot;update*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+            &lt;tx:method name=&quot;del*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+            &lt;tx:method name=&quot;reset*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+            &lt;tx:method name=&quot;change*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+            &lt;tx:method name=&quot;*&quot; read-only=&quot;true&quot;/&gt;
+        &lt;/tx:attributes&gt;
+    &lt;/tx:advice&gt;
+
+    &lt;!-- 配置aop --&gt;
+    &lt;aop:config&gt;
+        &lt;aop:pointcut expression=&quot;execution(* com.sxt.service.impl.*.*(..))&quot; id=&quot;pc&quot;/&gt;
+        &lt;!-- 织入操作 --&gt;
+        &lt;aop:advisor advice-ref=&quot;advise&quot; pointcut-ref=&quot;pc&quot;/&gt;
+    &lt;/aop:config&gt;        
+&lt;/beans&gt;</code></pre>
+<h4 id="创建applicationContext-xml"><a href="#创建applicationContext-xml" class="headerlink" title="创建applicationContext.xml"></a>创建applicationContext.xml</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;
+    &lt;import resource=&quot;classpath:application-dao.xml&quot; /&gt;
+    &lt;import resource=&quot;classpath:application-service.xml&quot; /&gt;
+&lt;/beans&gt;
+
+</code></pre>
+<h4 id="创建springmvc-xml"><a href="#创建springmvc-xml" class="headerlink" title="创建springmvc.xml"></a>创建springmvc.xml</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd&quot;&gt;
+
+    &lt;!-- 扫描 --&gt;
+    &lt;context:component-scan base-package=&quot;com.sxt.controller&quot;&gt;&lt;/context:component-scan&gt;
+    &lt;!-- 配置适配器和映射器 --&gt;
+    &lt;mvc:annotation-driven&gt;&lt;/mvc:annotation-driven&gt;
+
+    &lt;!-- 配置视图解析器 --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;!-- 前缀 --&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/view/&quot;&gt;&lt;/property&gt;
+        &lt;!-- 后缀 --&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;!-- 配置文件上传 --&gt;
+    &lt;!-- 配置拦截器 --&gt;
+    &lt;!-- 配置静态资源放行--&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+
+&lt;/beans&gt;</code></pre>
+<h4 id="配置web-xml"><a href="#配置web-xml" class="headerlink" title="配置web.xml"></a>配置web.xml</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+    xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;
+    id=&quot;WebApp_ID&quot; version=&quot;3.1&quot;&gt;
+    &lt;display-name&gt;06_ssm_shiro&lt;/display-name&gt;
+
+    &lt;!-- 配置编码过滤器 开始 --&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+    &lt;/filter-mapping&gt;
+    &lt;!-- 配置编码过滤器 结束 --&gt;
+
+    &lt;!-- 配置spring的监听器加载 applicationContext.xml开始 --&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;classpath*:applicationContext.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;!-- 配置spring的监听器加载 applicationContext.xml结束 --&gt;
+
+    &lt;!-- 配置前端控制器开始 --&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;!-- 注入springmvc.xml --&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath*:springmvc.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;!-- 启动创建 --&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;!-- 配置前端控制器结束 --&gt;
+    &lt;welcome-file-list&gt;
+        &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+    &lt;/welcome-file-list&gt;
+&lt;/web-app&gt;</code></pre>
+<h3 id="集成shiro"><a href="#集成shiro" class="headerlink" title="集成shiro"></a>集成shiro</h3><h4 id="生成User-Role-Permission"><a href="#生成User-Role-Permission" class="headerlink" title="生成User Role Permission"></a>生成User Role Permission</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194007.jpg" alt=""></p>
+<h4 id="生成UserMapper-RoleMapper-PermissionMapper"><a href="#生成UserMapper-RoleMapper-PermissionMapper" class="headerlink" title="生成UserMapper RoleMapper PermissionMapper"></a>生成UserMapper RoleMapper PermissionMapper</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194008.jpg" alt=""></p>
+<h4 id="生成UserMapper-xml-RoleMapper-xml-PermissionMapper-xml"><a href="#生成UserMapper-xml-RoleMapper-xml-PermissionMapper-xml" class="headerlink" title="生成UserMapper.xml RoleMapper.xml PermissionMapper.xml"></a>生成UserMapper.xml RoleMapper.xml PermissionMapper.xml</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194009.jpg" alt=""></p>
+<h4 id="创建ActivierUser"><a href="#创建ActivierUser" class="headerlink" title="创建ActivierUser"></a>创建ActivierUser</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194010.jpg" alt=""></p>
+<h4 id="创建UserRealm"><a href="#创建UserRealm" class="headerlink" title="创建UserRealm"></a>创建UserRealm</h4><pre><code class="java">public class UserRealm extends AuthorizingRealm {
+
+    /**
+     * 认证
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+
+        return null;
+    }
+
+    /**
+     * 授权
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+}</code></pre>
+<h4 id="创建application-shrio-xml"><a href="#创建application-shrio-xml" class="headerlink" title="创建application-shrio.xml"></a>创建application-shrio.xml</h4><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+
+    &lt;!-- 声明凭证匹配器 --&gt;
+    &lt;bean id=&quot;credentialsMatcher&quot; class=&quot;org.apache.shiro.authc.credential.HashedCredentialsMatcher&quot;&gt;
+        &lt;property name=&quot;hashAlgorithmName&quot; value=&quot;md5&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;hashIterations&quot; value=&quot;2&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 声明userRealm --&gt;
+    &lt;bean id=&quot;userRealm&quot; class=&quot;com.sxt.realm.UserRealm&quot;&gt;
+        &lt;!-- 注入凭证匹配器 --&gt;
+        &lt;property name=&quot;credentialsMatcher&quot; ref=&quot;credentialsMatcher&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置SecurityManager --&gt;
+    &lt;bean id=&quot;securityManager&quot; class=&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;&gt;
+        &lt;!-- 注入realm --&gt;
+        &lt;property name=&quot;realm&quot; ref=&quot;userRealm&quot;&gt;&lt;/property&gt;    
+    &lt;/bean&gt;
+
+    &lt;!-- 配置shiro的过滤器  这里面的id必须和web.xml里面的配置一样 --&gt;
+    &lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot; &gt;
+        &lt;!-- 注入安全管理器 --&gt;
+        &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot;&gt;&lt;/property&gt;
+        &lt;!-- 注入未登陆的跳转页面 默认的是webapp/login.jsp--&gt;
+        &lt;property name=&quot;loginUrl&quot; value=&quot;/index.jsp&quot;&gt;&lt;/property&gt;
+        &lt;!-- 注入未授权的访问页面 --&gt;
+        &lt;property name=&quot;unauthorizedUrl&quot; value=&quot;/unauthorized.jsp&quot;&gt;&lt;/property&gt;
+        &lt;!-- 配置过滤器链 --&gt;
+        &lt;property name=&quot;filterChainDefinitions&quot;&gt;
+            &lt;value&gt;
+                &lt;!-- 放行index.jsp --&gt;
+                /index.jsp*=anon  
+                &lt;!-- 放行跳转到登陆页面的路径 --&gt;
+                /login/toLogin*=anon
+                &lt;!-- 放行登陆的请求 --&gt;
+                /login/login*=anon
+                &lt;!-- 设置登出的路径 --&gt;
+                /login/logout*=logout
+                &lt;!-- 设置其它路径全部拦截 --&gt;   
+                /**=authc 
+            &lt;/value&gt;
+        &lt;/property&gt;
+
+    &lt;/bean&gt;
+
+&lt;/beans&gt;</code></pre>
+<h4 id="修改applicationContext-xml"><a href="#修改applicationContext-xml" class="headerlink" title="修改applicationContext.xml"></a>修改applicationContext.xml</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194011.jpg" alt=""></p>
+<h4 id="修改web-xml"><a href="#修改web-xml" class="headerlink" title="修改web.xml"></a>修改web.xml</h4><pre><code class="xml">&lt;!-- 配置shiro的集成开始 --&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;targetFilterLifecycle&lt;/param-name&gt;
+            &lt;param-value&gt;true&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;init-param&gt;
+            &lt;!-- 这里面的shiroFilter必须和application-shiro.xml里面的
+            &lt;bean id=&quot;shiroFilter&quot; class=&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot; &gt;id 一样 --&gt;
+            &lt;param-name&gt;targetBeanName&lt;/param-name&gt;
+            &lt;param-value&gt;shiroFilter&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+    &lt;/filter-mapping&gt;
+
+    &lt;!-- 配置shiro的集成结束 --&gt;</code></pre>
+<h3 id="使用shiro完成用户权限的开发"><a href="#使用shiro完成用户权限的开发" class="headerlink" title="使用shiro完成用户权限的开发"></a>使用shiro完成用户权限的开发</h3><h4 id="修改UserRealm"><a href="#修改UserRealm" class="headerlink" title="修改UserRealm"></a>修改UserRealm</h4><pre><code class="java">
+public class UserRealm extends AuthorizingRealm {
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private PermissionService permissionService;
+
+
+    @Override
+    public String getName() {
+        return this.getClass().getSimpleName();
+    }
+
+    /**
+     * 认证
+     */
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String username = token.getPrincipal().toString();
+        // 根据用户名查询用户
+        User user = this.userService.queryUserByUserName(username);
+        if (null != user) {
+            //查询角色
+            List&lt;String&gt; roles = this.roleService.queryRolesByUserId(user.getUserid());
+            //查询权限
+            List&lt;String&gt; permissions = this.permissionService.queryPermissionByUserId(user.getUserid());
+            //构造ActiverUser
+            ActivierUser activierUser=new ActivierUser(user, roles, permissions);
+            //创建盐
+            ByteSource credentialsSalt=ByteSource.Util.bytes(user.getUsername()+user.getAddress());
+            SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(activierUser, user.getUserpwd(), credentialsSalt, this.getName());
+            return info;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 授权
+     */
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        ActivierUser activierUser = (ActivierUser) principals.getPrimaryPrincipal();
+        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+
+        List&lt;String&gt; roles = activierUser.getRoles();
+        List&lt;String&gt; permissions = activierUser.getPermissions();
+        if(null!=roles&amp;&amp;roles.size()&gt;0) {
+            info.addRoles(roles);
+        }
+        if(null!=permissions&amp;&amp;permissions.size()&gt;0) {
+            info.addStringPermissions(permissions);
+        }
+        return info;
+    }
+
+}</code></pre>
+<h4 id="创建UserService"><a href="#创建UserService" class="headerlink" title="创建UserService"></a>创建UserService</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194012.jpg" alt=""></p>
+<h4 id="创建UserServiceImpl"><a href="#创建UserServiceImpl" class="headerlink" title="创建UserServiceImpl"></a>创建UserServiceImpl</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194013.jpg" alt=""></p>
+<h4 id="修改UserMapper"><a href="#修改UserMapper" class="headerlink" title="修改UserMapper"></a>修改UserMapper</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194014.jpg" alt=""></p>
+<h4 id="修改UserMapper-xml"><a href="#修改UserMapper-xml" class="headerlink" title="修改UserMapper.xml"></a>修改UserMapper.xml</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194015.jpg" alt=""></p>
+<h4 id="创建RoleService"><a href="#创建RoleService" class="headerlink" title="创建RoleService"></a>创建RoleService</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194016.jpg" alt=""></p>
+<h4 id="创建RoleServiceImpl"><a href="#创建RoleServiceImpl" class="headerlink" title="创建RoleServiceImpl"></a>创建RoleServiceImpl</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194017.jpg" alt=""></p>
+<h4 id="修改RoleMapper"><a href="#修改RoleMapper" class="headerlink" title="修改RoleMapper"></a>修改RoleMapper</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194018.jpg" alt=""></p>
+<h4 id="修改RoleMapper-xml"><a href="#修改RoleMapper-xml" class="headerlink" title="修改RoleMapper.xml"></a>修改RoleMapper.xml</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194019.jpg" alt=""></p>
+<h4 id="创建PermissionService"><a href="#创建PermissionService" class="headerlink" title="创建PermissionService"></a>创建PermissionService</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194020.jpg" alt=""></p>
+<h4 id="创建PermissionServiceImpl"><a href="#创建PermissionServiceImpl" class="headerlink" title="创建PermissionServiceImpl"></a>创建PermissionServiceImpl</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194021.jpg" alt=""></p>
+<h4 id="修改PermissionMapper"><a href="#修改PermissionMapper" class="headerlink" title="修改PermissionMapper"></a>修改PermissionMapper</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194022.jpg" alt=""></p>
+<h4 id="修改PermissionMapper-xml"><a href="#修改PermissionMapper-xml" class="headerlink" title="修改PermissionMapper.xml"></a>修改PermissionMapper.xml</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194023.jpg" alt=""></p>
+<h4 id="创建index-jsp"><a href="#创建index-jsp" class="headerlink" title="创建index.jsp"></a>创建index.jsp</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194024.jpg" alt=""></p>
+<h4 id="创建WEB-INF-view-login-jsp"><a href="#创建WEB-INF-view-login-jsp" class="headerlink" title="创建WEB-INF/view/login.jsp"></a>创建WEB-INF/view/login.jsp</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194025.jpg" alt=""></p>
+<h4 id="创建LoginController"><a href="#创建LoginController" class="headerlink" title="创建LoginController"></a>创建LoginController</h4><pre><code class="java">@RequestMapping(&quot;login&quot;)
+@Controller
+public class LoginController {
+
+    /**
+     * 跳转到登陆页面
+     */
+    @RequestMapping(&quot;toLogin&quot;)
+    public String toLogin() {
+        return &quot;login&quot;;
+    }
+
+
+    /**
+     * 做登陆
+     */
+    @RequestMapping(&quot;login&quot;)
+    public String login(String username,String pwd,HttpSession session) {
+        //得到主体
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token=new UsernamePasswordToken(username, pwd);
+        try {
+            subject.login(token);
+            System.out.println(&quot;登陆成功&quot;);
+            ActivierUser activierUser = (ActivierUser) subject.getPrincipal();
+            session.setAttribute(&quot;user&quot;, activierUser.getUser());
+            return &quot;redirect:/user/toUserManager.action&quot;;
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            return &quot;redirect:/index.jsp&quot;;
+        }
+    }
+
+}</code></pre>
+<h4 id="创建UserController"><a href="#创建UserController" class="headerlink" title="创建UserController"></a>创建UserController</h4><pre><code class="java">@Controller
+@RequestMapping(&quot;user&quot;)
+public class UserController {
+
+    /**
+     * 跳转到用户管理的页面
+     */
+    @RequestMapping(&quot;toUserManager&quot;)
+    public String toUserManager() {
+        return &quot;list&quot;;
+    }
+
+    @RequestMapping(&quot;query&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; query(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;query&quot;);
+        return map;
+    }
+    @RequestMapping(&quot;add&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; add(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;add&quot;);
+        return map;
+    }
+    @RequestMapping(&quot;update&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; update(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;update&quot;);
+        return map;
+    }
+
+    @RequestMapping(&quot;delete&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; delete(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;delete&quot;);
+        return map;
+    }
+
+    @RequestMapping(&quot;export&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; export(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;export&quot;);
+        return map;
+    }
+
+}</code></pre>
+<h2 id="09【掌握】ssm-shrio前后端分离的使用方法"><a href="#09【掌握】ssm-shrio前后端分离的使用方法" class="headerlink" title="09【掌握】ssm+shrio前后端分离的使用方法"></a>09【掌握】ssm+shrio前后端分离的使用方法</h2><h3 id="什么是前后端分离"><a href="#什么是前后端分离" class="headerlink" title="什么是前后端分离"></a>什么是前后端分离</h3><p>后端只给前端提供数据接口</p>
+<h3 id="接文档的说明【以登陆为例】"><a href="#接文档的说明【以登陆为例】" class="headerlink" title="接文档的说明【以登陆为例】"></a>接文档的说明【以登陆为例】</h3><p>接口名:用户登陆</p>
+<p>接口地址: <a href="http://127.0.0.1:8080/login/login.action" target="_blank" rel="noopener">http://127.0.0.1:8080/login/login.action</a></p>
+<p>参数说明</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>参数说明</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Username</td>
+<td>登陆名</td>
+<td>必填</td>
+</tr>
+<tr>
+<td>Pwd</td>
+<td>登陆密码</td>
+<td>必填</td>
+</tr>
+</tbody></table>
+<p><strong>返回示例</strong></p>
+<p>  {   “code”：200，   “msg”:”登陆成功”  }  </p>
+<h3 id="复制项目"><a href="#复制项目" class="headerlink" title="复制项目"></a>复制项目</h3><h4 id="创建ResultObj"><a href="#创建ResultObj" class="headerlink" title="创建ResultObj"></a>创建ResultObj</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194026.jpg" alt=""></p>
+<h4 id="修改loginController"><a href="#修改loginController" class="headerlink" title="修改loginController"></a>修改loginController</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194027.jpg" alt=""></p>
+<h4 id="创建ShiroLoginFilter-解决未登陆时返回json"><a href="#创建ShiroLoginFilter-解决未登陆时返回json" class="headerlink" title="创建ShiroLoginFilter[解决未登陆时返回json]"></a>创建ShiroLoginFilter[解决未登陆时返回json]</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194028.jpg" alt=""></p>
+<h4 id="修改UserController"><a href="#修改UserController" class="headerlink" title="修改UserController"></a>修改UserController</h4><pre><code class="java">/**
+ * 用户控制器
+ */
+@Controller
+@RequestMapping(&quot;user&quot;)
+public class UserController {
+
+    @RequiresPermissions(value=&quot;user:query&quot;)
+    @RequestMapping(&quot;query&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; query(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;query&quot;);
+        return map;
+    }
+    @RequiresPermissions(value=&quot;user:add&quot;)
+    @RequestMapping(&quot;add&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; add(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;add&quot;);
+        return map;
+    }
+
+    @RequiresPermissions(value=&quot;user:update&quot;)
+    @RequestMapping(&quot;update&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; update(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;update&quot;);
+        return map;
+    }
+    @RequiresPermissions(value=&quot;user:delete&quot;)
+    @RequestMapping(&quot;delete&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; delete(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;delete&quot;);
+        return map;
+    }
+
+    @RequiresPermissions(value= {&quot;user:export&quot;})
+    @RequestMapping(&quot;export&quot;)
+    @ResponseBody
+    public Map&lt;String,Object&gt; export(){
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;, &quot;export&quot;);
+        return map;
+    }
+
+
+}</code></pre>
+<h4 id="修改application-shrio-xml"><a href="#修改application-shrio-xml" class="headerlink" title="修改application-shrio.xml"></a>修改application-shrio.xml</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194029.jpg" alt=""></p>
+<h4 id="创建GlobalExceptionHanderAdvise"><a href="#创建GlobalExceptionHanderAdvise" class="headerlink" title="创建GlobalExceptionHanderAdvise"></a>创建GlobalExceptionHanderAdvise</h4><pre><code class="java">/**
+ * 全局异常监控
+*/
+@RestControllerAdvice
+public class GlobalExceptionHanderAdvise {
+    /**
+     * 未授权
+     * 只要当前项目的代码抛出UnauthorizedException就会回调
+     */
+    @ExceptionHandler(value= {UnauthorizedException.class})
+    public ResultObj unauthorized() {
+        return ResultObj.UNAUTHORIZED;
+    }
+}</code></pre>
+<h4 id="修改springmvc-xml"><a href="#修改springmvc-xml" class="headerlink" title="修改springmvc.xml"></a>修改springmvc.xml</h4><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/05/13/20200513194030.jpg" alt=""></p>
+<pre><code class="xml">&lt;!-- 启动Shrio的注解 --&gt;
+    &lt;bean id=&quot;lifecycleBeanPostProcessor&quot;
+        class=&quot;org.apache.shiro.spring.LifecycleBeanPostProcessor&quot; /&gt;
+    &lt;bean
+        class=&quot;org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator&quot;
+        depends-on=&quot;lifecycleBeanPostProcessor&quot; /&gt;
+    &lt;bean
+        class=&quot;org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor&quot;&gt;
+        &lt;property name=&quot;securityManager&quot; ref=&quot;securityManager&quot; /&gt;
+    &lt;/bean&gt;</code></pre>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>未登陆时调用  <a href="http://127.0.0.1:8080/bjsxt/user/query.action" target="_blank" rel="noopener">http://127.0.0.1:8080/bjsxt/user/query.action</a></p>
+<p>  显示  未登陆</p>
+<p>使用张三已登陆  调用<a href="http://127.0.0.1:8080/bjsxt/user/export.action" target="_blank" rel="noopener">http://127.0.0.1:8080/bjsxt/user/export.action</a></p>
+<p>  显示 未授权</p>
+
+      
+       
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>shiro基础</p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="卖剩鸭">卖剩鸭</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-07-06, 20:00:05</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-06, 20:00:05</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/post/3c250027.html" title="shiro基础">http://lsqstudy.top/post/3c250027.html</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备20031985号</a>
+        </span>
+    
+    ©2019-2020
+</p>
+<p class="footer-entry">卖剩鸭也要奋斗</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 579px;
+    }
+    .nav.fullscreen {
+        margin-left: -579px;
+    }
+    .nav-left {
+        width: 157px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 512px;
+        }
+        .nav.fullscreen {
+            margin-left: -512px;
+        }
+        .nav-left {
+            width: 120px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 512px;
+            margin-left: -512px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #c1bfc1;
+    }
+    
+    
+    .nav-right nav a.hover > span{
+        color: #ffffff !important;
+    }
+    
+
+    /*列表样式*/
+    
+    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>
