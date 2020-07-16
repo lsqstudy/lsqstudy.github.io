@@ -1,0 +1,3354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>06垃圾收集器 | 卖剩鸭</title>
+  <meta name="keywords" content=" 面试 ">
+  <meta name="description" content="06垃圾收集器 | 卖剩鸭">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Sorry！没有你想要的内容错误代码：404">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404">
+<meta property="og:url" content="http://lsqstudy.top/404.html">
+<meta property="og:site_name" content="卖剩鸭">
+<meta property="og:description" content="Sorry！没有你想要的内容错误代码：404">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-06T12:00:05.052Z">
+<meta property="article:modified_time" content="2020-07-06T12:00:05.052Z">
+<meta property="article:author" content="卖剩鸭">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418165302.png">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="卖剩鸭" type="application/atom+xml">
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+</div>
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418164903.jpg" />
+</a>
+<div class="author">
+    <span>卖剩鸭</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/lsqstudy" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="weibo" href="https://weibo.com/p/1005057423713257" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/34fa573ae2b2" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/lsqstudy" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://me.csdn.net/PorkBird" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1823472446@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1823472446&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=333252440" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="全部文章">全部文章<small>(233)</small></div></li>
+    
+        
+            
+            <li><div data-rel="Java"><i class="fold iconfont icon-right"></i>Java<small>(23)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="Java<--->GC">GC<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java<--->Java基础">Java基础<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java<--->JUC">JUC<small>(14)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="Java<--->JVM">JVM<small>(5)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="课程"><i class="fold iconfont icon-right"></i>课程<small>(137)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="课程<--->ActiveMQ">ActiveMQ<small>(11)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Docker">Docker<small>(16)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Dubbo">Dubbo<small>(17)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->FastDFS">FastDFS<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Git">Git<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Github">Github<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Linux">Linux<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->MyCat">MyCat<small>(11)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Nginx">Nginx<small>(5)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Solr">Solr<small>(16)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->Zookeeper">Zookeeper<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->数据库"><i class="fold iconfont icon-right"></i>数据库<small>(26)</small></div>
+                            
+                                <ul class="sub hide">
+                                    
+                                    <li><div data-rel="课程<--->数据库MySQL">MySQL<small>(7)</small></div>
+                                    </li>
+                                    
+                                    <li><div data-rel="课程<--->数据库Redis">Redis<small>(19)</small></div>
+                                    </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->数据结构与算法">数据结构与算法<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->计算机网络">计算机网络<small>(4)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="课程<--->阿里云">阿里云<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="框架"><i class="fold iconfont icon-right"></i>框架<small>(22)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="框架<--->MyBatisPlus">MyBatisPlus<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->shiro">shiro<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SpringBoot">SpringBoot<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SpringCloud">SpringCloud<small>(17)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="框架<--->SSM">SSM<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="前端"><i class="fold iconfont icon-right"></i>前端<small>(11)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="前端<--->vue">vue<small>(11)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="系统与软件"><i class="fold iconfont icon-right"></i>系统与软件<small>(8)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="系统与软件<--->快捷键">快捷键<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="系统与软件<--->环境">环境<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="系统与软件<--->软件配置">软件配置<small>(4)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="普通话"><i class="fold iconfont icon-right"></i>普通话<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="普通话<--->拼音">拼音<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="English"><i class="fold iconfont icon-right"></i>English<small>(13)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="English<--->Pharse">Pharse<small>(3)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Translation">Translation<small>(2)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Vocabulary">Vocabulary<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="English<--->Writing">Writing<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="面试"><i class="fold iconfont icon-right"></i>面试<small>(18)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="面试<--->GitHub">GitHub<small>(1)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="面试<--->JUC">JUC<small>(10)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="面试<--->JVM">JVM<small>(6)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="面试<--->Linux">Linux<small>(1)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="233">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://lsqstudy.top/">卖剩鸭</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ActiveMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Dubbo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>English</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>FastDFS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Github</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java基础</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JUC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JVM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyBatisPlus</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MyCat</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MySQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Nginx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Pharse</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>shiro</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>socket</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Solr</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringBoot</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringCloud</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SSM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Translation</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vocabulary</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Vue</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Writing</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Zookeeper</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>快捷键</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>拼音</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数据结构与算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>普通话</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>环境</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>计算机网络</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>软件配置</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>阿里云</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="全部文章 English Pharse "
+           href="/post/5b2620ec.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="日常词组（1）">日常词组（1）</span>
+            <span class="post-date" title="2020-02-27 22:10:43">2020/02/27</span>
+        </a>
+        
+        <a id="top" class="全部文章 English Pharse "
+           href="/post/49938f02.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="日常词组（2）">日常词组（2）</span>
+            <span class="post-date" title="2020-02-29 22:10:43">2020/02/29</span>
+        </a>
+        
+        <a  class="全部文章 面试 JVM "
+           href="/post/a85afe41.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="04Java中的引用">04Java中的引用</span>
+            <span class="post-date" title="2020-07-16 23:25:57">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 JVM "
+           href="/post/75c4b7e7.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="03JVM参数调优">03JVM参数调优</span>
+            <span class="post-date" title="2020-07-16 23:25:57">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 GitHub "
+           href="/post/c46462d7.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="01Github学习">01Github学习</span>
+            <span class="post-date" title="2020-07-16 00:00:00">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 JVM "
+           href="/post/198bb99c.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="02什么是GCRoots？能做什么？">02什么是GCRoots？能做什么？</span>
+            <span class="post-date" title="2020-07-16 00:00:00">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 JVM "
+           href="/post/9d66f7d2.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="01JVM体系结构">01JVM体系结构</span>
+            <span class="post-date" title="2020-07-16 00:00:00">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 JVM "
+           href="/post/c385b39.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="05Java内存溢出OOM">05Java内存溢出OOM</span>
+            <span class="post-date" title="2020-07-16 00:00:00">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 JVM "
+           href="/post/e41f9b46.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="06垃圾收集器">06垃圾收集器</span>
+            <span class="post-date" title="2020-07-16 00:00:00">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 Linux "
+           href="/post/63d9b5b8.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="01Linux诊断原因">01Linux诊断原因</span>
+            <span class="post-date" title="2020-07-16 00:00:00">2020/07/16</span>
+        </a>
+        
+        <a  class="全部文章 Java GC "
+           href="/post/7ff67db7.html"
+           data-tag="GC"
+           data-author="" >
+            <span class="post-title" title="02垃圾回收算法">02垃圾回收算法</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 Java GC "
+           href="/post/194c267.html"
+           data-tag="GC"
+           data-author="" >
+            <span class="post-title" title="03垃圾回收器">03垃圾回收器</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 Java GC "
+           href="/post/697d2448.html"
+           data-tag="GC"
+           data-author="" >
+            <span class="post-title" title="01GC总体概述">01GC总体概述</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/34524172.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="01谈谈你对volatile的理解">01谈谈你对volatile的理解</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/7e7a8188.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="02CAS底层原理">02CAS底层原理</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/32574176.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="03ArrayList为什么线程不安全">03ArrayList为什么线程不安全</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/9f38e304.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="04TransferValue是什么">04TransferValue是什么</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/68d2e89d.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="05Java的锁">05Java的锁</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/84f8e3c5.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="06CountDownLatch、CyclicBarrier、Semaphore使用">06CountDownLatch、CyclicBarrier、Semaphore使用</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/6e2e70f3.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="07阻塞队列">07阻塞队列</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/980a6200.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="08Synchronized和Lock的区别与好处">08Synchronized和Lock的区别与好处</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/ef7e1452.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="09线程池">09线程池</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 面试 JUC "
+           href="/post/d2f16675.html"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="10死锁编码及快速定位">10死锁编码及快速定位</span>
+            <span class="post-date" title="2020-07-14 00:00:00">2020/07/14</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/801aec6f.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="01Java多线程">01Java多线程</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/a69e1457.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="05线程间通信">05线程间通信</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/4ce22d9a.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="04Java8之lambda表达式和流式计算复习">04Java8之lambda表达式和流式计算复习</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java Java基础 "
+           href="/post/2535cae0.html"
+           data-tag="Java基础"
+           data-author="" >
+            <span class="post-title" title="01Java常见基础知识点">01Java常见基础知识点</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/6d98264e.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="07集合类是不安全的">07集合类是不安全的</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/27e06f6c.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="02Lock接口">02Lock接口</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/b3ad3f7c.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="03获得线程的4种方式.md">03获得线程的4种方式.md</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/5adedb8b.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="09ReentrantReadWriteLock 读写锁">09ReentrantReadWriteLock 读写锁</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/d8320594.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="08JUC强大的辅助类">08JUC强大的辅助类</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/d596a47.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="06多线程锁">06多线程锁</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/a2c489.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="12异步回调">12异步回调</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/15068b6.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="10BlockingQueueDemo 阻塞队列">10BlockingQueueDemo 阻塞队列</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/49c55a91.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="11分支合并框架">11分支合并框架</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JVM "
+           href="/post/88417f4c.html"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="01JVM体系结构概述">01JVM体系结构概述</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/37d288de.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="13Java并发">13Java并发</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JVM "
+           href="/post/5a9cccc.html"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="02堆体系结构概述">02堆体系结构概述</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JVM "
+           href="/post/48318940.html"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="03JVM调优相关">03JVM调优相关</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JVM "
+           href="/post/88417f4c.html"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="04JVM常量池">04JVM常量池</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JVM "
+           href="/post/e007e736.html"
+           data-tag="JVM"
+           data-author="" >
+            <span class="post-title" title="05类的生命周期">05类的生命周期</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 Java JUC "
+           href="/post/4b0d9081.html"
+           data-tag="JUC"
+           data-author="" >
+            <span class="post-title" title="14java集合">14java集合</span>
+            <span class="post-date" title="2020-07-13 00:00:00">2020/07/13</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/c69900a3.html"
+           data-tag="软件配置"
+           data-author="" >
+            <span class="post-title" title="IDEA模板">IDEA模板</span>
+            <span class="post-date" title="2020-07-07 15:37:36">2020/07/07</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/41b321f1.html"
+           data-tag="软件配置"
+           data-author="" >
+            <span class="post-title" title="VSCode基本配置">VSCode基本配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/d3eb75f3.html"
+           data-tag="软件配置"
+           data-author="" >
+            <span class="post-title" title="IDEA基本配置">IDEA基本配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/cb52f9d8.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="Word 快捷键">Word 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/cc9c1aa9.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="VS Code 快捷键">VS Code 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 环境 "
+           href="/post/c623287b.html"
+           data-tag="环境,软件配置"
+           data-author="" >
+            <span class="post-title" title="node.js安装配置">node.js安装配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 软件配置 "
+           href="/post/610bdf07.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="IDEA快捷键">IDEA快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 系统与软件 快捷键 "
+           href="/post/f03799ec.html"
+           data-tag="快捷键"
+           data-author="" >
+            <span class="post-title" title="Typory 快捷键">Typory 快捷键</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SSM "
+           href="/post/6990e316.html"
+           data-tag="环境,SSM"
+           data-author="" >
+            <span class="post-title" title="SSM环境搭建">SSM环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringBoot "
+           href="/post/f09f8d55.html"
+           data-tag="SpringBoot"
+           data-author="" >
+            <span class="post-title" title="springboot基础">springboot基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/f4ccf8e0.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="17【面试】ID生成——雪花算法">17【面试】ID生成——雪花算法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/bdecf7ed.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="15SpringCloud Alibaba Sentinel实现熔断与限流.md">15SpringCloud Alibaba Sentinel实现熔断与限流.md</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/dbb658df.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="16SpringCloud Alibaba Seata处理分布式事务">16SpringCloud Alibaba Seata处理分布式事务</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/e13c8c8d.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="14SpringCloud Alibaba Nacos服务注册和配置中心">14SpringCloud Alibaba Nacos服务注册和配置中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/92ae0bbf.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="13Spring Cloud Sleuth分布式链路跟踪">13Spring Cloud Sleuth分布式链路跟踪</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/85ee5c30.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="11SpringCloud Bus消息总线">11SpringCloud Bus消息总线</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/e44e7c6b.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="12SpringCloud Stream消息驱动">12SpringCloud Stream消息驱动</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/2a134859.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="08Hystrix熔断器">08Hystrix熔断器</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/b5685c58.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="10SpringCloud config分布式配置中心">10SpringCloud config分布式配置中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/f8a33702.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="09Gateway新一代网关">09Gateway新一代网关</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/44028d5a.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="05三个注册中心异同点">05三个注册中心异同点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/788b5538.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="07OpenFeign服务接口调用">07OpenFeign服务接口调用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/c0092dea.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="06Ribbon负载均衡调用">06Ribbon负载均衡调用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/349c9423.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="04Consul服务注册与发现">04Consul服务注册与发现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/1a3cd1eb.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="03Zookeeper服务注册与发现">03Zookeeper服务注册与发现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/c38b7567.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="01微服务架构编码 构建">01微服务架构编码 构建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 SpringCloud "
+           href="/post/b1d49aec.html"
+           data-tag="SpringCloud"
+           data-author="" >
+            <span class="post-title" title="02Eureka服务注册与发现【已经停更】">02Eureka服务注册与发现【已经停更】</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 shiro "
+           href="/post/f92777b3.html"
+           data-tag="环境,shiro,SSM"
+           data-author="" >
+            <span class="post-title" title="SSM-shiro环境搭建">SSM-shiro环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 shiro "
+           href="/post/3c250027.html"
+           data-tag="shiro"
+           data-author="" >
+            <span class="post-title" title="shiro基础">shiro基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 框架 MyBatisPlus "
+           href="/post/8955ba6d.html"
+           data-tag="MyBatisPlus"
+           data-author="" >
+            <span class="post-title" title="MyBatis-Plus基础">MyBatis-Plus基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/ff56e6aa.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="solt插槽">solt插槽</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/42c68f02.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="module模块">module模块</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/dae84f4a.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vuex共享变量">Vuex共享变量</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/e0886ac8.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue基础语法">Vue基础语法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/e37a829a.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue项目创建与配置">Vue项目创建与配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/34778b46.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="组件">组件</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/342f857c.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Promise对像">Promise对像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/5925592c.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="UI库的选择">UI库的选择</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/a314c4e9.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Vue-router路由">Vue-router路由</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/700f8fbd.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="MVVM模型">MVVM模型</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 前端 vue "
+           href="/post/f65b3c86.html"
+           data-tag="Vue,前端"
+           data-author="" >
+            <span class="post-title" title="Axios网络请求">Axios网络请求</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/51287ee3.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Zookerper集群的特征（面试）">10【掌握】Zookerper集群的特征（面试）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/3e0f77a3.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="06【了解】Zookeeper客户端连接">06【了解】Zookeeper客户端连接</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/c220babc.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="08【掌握】java操作zookeeper">08【掌握】java操作zookeeper</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/237c5a16.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="09【了解】ZooKeeper和CAP理论及一致性原则">09【了解】ZooKeeper和CAP理论及一致性原则</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/3392f3a6.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Zookeper应用场景">07【掌握】Zookeper应用场景</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/1fba7961.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Zookeeper单机版本使用">04【掌握】Zookeeper单机版本使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/f5952d38.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Zookeeper集群搭建及使用">05【掌握】Zookeeper集群搭建及使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/a7d5b2cd.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Zookeeper文件系统及监听机制">03【掌握】Zookeeper文件系统及监听机制</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/5272d092.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="16【掌握】Solr集群的使用">16【掌握】Solr集群的使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/76aa98b0.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Zookeeper的安装及单机版配置">02【掌握】Zookeeper的安装及单机版配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Zookeeper "
+           href="/post/8d771482.html"
+           data-tag="Zookeeper"
+           data-author="" >
+            <span class="post-title" title="01【了解】Zookeeper简介">01【了解】Zookeeper简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/bd4851f8.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Solr控制台全量和增量导入配置">12【掌握】Solr控制台全量和增量导入配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/905d5fbe.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="14【掌握】SolrCloud搭建">14【掌握】SolrCloud搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/ce05e1ea.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="13【掌握】SolrCloud概述">13【掌握】SolrCloud概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/80a0385a.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="15【掌握】zookeeper管理配置文件">15【掌握】zookeeper管理配置文件</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a850c581.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Solr的javaAPI讲解solrj">10【掌握】Solr的javaAPI讲解solrj</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/b807aa4e.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Solr的分词及IK库的使用">09【掌握】Solr的分词及IK库的使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/8955ba63d.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="11【案例】使用Solr完成对jd案例的实现">11【案例】使用Solr完成对jd案例的实现</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/2f388a55.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Solr的单机版装">05【掌握】Solr的单机版装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/dc447f4a.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="08【了解】Solr控制台说明">08【了解】Solr控制台说明</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/cac3217.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Solr的名词解释及配置文件说明">06【掌握】Solr的名词解释及配置文件说明</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/47b66419.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Solr索引库说明及创建">07【掌握】Solr索引库说明及创建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/af9e4515.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="02【了解】倒排索引算法">02【了解】倒排索引算法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a4d23341.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="01【掌握】入门问题">01【掌握】入门问题</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/a3530fc1.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="04【了解】Solr简介">04【了解】Solr简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Solr "
+           href="/post/4775554e.html"
+           data-tag="Solr"
+           data-author="" >
+            <span class="post-title" title="03【熟悉】手写倒排索引">03【熟悉】手写倒排索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/c1e71fa1.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="05【掌握】动静分离">05【掌握】动静分离</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/6e632f41.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="03【掌握】nginx.conf配置详解">03【掌握】nginx.conf配置详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/c1e71fa1.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="04【掌握】反向代理+负载均衡">04【掌握】反向代理+负载均衡</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/d11f721c.html"
+           data-tag="环境,Nginx"
+           data-author="" >
+            <span class="post-title" title="02【掌握】CentOS7下安装Nginx">02【掌握】CentOS7下安装Nginx</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Nginx "
+           href="/post/775845e2.html"
+           data-tag="Linux,Nginx"
+           data-author="" >
+            <span class="post-title" title="01【了解】简介">01【了解】简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/e255a10a.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="计算机网络">计算机网络</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/b3287aa2.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="计算机网络知识总结">计算机网络知识总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/cea506c.html"
+           data-tag="计算机网络"
+           data-author="" >
+            <span class="post-title" title="HTTPS中的TLS">HTTPS中的TLS</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 计算机网络 "
+           href="/post/8efe3606.html"
+           data-tag="计算机网络,socket"
+           data-author="" >
+            <span class="post-title" title="网络编程（socket套接字)">网络编程（socket套接字)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/3c239ac7.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="11【重点】mycat使用总结">11【重点】mycat使用总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/ba8e5577.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="10【掌握】mycat全局主键的生成方式">10【掌握】mycat全局主键的生成方式</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/d968d449.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="09【掌握】全局ID的概述">09【掌握】全局ID的概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/b18584ce.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="06【掌握】mycat的server.xml配置">06【掌握】mycat的server.xml配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/a0d7b5e6.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="05【掌握】mycat名词解释">05【掌握】mycat名词解释</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/5307fdc1.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="08【掌握】全局表和ER表">08【掌握】全局表和ER表</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/6af66496.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="07【掌握】mycat分片详解">07【掌握】mycat分片详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/4772ad75.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="04【掌握】mycat的安装">04【掌握】mycat的安装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/2b250a65.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="03【掌握】mysql的集群搭建">03【掌握】mysql的集群搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/3a4057a1.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="01【了解】mycat简介">01【了解】mycat简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 MyCat "
+           href="/post/946c1207.html"
+           data-tag="MyCat"
+           data-author="" >
+            <span class="post-title" title="02【了解】mysql主从搭建">02【了解】mysql主从搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/63ce1fb.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux07：三种软件安装方式及服务器基本环境搭建">Linux07：三种软件安装方式及服务器基本环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/5a5470c9.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux06：磁盘管理">Linux06：磁盘管理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/fa67d3b0.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux04：vim使用方法">Linux04：vim使用方法</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/281556f0.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux03：linux基本命令">Linux03：linux基本命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/d7893cbc.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux05：账号【用户】管理">Linux05：账号【用户】管理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/dd0f448e.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux01：概述及环境搭建">Linux01：概述及环境搭建</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/cb47c65a.html"
+           data-tag="Linux"
+           data-author="" >
+            <span class="post-title" title="Linux02：linux基本使用">Linux02：linux基本使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/661cff0f.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="CentOS7安装RabbitMQ">CentOS7安装RabbitMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Github "
+           href="/post/5c70dd55.html"
+           data-tag="Github"
+           data-author="" >
+            <span class="post-title" title="高效使用Github寻找开源项目">高效使用Github寻找开源项目</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/bbd8500a.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="Apache配置虚拟主机">Apache配置虚拟主机</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Linux "
+           href="/post/37b68c09.html"
+           data-tag="Linux,环境"
+           data-author="" >
+            <span class="post-title" title="CentOS7防火墙和开放端口相关命令">CentOS7防火墙和开放端口相关命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Git "
+           href="/post/a4abef79.html"
+           data-tag="Git"
+           data-author="" >
+            <span class="post-title" title="Git">Git</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 FastDFS "
+           href="/post/f5bd765101.html"
+           data-tag="FastDFS"
+           data-author="" >
+            <span class="post-title" title="FastDFS基础">FastDFS基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 FastDFS "
+           href="/post/52f98e0d.html"
+           data-tag="FastDFS"
+           data-author="" >
+            <span class="post-title" title="FastDFS总结">FastDFS总结</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/51879ad5.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="16【难点】[源代码]Dubbo的设计原理">16【难点】[源代码]Dubbo的设计原理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/f361b11e.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="15【了解】RPC原理和通信原理">15【了解】RPC原理和通信原理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/laddb7d2.html"
+           data-tag="Dubbo,面试"
+           data-author="" >
+            <span class="post-title" title="17【掌握】Dubbo面试相关">17【掌握】Dubbo面试相关</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/cacca95c.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Dubbo常规配置">10【掌握】Dubbo常规配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/e4cc786.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="11【掌握】Dubbo与SpringBoot整合的常规配置">11【掌握】Dubbo与SpringBoot整合的常规配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/2cb5f04d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Zookeeper宕机与Dubbo直连">12【掌握】Zookeeper宕机与Dubbo直连</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/1f89747d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="14【掌握】整合hystrix，服务容断与降级处理">14【掌握】整合hystrix，服务容断与降级处理</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/b263e128.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="13【掌握】集群下dubbo负载均衡配置">13【掌握】集群下dubbo负载均衡配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/32789f2f.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="08【掌握】Dubbo整合Springboot方式2">08【掌握】Dubbo整合Springboot方式2</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/63175f7f.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Dubbo配置文件加载顺序">09【掌握】Dubbo配置文件加载顺序</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/bbb51140.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="06【了解】监控中心">06【了解】监控中心</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/73fcab3d.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="07【掌握】Dubbo整合Springboot方式1">07【掌握】Dubbo整合Springboot方式1</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/90263f4b.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Dubbo环境搭建（linux）">04【掌握】Dubbo环境搭建（linux）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/28d225bd.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="05【掌握】dubbo-HelloWork">05【掌握】dubbo-HelloWork</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/ac36621.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="01【掌握】分布式基础理论">01【掌握】分布式基础理论</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/bd889a72.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Dubbo环境搭建(windows)">03【掌握】Dubbo环境搭建(windows)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Dubbo "
+           href="/post/d0740bf3.html"
+           data-tag="Dubbo"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Dubbo核心概念">02【掌握】Dubbo核心概念</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/43aeb173.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="14【掌握】制作tomcat镜像">14【掌握】制作tomcat镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="15【掌握】Docker安装与配置mysql5.7">15【掌握】Docker安装与配置mysql5.7</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker,Redis"
+           data-author="" >
+            <span class="post-title" title="16【掌握】docker部署Redis集群">16【掌握】docker部署Redis集群</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="11【掌握】Docker制作war包镜像">11【掌握】Docker制作war包镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="13【掌握】docker安装nginx">13【掌握】docker安装nginx</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/5970d170.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="12【掌握】Docker制作jar包镜像">12【掌握】Docker制作jar包镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="09【掌握】Docker的四种网络模式">09【掌握】Docker的四种网络模式</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/3849e8ae.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="08【掌握】Docker网络">08【掌握】Docker网络</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/e94391b2.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="09【了解】Docker可视化界面">09【了解】Docker可视化界面</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/14805318.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Dockerfile详解">06【掌握】Dockerfile详解</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/72509934.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="05【掌握】Docker容器数据卷">05【掌握】Docker容器数据卷</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/9dd03917.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="07【掌握】发布镜像">07【掌握】发布镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d72e194.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="02【掌握】docker安装和配置">02【掌握】docker安装和配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/d4a9f208.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="03【掌握】docker常用命令">03【掌握】docker常用命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/913d1c8d.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="04【掌握】Docker镜像">04【掌握】Docker镜像</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 Docker "
+           href="/post/7c7aa8be.html"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="01【了解】docker的简介">01【了解】docker的简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/4d968ae.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="redis基础">redis基础</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/187692e0.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="Redis(1)——5种基本数据结构">Redis(1)——5种基本数据结构</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/faddb7d2.html"
+           data-tag="Redis,面试"
+           data-author="" >
+            <span class="post-title" title="16【掌握】redis面试中重点">16【掌握】redis面试中重点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/92415e6.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="15【掌握】Redis键和值的设计原则">15【掌握】Redis键和值的设计原则</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/6484fd69.html"
+           data-tag="Redis,数据库"
+           data-author="" >
+            <span class="post-title" title="Redis持久化">Redis持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/462467c9.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="14【掌握】springboot使用redis做缓存">14【掌握】springboot使用redis做缓存</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/cf6d0bb4.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="13【掌握】spring+redis实现秒杀">13【掌握】spring+redis实现秒杀</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/87947476.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="12【掌握】spring里面使用redis缓存">12【掌握】spring里面使用redis缓存</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/baa33aa9.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="09【掌握】高可用高并发集群配置">09【掌握】高可用高并发集群配置</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/2be75867.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="11【掌握】java连接redis">11【掌握】java连接redis</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/e6bd8ae0.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="10【掌握】Redis客户端使用">10【掌握】Redis客户端使用</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/d696ae96.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="06【掌握】Redis的持久化">06【掌握】Redis的持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/323c5dd4.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="08【了解】Redis的复制(Master/Slave)">08【了解】Redis的复制(Master/Slave)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/ed566576.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="07【了解】Redis的事务">07【了解】Redis的事务</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/da2464d6.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="05【掌握】配置文件redis.conf">05【掌握】配置文件redis.conf</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/b2f6f635.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="03【掌握】启动后相关知识串讲">03【掌握】启动后相关知识串讲</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/debd07e2.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="04【掌握】数据类型和相关命令">04【掌握】数据类型和相关命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/f4dfe0bc.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="02【掌握】Redis的安装及启动停止">02【掌握】Redis的安装及启动停止</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/1442515a.html"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="数据库索引">数据库索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 Redis "
+           href="/post/87947476.html"
+           data-tag="Redis"
+           data-author="" >
+            <span class="post-title" title="01【了解】简介">01【了解】简介</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/fb393be.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="一条sql语句在mysql中如何执行的">一条sql语句在mysql中如何执行的</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/1c44b4c0.html"
+           data-tag="数据库"
+           data-author="" >
+            <span class="post-title" title="事务隔离级别(图文详解)">事务隔离级别(图文详解)</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/6dd3ee4e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL高性能优化规范建议">MySQL高性能优化规范建议</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/e35d838e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="一千行MySQL命令">一千行MySQL命令</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/4c160c6e.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL数据库索引">MySQL数据库索引</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据库 MySQL "
+           href="/post/c24675b4.html"
+           data-tag="数据库,MySQL"
+           data-author="" >
+            <span class="post-title" title="MySQL">MySQL</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/62b5cc4f.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="队列的应用(1)——热土豆（python版）">队列的应用(1)——热土豆（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/83ba725c.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="队列的应用(2)——打印任务（python版）">队列的应用(2)——打印任务（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/da9e44a6.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(3)——表达式（python版）">栈的应用(3)——表达式（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/8912cd63.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(4)——后缀表达式求值（python版）">栈的应用(4)——后缀表达式求值（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/a2c4feef.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(1)——符号匹配（python版）">栈的应用(1)——符号匹配（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 数据结构与算法 "
+           href="/post/c82a1b6e.html"
+           data-tag="数据结构与算法"
+           data-author="" >
+            <span class="post-title" title="栈的应用(2)——进制转换（python版）">栈的应用(2)——进制转换（python版）</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 阿里云 "
+           href="/post/b8a2cdb2.html"
+           data-tag="阿里云"
+           data-author="" >
+            <span class="post-title" title="阿里云服务器使用经验">阿里云服务器使用经验</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/c294b70c.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="09【掌握】ActiveMQ的消息存储和持久化">09【掌握】ActiveMQ的消息存储和持久化</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/2b82d214.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="10【掌握】ActiveMQ的多节点集群">10【掌握】ActiveMQ的多节点集群</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/39dff01d.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="11【掌握】面试重点">11【掌握】面试重点</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/1265381b.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="07【重点】SpringBoot整合ActiveMQ">07【重点】SpringBoot整合ActiveMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/7b069547.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="06【重点】Spring整合ActiveMQ">06【重点】Spring整合ActiveMQ</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/118a2e03.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="08【了解】ActiveMQ的传输协议">08【了解】ActiveMQ的传输协议</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/2eb68993.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="05【了解】ActiveMQ的Broker">05【了解】ActiveMQ的Broker</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/a396c1d6.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="04【掌握】JMS规范和落地产品">04【掌握】JMS规范和落地产品</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/7988865d.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="03【掌握】Java编码实现ActiveMQ通讯">03【掌握】Java编码实现ActiveMQ通讯</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/9302ee05.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="01【了解】入门概述">01【了解】入门概述</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 课程 ActiveMQ "
+           href="/post/6512d5c7.html"
+           data-tag="ActiveMQ"
+           data-author="" >
+            <span class="post-title" title="02【掌握】ActiveMQ安装">02【掌握】ActiveMQ安装</span>
+            <span class="post-date" title="2020-07-06 20:00:05">2020/07/06</span>
+        </a>
+        
+        <a  class="全部文章 普通话 拼音 "
+           href="/post/8f89e6b9.html"
+           data-tag="普通话,拼音"
+           data-author="" >
+            <span class="post-title" title="学习拼音">学习拼音</span>
+            <span class="post-date" title="2020-03-05 22:10:43">2020/03/05</span>
+        </a>
+        
+        <a  class="全部文章 English Writing "
+           href="/post/9e9cc8ba.html"
+           data-tag="English,Writing"
+           data-author="" >
+            <span class="post-title" title="写作句式">写作句式</span>
+            <span class="post-date" title="2020-03-03 22:10:43">2020/03/03</span>
+        </a>
+        
+        <a  class="全部文章 English Translation "
+           href="/post/94818824.html"
+           data-tag="English,Translation,Pharse"
+           data-author="" >
+            <span class="post-title" title="翻译词组与词汇">翻译词组与词汇</span>
+            <span class="post-date" title="2020-03-02 22:10:43">2020/03/02</span>
+        </a>
+        
+        <a  class="全部文章 English Translation "
+           href="/post/dad6e1bc.html"
+           data-tag="English,Translation"
+           data-author="" >
+            <span class="post-title" title="中英翻译">中英翻译</span>
+            <span class="post-date" title="2020-03-01 22:10:43">2020/03/01</span>
+        </a>
+        
+        <a  class="全部文章 English Pharse "
+           href="/post/44d82819.html"
+           data-tag="English,Pharse"
+           data-author="" >
+            <span class="post-title" title="词组固定搭配">词组固定搭配</span>
+            <span class="post-date" title="2020-02-28 22:10:43">2020/02/28</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/524daf26.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（3）">积累词汇（3）</span>
+            <span class="post-date" title="2020-02-26 22:10:43">2020/02/26</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/eaf1c843.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（2）">积累词汇（2）</span>
+            <span class="post-date" title="2020-02-25 22:10:43">2020/02/25</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/f84467ad.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="积累词汇（1）">积累词汇（1）</span>
+            <span class="post-date" title="2020-02-24 22:10:43">2020/02/24</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/ba5a0ef8.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（1）">有道考神词汇（1）</span>
+            <span class="post-date" title="2020-02-23 15:29:32">2020/02/23</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/8d84feca.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（4）">有道考神词汇（4）</span>
+            <span class="post-date" title="2020-02-23 00:00:00">2020/02/23</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/1053c673.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（3）">有道考神词汇（3）</span>
+            <span class="post-date" title="2020-02-22 00:00:00">2020/02/22</span>
+        </a>
+        
+        <a  class="全部文章 English Vocabulary "
+           href="/post/a8efa116.html"
+           data-tag="English,Vocabulary"
+           data-author="" >
+            <span class="post-title" title="有道考神词汇（2）">有道考神词汇（2）</span>
+            <span class="post-date" title="2020-02-21 00:00:00">2020/02/21</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-docs/interview/jvm-gc/06垃圾收集器" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">06垃圾收集器</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="面试">面试</a> > 
+            
+            <a  data-rel="面试&lt;---&gt;JVM">JVM</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">面试</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2020-07-16 21:33:58'>2020-07-16 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01、GC垃圾回收算法和垃圾收集器关系"><span class="toc-text">01、GC垃圾回收算法和垃圾收集器关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#02、四种主要的垃圾收集器"><span class="toc-text">02、四种主要的垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1、Serial"><span class="toc-text">2.1、Serial</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2、Parallel"><span class="toc-text">2.2、Parallel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3、CMS"><span class="toc-text">2.3、CMS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4、G1"><span class="toc-text">2.4、G1</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#03、垃圾收集器总结"><span class="toc-text">03、垃圾收集器总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04、查看默认垃圾收集器"><span class="toc-text">04、查看默认垃圾收集器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05、默认垃圾收集器有哪些"><span class="toc-text">05、默认垃圾收集器有哪些</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06、各垃圾收集器的使用范围"><span class="toc-text">06、各垃圾收集器的使用范围</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#07、部分参数预先说明"><span class="toc-text">07、部分参数预先说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#08、Java中的Server和Client模式"><span class="toc-text">08、Java中的Server和Client模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#09、新生代下的垃圾收集器"><span class="toc-text">09、新生代下的垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1、串行GC-Serial"><span class="toc-text">9.1、串行GC(Serial)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2、并行GC-ParNew"><span class="toc-text">9.2、并行GC(ParNew)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3、并行回收GC（Parallel）-（Parallel-Scavenge）"><span class="toc-text">9.3、并行回收GC（Parallel）&#x2F; （Parallel Scavenge）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10、老年代下的垃圾收集器"><span class="toc-text">10、老年代下的垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1、串行GC（Serial-Old）-Serial-MSC"><span class="toc-text">10.1、串行GC（Serial Old） &#x2F; (Serial MSC)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2、并行GC（Parallel-Old）-（Parallel-MSC）"><span class="toc-text">10.2、并行GC（Parallel Old）&#x2F; （Parallel MSC）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3、-并发标记清除GC（CMS）"><span class="toc-text">10.3、 并发标记清除GC（CMS）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-3-1、四个步骤"><span class="toc-text">10.3.1、四个步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#11、提出问题"><span class="toc-text">11、提出问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1、新生代使用复制算法"><span class="toc-text">11.1、新生代使用复制算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2、老年代采用标记整理"><span class="toc-text">11.2、老年代采用标记整理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12、垃圾收集器如何选择"><span class="toc-text">12、垃圾收集器如何选择</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1、组合的选择"><span class="toc-text">12.1、组合的选择</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#13、G1垃圾收集器"><span class="toc-text">13、G1垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#13-1、开启G1垃圾收集器"><span class="toc-text">13.1、开启G1垃圾收集器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-2、以前收集器的特点"><span class="toc-text">13.2、以前收集器的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-3、G1是什么"><span class="toc-text">13.3、G1是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-4、特点"><span class="toc-text">13.4、特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-5、底层原理"><span class="toc-text">13.5、底层原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-6、Region区域化垃圾收集器"><span class="toc-text">13.6、Region区域化垃圾收集器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-7、回收步骤"><span class="toc-text">13.7、回收步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-8、四步过程"><span class="toc-text">13.8、四步过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-9、参数配置"><span class="toc-text">13.9、参数配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-10、G1和CMS比较"><span class="toc-text">13.10、G1和CMS比较</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#14、SpringBoot结合JVMGC"><span class="toc-text">14、SpringBoot结合JVMGC</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="01、GC垃圾回收算法和垃圾收集器关系"><a href="#01、GC垃圾回收算法和垃圾收集器关系" class="headerlink" title="01、GC垃圾回收算法和垃圾收集器关系"></a>01、GC垃圾回收算法和垃圾收集器关系</h1><blockquote>
+<p>GC算法是内存回收的方法论，垃圾收集器就是GC垃圾回收算法的实现</p>
+</blockquote>
+<p>GC算法主要有以下几种</p>
+<ul>
+<li>引用计数（几乎不用，无法解决循环引用的问题）</li>
+<li>复制拷贝（用于新生代）</li>
+<li>标记清除（用于老年代）</li>
+<li>标记整理（用于老年代）</li>
+</ul>
+<p>因为目前为止还没有完美的收集器出现，更没有万能的收集器，只是针对具体应用最合适的收集器，进行<strong>分代收集</strong>（那个代用什么收集器）</p>
+<h1 id="02、四种主要的垃圾收集器"><a href="#02、四种主要的垃圾收集器" class="headerlink" title="02、四种主要的垃圾收集器"></a>02、四种主要的垃圾收集器</h1><ul>
+<li>Serial：串行回收  <code>-XX:+UseSeriallGC</code></li>
+<li>Parallel：并行回收  <code>-XX:+UseParallelGC</code></li>
+<li>CMS：并发标记清除</li>
+<li>G1</li>
+<li>ZGC：（java 11 出现的）</li>
+</ul>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716193639.png" alt=""></p>
+<h2 id="2-1、Serial"><a href="#2-1、Serial" class="headerlink" title="2.1、Serial"></a>2.1、Serial</h2><p>串行垃圾回收器，它为单线程环境设计且值使用一个线程进行垃圾收集，会暂停所有的用户线程，只有当垃圾回收完成时，才会重新唤醒主线程继续执行。所以不适合服务器环境</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716213039.png" alt=""></p>
+<h2 id="2-2、Parallel"><a href="#2-2、Parallel" class="headerlink" title="2.2、Parallel"></a>2.2、Parallel</h2><p>并行垃圾收集器，多个垃圾收集线程并行工作，此时用户线程也是阻塞的，适用于科学计算 / 大数据处理等弱交互场景，也就是说Serial 和 Parallel其实是类似的，不过是多了几个线程进行垃圾收集，但是主线程都会被暂停，但是并行垃圾收集器处理时间，肯定比串行的垃圾收集器要更短</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716213033.png" alt="image-20200325085729428"></p>
+<h2 id="2-3、CMS"><a href="#2-3、CMS" class="headerlink" title="2.3、CMS"></a>2.3、CMS</h2><p>并发标记清除，用户线程和垃圾收集线程同时执行（不一定是并行，可能是交替执行），不需要停顿用户线程，互联网公司都在使用，适用于响应时间有要求的场景。并发是可以有交互的，也就是说可以一边进行收集，一边执行应用程序。</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716213030.png" alt=""></p>
+<h2 id="2-4、G1"><a href="#2-4、G1" class="headerlink" title="2.4、G1"></a>2.4、G1</h2><p>G1垃圾回收器将堆内存分割成不同区域，然后并发的进行垃圾回收</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716213027.png" alt=""></p>
+<h1 id="03、垃圾收集器总结"><a href="#03、垃圾收集器总结" class="headerlink" title="03、垃圾收集器总结"></a>03、垃圾收集器总结</h1><blockquote>
+<p>注意：并行垃圾回收在单核CPU下可能会更慢</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716213018.png" alt=""></p>
+<h1 id="04、查看默认垃圾收集器"><a href="#04、查看默认垃圾收集器" class="headerlink" title="04、查看默认垃圾收集器"></a>04、查看默认垃圾收集器</h1><p>使用下面JVM命令，查看配置的初始参数</p>
+<pre><code>-XX:+PrintCommandLineFlags</code></pre><p>然后运行一个程序后，能够看到它的一些初始配置信息</p>
+<pre><code>-XX:InitialHeapSize=266376000 -XX:MaxHeapSize=4262016000 -XX:+PrintCommandLineFlags -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:+UseParallelGC</code></pre><p>移动到最后一句，就能看到 <code>-XX:+UseParallelGC</code> 说明使用的是并行垃圾回收</p>
+<pre><code>-XX:+UseParallelGC</code></pre><h1 id="05、默认垃圾收集器有哪些"><a href="#05、默认垃圾收集器有哪些" class="headerlink" title="05、默认垃圾收集器有哪些"></a>05、默认垃圾收集器有哪些</h1><p>Java中一共有7大垃圾收集器</p>
+<ul>
+<li>UserSerialGC：串行垃圾收集器</li>
+<li>UserParallelGC：并行垃圾收集器</li>
+<li>UseConcMarkSweepGC：（CMS）并发标记清除</li>
+<li>UseParNewGC：年轻代的并行垃圾回收器</li>
+<li>UseParallelOldGC：老年代的并行垃圾回收器</li>
+<li>UseG1GC：G1垃圾收集器</li>
+<li>UserSerialOldGC：串行老年代垃圾收集器（已经被移除）</li>
+</ul>
+<blockquote>
+<p>底层源码</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716213010.png" alt=""></p>
+<h1 id="06、各垃圾收集器的使用范围"><a href="#06、各垃圾收集器的使用范围" class="headerlink" title="06、各垃圾收集器的使用范围"></a>06、各垃圾收集器的使用范围</h1><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716213002.png" alt=""></p>
+<blockquote>
+<p>1、新生代使用的：</p>
+</blockquote>
+<ul>
+<li>Serial Copying： UserSerialGC，串行垃圾收集器</li>
+<li>Parallel Scavenge：UserParallelGC，并行垃圾收集器</li>
+<li>ParNew：UserParNewGC，新生代并行垃圾收集器</li>
+</ul>
+<blockquote>
+<p>2、老年区使用的：</p>
+</blockquote>
+<ul>
+<li>Serial Old：UseSerialOldGC，老年代串行垃圾收集器</li>
+<li>Parallel Compacting（Parallel Old）：UseParallelOldGC，老年代并行垃圾收集器</li>
+<li>CMS：UseConcMarkSwepp，并行标记清除垃圾收集器</li>
+</ul>
+<blockquote>
+<p>3、各区都能使用的：</p>
+</blockquote>
+<p>G1：UseG1GC：G1垃圾收集器</p>
+<p>垃圾收集器就来具体实现这些GC算法并实现内存回收，不同厂商，不同版本的虚拟机实现差别很大，HotSpot中包含的收集器如下图所示：</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212947.png" alt=""></p>
+<h1 id="07、部分参数预先说明"><a href="#07、部分参数预先说明" class="headerlink" title="07、部分参数预先说明"></a>07、部分参数预先说明</h1><ul>
+<li>DefNew：Default New Generation</li>
+<li>Tenured：Old</li>
+<li>ParNew：Parallel New Generation</li>
+<li>PSYoungGen：Parallel Scavenge</li>
+<li>ParOldGen：Parallel Old Generation</li>
+</ul>
+<h1 id="08、Java中的Server和Client模式"><a href="#08、Java中的Server和Client模式" class="headerlink" title="08、Java中的Server和Client模式"></a>08、Java中的Server和Client模式</h1><p>使用范围：一般使用Server模式，Client模式基本不会使用</p>
+<p>操作系统</p>
+<ul>
+<li>32位的Window操作系统，不论硬件如何都默认使用Client的JVM模式</li>
+<li>32位的其它操作系统，2G内存同时有2个cpu以上用Server模式，低于该配置还是Client模式</li>
+<li>64位只有Server模式</li>
+</ul>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212942.png" alt=""></p>
+<h1 id="09、新生代下的垃圾收集器"><a href="#09、新生代下的垃圾收集器" class="headerlink" title="09、新生代下的垃圾收集器"></a>09、新生代下的垃圾收集器</h1><h3 id="9-1、串行GC-Serial"><a href="#9-1、串行GC-Serial" class="headerlink" title="9.1、串行GC(Serial)"></a>9.1、串行GC(Serial)</h3><p>串行GC（Serial）（Serial Copying）</p>
+<p>是一个单线程单线程的收集器，在进行垃圾收集时候，必须暂停其他所有的工作线程直到它收集结束。</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212933.png" alt=""></p>
+<p>串行收集器是最古老，最稳定以及效率高的收集器，只使用一个线程去回收，但其在垃圾收集过程中可能会产生较长的停顿(Stop-The-World 状态)。 虽然在收集垃圾过程中需要暂停所有其它的工作线程，但是它简单高效，对于限定单个CPU环境来说，没有线程交互的开销可以获得最高的单线程垃圾收集效率，因此Serial垃圾收集器依然是Java虚拟机运行在Client模式下默认的新生代垃圾收集器</p>
+<blockquote>
+<p>JVM参数是：<code>-XX:+UseSerialGC</code></p>
+</blockquote>
+<p>开启后会使用：Serial(Young区用) + Serial Old(Old区用) 的收集器组合</p>
+<p>表示：新生代、老年代都会使用串行回收收集器，新生代使用<strong>复制算法</strong>，老年代使用<strong>标记-整理算法</strong></p>
+<pre><code>-Xms10m -Xmx10m -XX:PrintGCDetails -XX:+PrintConmandLineFlags -XX:+UseSerialGC</code></pre><h3 id="9-2、并行GC-ParNew"><a href="#9-2、并行GC-ParNew" class="headerlink" title="9.2、并行GC(ParNew)"></a>9.2、并行GC(ParNew)</h3><p>并行收集器，使用多线程进行垃圾回收，在垃圾收集，会Stop-the-World暂停其他所有的工作线程直到它收集结束</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212928.png" alt=""></p>
+<p>ParNew收集器其实就是Serial收集器新生代的并行多线程版本，最常见的应用场景时配合老年代的CMS GC工作，其余的行为和Serial收集器完全一样，ParNew垃圾收集器在垃圾收集过程中同样也要暂停所有其他的工作线程。它是很多Java虚拟机运行在Server模式下新生代的默认垃圾收集器。</p>
+<blockquote>
+<p>常见对应JVM参数：<code>-XX:+UseParNewGC</code>   启动ParNew收集器，只影响新生代的收集，不影响老年代</p>
+</blockquote>
+<p>开启后会使用：<strong>ParNew（Young区用） + Serial Old的收集器组合</strong>，新生代使用<strong>复制算法</strong>，老年代采用<strong>标记-整理算法</strong></p>
+<pre><code>-Xms10m -Xmx10m -XX:PrintGCDetails -XX:+PrintConmandLineFlags -XX:+UseParNewGC</code></pre><blockquote>
+<p>但是会出现警告，即 ParNew 和 Serial Old 这样搭配，Java8已经不再被推荐</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212912.png" alt=""></p>
+<p>备注： -XX:ParallelGCThreads   限制线程数量，默认开启和CPU数目相同的线程数</p>
+<h3 id="9-3、并行回收GC（Parallel）-（Parallel-Scavenge）"><a href="#9-3、并行回收GC（Parallel）-（Parallel-Scavenge）" class="headerlink" title="9.3、并行回收GC（Parallel）/ （Parallel Scavenge）"></a>9.3、并行回收GC（Parallel）/ （Parallel Scavenge）</h3><p>因为Serial 和 ParNew都不推荐使用了，因此现在新生代默认使用的是Parallel Scavenge，也就是新生代和老年代都是使用并行</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212906.png" alt=""></p>
+<p>Parallel Scavenge收集器类似ParNew也是一个新生代垃圾收集器，使用复制算法，也是一个并行的多线程的垃圾收集器，俗称吞吐量优先收集器。一句话：<strong>串行收集器在新生代和老年代的并行化</strong></p>
+<p>它关注的重点是：</p>
+<p>可控制的吞吐量（Thoughput = 运行用户代码时间 / (运行用户代码时间 + 垃圾收集时间) ），也即比如程序运行100分钟，垃圾收集时间1分钟，吞吐量就是99%。高吞吐量意味着高效利用CPU时间，它多用于在后台运算而不需要太多交互的任务。</p>
+<p>自适应调节策略也是ParallelScavenge收集器与ParNew收集器的一个重要区别。（自适应调节策略：虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间( -XX:MaxGCPauseMills)）或最大的吞吐量。</p>
+<blockquote>
+<p>常用JVM参数：<code>-XX:+UseParallelGC</code>或<code>-XX:+UseParallelOldGC</code>（可互相激活）使用Parallel Scanvenge收集器</p>
+</blockquote>
+<p>开启该参数后：新生代使用<strong>复制算法</strong>，老年代使用<strong>标记-整理算法</strong></p>
+<pre><code>-Xms10m -Xmx10m -XX:PrintGCDetails -XX:+PrintConmandLineFlags -XX:+UseParallelGC</code></pre><h1 id="10、老年代下的垃圾收集器"><a href="#10、老年代下的垃圾收集器" class="headerlink" title="10、老年代下的垃圾收集器"></a>10、老年代下的垃圾收集器</h1><h2 id="10-1、串行GC（Serial-Old）-Serial-MSC"><a href="#10-1、串行GC（Serial-Old）-Serial-MSC" class="headerlink" title="10.1、串行GC（Serial Old） / (Serial MSC)"></a>10.1、串行GC（Serial Old） / (Serial MSC)</h2><p>Serial Old是Serial垃圾收集器老年代版本，它同样是一个单线程的收集器，使用标记-整理算法，这个收集器也主要是运行在Client默认的Java虚拟机中默认的老年代垃圾收集器</p>
+<p>在Server模式下，主要有两个用途（了解，版本已经到8及以后）</p>
+<ul>
+<li>在JDK1.5之前版本中与新生代的Parallel Scavenge收集器搭配使用（Parallel Scavenge + Serial Old）</li>
+<li>作为老年代版中使用CMS收集器的后备垃圾收集方案。</li>
+</ul>
+<blockquote>
+<p>配置方法：</p>
+</blockquote>
+<pre><code>-Xms10m -Xmx10m -XX:PrintGCDetails -XX:+PrintConmandLineFlags -XX:+UseSerialOldlGC</code></pre><p><strong>该垃圾收集器，目前已经不推荐使用了</strong></p>
+<h2 id="10-2、并行GC（Parallel-Old）-（Parallel-MSC）"><a href="#10-2、并行GC（Parallel-Old）-（Parallel-MSC）" class="headerlink" title="10.2、并行GC（Parallel Old）/ （Parallel MSC）"></a>10.2、并行GC（Parallel Old）/ （Parallel MSC）</h2><p>Parallel Old收集器是Parallel Scavenge的老年代版本，使用多线程的标记-整理算法，Parallel Old收集器在JDK1.6才开始提供。</p>
+<p>在JDK1.6之前，新生代使用ParallelScavenge收集器只能搭配老年代的Serial Old收集器，只能保证新生代的吞吐量优先，无法保证整体的吞吐量。在JDK1.6以前(Parallel Scavenge + Serial Old)</p>
+<p>Parallel Old正是为了在老年代同样提供吞吐量优先的垃圾收集器，如果系统对吞吐量要求比较高，JDK1.8后可以考虑新生代Parallel Scavenge和老年代Parallel Old 收集器的搭配策略。在JDK1.8及后（Parallel Scavenge + Parallel Old）</p>
+<blockquote>
+<p>JVM常用参数：</p>
+</blockquote>
+<pre><code>-XX +UseParallelOldGC：使用Parallel Old收集器，设置该参数后，新生代Parallel+老年代 Parallel Old</code></pre><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212854.png" alt=""></p>
+<blockquote>
+<p>使用老年代并行收集器：</p>
+</blockquote>
+<pre><code>-Xms10m -Xmx10m -XX:PrintGCDetails -XX:+PrintConmandLineFlags -XX:+UseParallelOldlGC</code></pre><h2 id="10-3、-并发标记清除GC（CMS）"><a href="#10-3、-并发标记清除GC（CMS）" class="headerlink" title="10.3、 并发标记清除GC（CMS）"></a>10.3、 并发标记清除GC（CMS）</h2><p>CMS收集器（Concurrent Mark Sweep：并发标记清除）是一种以最短回收停顿时间为目标的收集器</p>
+<p>适合应用在互联网或者B/S系统的服务器上，这类应用尤其重视服务器的响应速度，希望系统停顿时间最短。</p>
+<p>CMS非常适合堆内存大，CPU核数多的服务器端应用，也是G1出现之前大型应用的首选收集器。</p>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212844.png" alt=""></p>
+<p>Concurrent Mark Sweep：并发标记清除，并发收集低停顿，并发指的是与用户线程一起执行</p>
+<blockquote>
+<p>开启该收集器的JVM参数： -XX:+UseConcMarkSweepGC  开启该参数后，会自动将 -XX:+UseParNewGC打开</p>
+</blockquote>
+<p>开启该参数后，使用ParNew(young 区用）+ CMS（Old 区用） + Serial Old 的收集器组合，Serial Old将作为CMS出错的后备收集器</p>
+<pre><code>-Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+UseConcMarkSweepGC</code></pre><h3 id="10-3-1、四个步骤"><a href="#10-3-1、四个步骤" class="headerlink" title="10.3.1、四个步骤"></a>10.3.1、四个步骤</h3><ul>
+<li>初始标记（CMS initial mark）<ul>
+<li>只是标记一个GC Roots 能直接关联的对象，速度很快，仍然需要暂停所有的工作线程</li>
+</ul>
+</li>
+<li>并发标记（CMS concurrent mark）和用户线程一起<ul>
+<li>进行GC Roots跟踪过程，和用户线程一起工作，不需要暂停工作线程。主要标记过程，标记全部对象</li>
+</ul>
+</li>
+<li>重新标记（CMS remark）<ul>
+<li>为了修正在并发标记期间，因用户程序继续运行而导致标记产生变动的那一部分对象的标记记录，仍然需要暂停所有的工作线程，由于并发标记时，用户线程依然运行，因此在正式清理前，在做修正</li>
+</ul>
+</li>
+<li>并发清除（CMS concurrent sweep）和用户线程一起<ul>
+<li>清除GC Roots不可达对象，和用户线程一起工作，不需要暂停工作线程。基于标记结果，直接清理对象，由于耗时最长的并发标记和并发清除过程中，垃圾收集线程可以和用户现在一起并发工作，所以总体上来看CMS收集器的内存回收和用户线程是一起并发地执行。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212826.png" alt=""></p>
+<p>优点：并发收集低停顿</p>
+<p>缺点：并发执行，对CPU资源压力大，采用的标记清除算法会导致大量碎片</p>
+<p>由于并发进行，CMS在收集与应用线程会同时增加对堆内存的占用，也就是说，CMS必须在老年代堆内存用尽之前完成垃圾回收，否则CMS回收失败时，将触发担保机制，串行老年代收集器将会以STW方式进行一次GC，从而造成较大的停顿时间</p>
+<p>标记清除算法无法整理空间碎片，老年代空间会随着应用时长被逐步耗尽，最后将不得不通过担保机制对堆内存进行压缩，CMS也提供了参数 -XX:CMSFullGCSBeForeCompaction（默认0，即每次都进行内存整理）来指定多少次CMS收集之后，进行一次压缩的Full GC</p>
+<h1 id="11、提出问题"><a href="#11、提出问题" class="headerlink" title="11、提出问题"></a>11、提出问题</h1><blockquote>
+<p>为什么新生代采用复制算法，老年代采用标整算法?</p>
+</blockquote>
+<h2 id="11-1、新生代使用复制算法"><a href="#11-1、新生代使用复制算法" class="headerlink" title="11.1、新生代使用复制算法"></a>11.1、新生代使用复制算法</h2><p>因为新生代对象的生存时间比较短，80%的都要回收的对象，采用标记-清除算法则内存碎片化比较严重，采用复制算法可以灵活高效，且便与整理空间。</p>
+<h2 id="11-2、老年代采用标记整理"><a href="#11-2、老年代采用标记整理" class="headerlink" title="11.2、老年代采用标记整理"></a>11.2、老年代采用标记整理</h2><p>标记整理算法主要是为了解决标记清除算法存在内存碎片的问题，又解决了复制算法两个Survivor区的问题，因为老年代的空间比较大，不可能采用复制算法，特别占用内存空间</p>
+<h1 id="12、垃圾收集器如何选择"><a href="#12、垃圾收集器如何选择" class="headerlink" title="12、垃圾收集器如何选择"></a>12、垃圾收集器如何选择</h1><h2 id="12-1、组合的选择"><a href="#12-1、组合的选择" class="headerlink" title="12.1、组合的选择"></a>12.1、组合的选择</h2><ul>
+<li>单CPU或者小内存，单机程序<ul>
+<li><code>-XX:+UseSerialGC</code></li>
+</ul>
+</li>
+<li>多CPU，需要最大的吞吐量，如后台计算型应用<ul>
+<li><code>-XX:+UseParallelGC</code>（这两个相互激活）</li>
+<li><code>-XX:+UseParallelOldGC</code></li>
+</ul>
+</li>
+<li>多CPU，追求低停顿时间，需要快速响应如互联网应用<ul>
+<li><code>-XX:+UseConcMarkSweepGC</code></li>
+<li><code>-XX:+ParNewGC</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">新生代垃圾收集器</th>
+<th align="center">新生代算法</th>
+<th align="center">老年代垃圾收集器</th>
+<th align="center">老年代算法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-XX:+UseSerialGC</td>
+<td align="center">SerialGC</td>
+<td align="center">复制</td>
+<td align="center">SerialOldGC</td>
+<td align="center">标记整理</td>
+</tr>
+<tr>
+<td align="center">-XX:+UseParNewGC</td>
+<td align="center">ParNew</td>
+<td align="center">复制</td>
+<td align="center">SerialOldGC</td>
+<td align="center">标记整理</td>
+</tr>
+<tr>
+<td align="center">-XX:+UseParallelGC</td>
+<td align="center">Parallel [Scavenge]</td>
+<td align="center">复制</td>
+<td align="center">Parallel Old</td>
+<td align="center">标记整理</td>
+</tr>
+<tr>
+<td align="center">-XX:+UseConcMarkSweepGC</td>
+<td align="center">ParNew</td>
+<td align="center">复制</td>
+<td align="center">CMS + Serial Old的收集器组合，Serial Old作为CMS出错的后备收集器</td>
+<td align="center">标记清除</td>
+</tr>
+<tr>
+<td align="center">-XX:+UseG1GC</td>
+<td align="center">G1整体上采用标记整理算法</td>
+<td align="center">局部复制</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h1 id="13、G1垃圾收集器"><a href="#13、G1垃圾收集器" class="headerlink" title="13、G1垃圾收集器"></a>13、G1垃圾收集器</h1><p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212623.png" alt=""></p>
+<h2 id="13-1、开启G1垃圾收集器"><a href="#13-1、开启G1垃圾收集器" class="headerlink" title="13.1、开启G1垃圾收集器"></a>13.1、开启G1垃圾收集器</h2><pre><code>-XX:+UseG1GC</code></pre><h2 id="13-2、以前收集器的特点"><a href="#13-2、以前收集器的特点" class="headerlink" title="13.2、以前收集器的特点"></a>13.2、以前收集器的特点</h2><ul>
+<li>年轻代和老年代是各自独立且连续的内存块</li>
+<li>年轻代收集使用单eden + S0 + S1 进行复制算法</li>
+<li>老年代收集必须扫描珍整个老年代区域</li>
+<li>都是以尽可能少而快速地执行GC为设计原则</li>
+</ul>
+<h2 id="13-3、G1是什么"><a href="#13-3、G1是什么" class="headerlink" title="13.3、G1是什么"></a>13.3、G1是什么</h2><p>G1：Garbage-First 收集器，是一款面向服务端应用的收集器，应用在多处理器和大容量内存环境中，在实现高吞吐量的同时，尽可能满足垃圾收集暂停时间的要求。</p>
+<blockquote>
+<p>它还具有下面特征：</p>
+</blockquote>
+<ul>
+<li>像CMS收集器一样，能与应用程序并发执行</li>
+<li>整理空闲空间更快</li>
+<li>需要更多的时间来预测GC停顿时间</li>
+<li>不希望牺牲大量的吞吐量性能</li>
+<li>不需要更大的Java Heap</li>
+</ul>
+<blockquote>
+<p>G1收集器设计目标是取代CMS收集器，它同CMS相比，在以下方面表现的更出色</p>
+</blockquote>
+<ul>
+<li>G1是一个有整理内存过程的垃圾收集器，不会产生很多内存碎片。</li>
+<li>G1的Stop The World（STW）更可控，G1在停顿时间上添加了预测机制，用户可以指定期望停顿时间。</li>
+</ul>
+<blockquote>
+<p>G1收集器简介</p>
+</blockquote>
+<p>CMS垃圾收集器虽然减少了暂停应用程序的运行时间，但是它还存在着内存碎片问题。于是，为了去除内存碎片问题，同时又保留CMS垃圾收集器低暂停时间的优点，JAVA7发布了一个新的垃圾收集器-G1垃圾收集器</p>
+<p>G1是在2012在JDK1.7中可用，Oracle官方计划在JDK9中将G1变成默认的垃圾收集器以替代CMS，它是一款面向服务端应用的收集器，主要应用在多CPU和大内存服务器环境下，极大减少垃圾收集的停顿时间，全面提升服务器的性能，逐步替换Java8以前的CMS收集器</p>
+<blockquote>
+<p>主要改变：</p>
+</blockquote>
+<p>Eden，Survivor和Tenured等内存区域不再是连续了，而是变成一个个大小一样的region，每个region从1M到32M不等。一个region有可能属于Eden，Survivor或者Tenured内存区域。</p>
+<h2 id="13-4、特点"><a href="#13-4、特点" class="headerlink" title="13.4、特点"></a>13.4、特点</h2><ul>
+<li>G1能充分利用多CPU，多核环境硬件优势，尽量缩短STW</li>
+<li>G1整体上采用标记-整理算法，局部是通过复制算法，不会产生内存碎片</li>
+<li>宏观上看G1之中不再区分年轻代和老年代。把内存划分成多个独立的子区域（Region），可以近似理解为一个围棋的棋盘</li>
+<li>G1收集器里面将整个内存区域都混合在一起了，但其本身依然在小范围内要进行年轻代和老年代的区分，保留了新生代和老年代，但他们不再是物理隔离的，而是通过一部分Region的集合且不需要Region是连续的，也就是说依然会采取不同的GC方式来处理不同的区域</li>
+<li>G1虽然也是分代收集器，但整个内存分区不存在物理上的年轻代和老年代的区别，也不需要完全独立的Survivor（to space）堆做复制准备，G1只有逻辑上的分代概念，或者说每个分区都可能随G1的运行在不同代之间前后切换。</li>
+</ul>
+<h2 id="13-5、底层原理"><a href="#13-5、底层原理" class="headerlink" title="13.5、底层原理"></a>13.5、底层原理</h2><p>Region区域化垃圾收集器，化整为零，打破了原来新生区和老年区的壁垒，避免了全内存扫描，只需要按照区域来进行扫描即可。</p>
+<p>区域化内存划片Region，整体遍为了一些列不连续的内存区域，避免了全内存区的GC操作。</p>
+<p>核心思想是将整个堆内存区域分成大小相同的子区域（Region），在JVM启动时会自动设置子区域大小</p>
+<p>在堆的使用上，G1并不要求对象的存储一定是物理上连续的，只要逻辑上连续即可，每个分区也不会固定地为某个代服务，可以按需在年轻代和老年代之间切换。启动时可以通过参数<code>-XX:G1HeapRegionSize=n</code> 可指定分区大小（1MB~32MB，且必须是2的幂），默认将整堆划分为2048个分区。</p>
+<p>大小范围在1MB~32MB，最多能设置2048个区域，也即能够支持的最大内存为：32MB*2048 = 64G内存</p>
+<p>Region区域化垃圾收集器</p>
+<h2 id="13-6、Region区域化垃圾收集器"><a href="#13-6、Region区域化垃圾收集器" class="headerlink" title="13.6、Region区域化垃圾收集器"></a>13.6、Region区域化垃圾收集器</h2><blockquote>
+<p>G1将新生代、老年代的物理空间划分取消了</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212614.png" alt=""></p>
+<blockquote>
+<p>同时对内存进行了区域划分</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212608.png" alt=""></p>
+<p>G1算法将堆划分为若干个区域（Reign），它仍然属于分代收集器，这些Region的一部分包含新生代，新生代的垃圾收集依然采用暂停所有应用线程的方式，将存活对象拷贝到老年代或者Survivor空间</p>
+<p>这些Region的一部分包含老年代，G1收集器通过将对象从一个区域复制到另外一个区域，完成了清理工作。这就意味着，在正常的处理过程中，G1完成了堆的压缩（至少是部分堆的压缩），这样也就不会有CMS内存碎片的问题存在了。</p>
+<p>在G1中，还有一种特殊的区域，叫做Humongous（巨大的）区域，如果一个对象占用了空间超过了分区容量50%以上，G1收集器就认为这是一个巨型对象，这些巨型对象默认直接分配在老年代，但是如果他是一个短期存在的巨型对象，就会对垃圾收集器造成负面影响，为了解决这个问题，G1划分了一个Humongous区，它用来专门存放巨型对象。如果一个H区装不下一个巨型对象，那么G1会寻找连续的H区来存储，为了能找到连续的H区，有时候不得不启动Full GC。</p>
+<h2 id="13-7、回收步骤"><a href="#13-7、回收步骤" class="headerlink" title="13.7、回收步骤"></a>13.7、回收步骤</h2><blockquote>
+<p>针对Eden区进行收集，Eden区耗尽后会被触发，主要是<strong>小区域收集 + 形成连续的内存块</strong>，避免内碎片</p>
+</blockquote>
+<ul>
+<li>Eden区的数据移动到Survivor区，加入出现Survivor区空间不够，Eden区数据会晋升到Old区</li>
+<li>Survivor区的数据移动到新的Survivor区，部分数据晋升到Old区</li>
+<li>最后Eden区收拾干净了，GC结束，用户的应用程序继续执行</li>
+</ul>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212600.png" alt=""></p>
+<blockquote>
+<p>回收完成后</p>
+</blockquote>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212552.png" alt=""></p>
+<p>最后在收集完成后，就会形成连续的内存空间，这样就解决了内存碎片的问题</p>
+<h2 id="13-8、四步过程"><a href="#13-8、四步过程" class="headerlink" title="13.8、四步过程"></a>13.8、四步过程</h2><ul>
+<li>初始标记：只标记GC Roots能直接关联到的对象</li>
+<li>并发标记：进行GC Roots Tracing（链路扫描）的过程</li>
+<li>最终标记：修正并发标记期间，因为程序运行导致标记发生变化的那一部分对象</li>
+<li>筛选回收：根据时间来进行价值最大化回收</li>
+</ul>
+<p><img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/06/03/20200716212540.png" alt=""></p>
+<h2 id="13-9、参数配置"><a href="#13-9、参数配置" class="headerlink" title="13.9、参数配置"></a>13.9、参数配置</h2><p>开发人员仅仅需要申明以下参数即可</p>
+<p>三步归纳：<code>-XX:+UseG1GC  -Xmx32G  -XX:MaxGCPauseMillis=100</code></p>
+<p>-XX:MaxGCPauseMillis=n：最大GC停顿时间单位毫秒，这是个软目标，JVM尽可能停顿小于这个时间</p>
+<h2 id="13-10、G1和CMS比较"><a href="#13-10、G1和CMS比较" class="headerlink" title="13.10、G1和CMS比较"></a>13.10、G1和CMS比较</h2><ul>
+<li>G1不会产生内碎片</li>
+<li>G1可以精准控制停顿。</li>
+<li>G1把整个堆（新生代、老年代）划分成多个固定大小的区域，</li>
+<li>G1每次根据允许停顿的时间去收集垃圾最多的区域。</li>
+</ul>
+<h1 id="14、SpringBoot结合JVMGC"><a href="#14、SpringBoot结合JVMGC" class="headerlink" title="14、SpringBoot结合JVMGC"></a>14、SpringBoot结合JVMGC</h1><p>启动微服务时候，就可以带上JVM和GC的参数</p>
+<ul>
+<li><p>IDEA开发完微服务工程</p>
+</li>
+<li><p>maven进行clean package</p>
+</li>
+<li><p>要求微服务启动的时候，同时配置我们的JVM/GC的调优参数</p>
+<ul>
+<li><p>我们就可以根据具体的业务配置我们启动的JVM参数</p>
+</li>
+<li><p>例如：</p>
+<pre><code class="bash">java -Xms1024m -Xmx1024 -XX:UseG1GC -jar   xxx.jar</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+       
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>06垃圾收集器</p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="卖剩鸭">卖剩鸭</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-07-16, 00:00:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-07-16, 21:33:58</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/post/e41f9b46.html" title="06垃圾收集器">http://lsqstudy.top/post/e41f9b46.html</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">&#34;署名-非商用-相同方式共享 4.0&#34;</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备20031985号</a>
+        </span>
+    
+    ©2019-2020
+</p>
+<p class="footer-entry">卖剩鸭也要奋斗</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418164902.png" class="alipay" title="扫码支持">
+            <img src="https://gitee.com/lsqpic/BlogPicBed-1/raw/master/img/2020/04/17/20200418164901.png" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 579px;
+    }
+    .nav.fullscreen {
+        margin-left: -579px;
+    }
+    .nav-left {
+        width: 157px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 512px;
+        }
+        .nav.fullscreen {
+            margin-left: -512px;
+        }
+        .nav-left {
+            width: 120px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 512px;
+            margin-left: -512px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #c1bfc1;
+    }
+    
+    
+    .nav-right nav a.hover > span{
+        color: #ffffff !important;
+    }
+    
+
+    /*列表样式*/
+    
+    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>
