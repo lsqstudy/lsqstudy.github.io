@@ -216,8 +216,8 @@
   #post .pjax article .article-title {
     font-size: 1.6em;
   }
-  #post .pjax article iframe {
-    height: 250px;
+  #post .pjax article .videoClass {
+    height: 300px;
     width: 100%;
   }
   #post .pjax article pre > code {
